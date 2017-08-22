@@ -1,0 +1,11 @@
+---
+- name: restart keycloak
+  service: 
+    name: keycloak
+    state: restarted
+
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+

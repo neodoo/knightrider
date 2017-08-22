@@ -1,0 +1,113 @@
+---
+
+- name: Actualizar la maquina con los ultimos paquetes
+  yum:
+    name: '*'
+    state: latest
+
+- name: Instalamos Java 1.8 y algunas dependencias basicas
+  yum: name={{item}} state=present
+  with_items:
+   - unzip
+   - wget
+   - java-1.8.0-openjdk
+   - java-1.8.0-openjdk-devel
+
+- name: Creamos el directorio dónde se almacenarán las descargas
+  file: 
+    path: /root/software
+    state: directory
+
+- name: Descargamos el proyecto Maven
+  get_url: url=http://apache.uvigo.es/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz dest=/root/software/apache-maven-3.5.0-bin.tar.gz
+
+- name: Creamos el directorio java
+  file:
+    path: /usr/java
+    state: directory
+
+- name: Descomprimimos el proyecto Maven
+  unarchive: src=/root/software/apache-maven-3.5.0-bin.tar.gz dest=/usr/java copy=no
+
+- name: Creamos link para Maven
+  file: path=/usr/java/apache-maven src=/usr/java/apache-maven-3.5.0 state=link
+
+- name: Configuramos las variables de entorno Java y Maven
+  template: src=java.sh.j2 dest=/etc/profile.d/java.sh owner=root group=root mode=0755 backup=yes 
+
+#- action: shell source /etc/profile.d/java.sh
+
+- template: src=apache-maven.sh.j2 dest=/etc/profile.d/apache-maven.sh owner=root group=root mode=0755 backup=yes 
+
+#- action: command chdir=/etc/profile.d/ source /etc/profile.d/apache-maven.sh
+
+- name: Descargamos el proyecto Keycloak
+  get_url: url=https://downloads.jboss.org/keycloak/3.2.1.Final/keycloak-3.2.1.Final.tar.gz dest=/root/software/keycloak-3.2.1.Final.tar.gz
+
+- name: Descomprimimos el proyecto Keycloak
+  unarchive: src=/root/software/keycloak-3.2.1.Final.tar.gz dest=/usr/java copy=no
+
+- name: Creamos link para Keycloak
+  file: path=/usr/java/keycloak src=/usr/java/keycloak-3.2.1.Final state=link
+
+- name: Anyadimos el grupo "keycloak"
+  group: name=keycloak
+
+- name: Anyadimos el usuario "keycloak"
+  user: name=keycloak group=keycloak home=/usr/java/keycloak
+
+- name: Cambiamos el propietario de la instalación Keycloak
+  file: path=/usr/java/keycloak/ owner=keycloak group=keycloak state=directory recurse=yes
+
+- name: Creamos el directorio para almacenar el fichero pid del keycloak
+  file:
+    path: '{{ keycloak_pid }}'
+    state: directory
+
+- name: keycloak systemd setup
+  template:
+    owner=root group=root mode=0644
+    src=wildfly.conf
+    dest=/etc/default/wildfly.conf
+
+- template:
+    owner=root group=root mode=0644
+    src=keycloak.service.j2
+    dest=/etc/systemd/system/keycloak.service
+
+- template:
+    owner=keycloak group=keycloak mode=0755
+    src=launch.sh.j2
+    dest=/usr/java/keycloak/bin/launch.sh
+  notify:
+    - reload systemd
+
+- name: keycloak systemd service enable and start
+  service: name=keycloak
+           enabled=yes
+           state=started
+
+- name: Habilitar firewalld
+  service: name=firewalld state=started enabled=yes
+
+- name: Habilita los puertos en el firewall
+  firewalld: 
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  with_items: 
+    - 8080/tcp
+    - 9990/tcp
+  notify: restart firewalld
+
+#- name: Permitir puertos 8080 y 9990
+#  command: firewall-cmd --permanent --add-port=8080/tcp --add-port=9990/tcp
+
+#- name: Arrancar firewalld
+#  service: name=firewalld state=restarted
+
+- name: Create management user
+  action: command /usr/java/keycloak/bin/add-user-keycloak.sh -r master -u {{ keycloak_management_user }} -p {{ keycloak_management_password }}
+  ignore_errors: yes
+  notify: restart keycloak
+

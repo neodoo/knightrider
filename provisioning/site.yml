@@ -1,0 +1,9 @@
+# playbook for provisionning the vm created using Vagrant (see Vagrantfile)
+
+- hosts: all
+  user: vagrant
+  become: yes
+
+  roles: 
+  - keycloack
+

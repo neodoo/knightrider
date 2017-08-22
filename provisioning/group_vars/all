@@ -1,0 +1,15 @@
+# Keycloak user configuration
+
+keycloak_management_user: admin
+keycloak_management_password: .admin8$
+
+keycloak_app_realm: knightrider_realm
+keycloak_app_client_id: knightrider_client
+
+keycloak_app_user_demo_username: demo
+keycloak_app_user_demo_password: .demo8$
+
+keycloak_home: /usr/java/keycloak 
+keycloak_conf: /etc/default
+keycloak_pid: /var/run/wildfly
+
