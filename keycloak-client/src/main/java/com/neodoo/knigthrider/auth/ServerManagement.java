@@ -1,4 +1,4 @@
-package com.neodoo.knigthrider.authentication;
+package com.neodoo.knigthrider.auth;
 
 import java.util.List;
 import java.util.Arrays;

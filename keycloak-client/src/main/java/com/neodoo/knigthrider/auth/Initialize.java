@@ -1,6 +1,4 @@
-package com.neodoo.knigthrider;
-
-import com.neodoo.knigthrider.authentication.ServerManagement;
+package com.neodoo.knigthrider.auth;
 
 public class Initialize {
 
