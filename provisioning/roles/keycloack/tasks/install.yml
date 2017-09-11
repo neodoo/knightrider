@@ -100,14 +100,13 @@
     - 9990/tcp
   notify: restart firewalld
 
-#- name: Permitir puertos 8080 y 9990
-#  command: firewall-cmd --permanent --add-port=8080/tcp --add-port=9990/tcp
-
-#- name: Arrancar firewalld
-#  service: name=firewalld state=restarted
-
 - name: Create management user
   action: command /usr/java/keycloak/bin/add-user-keycloak.sh -r master -u {{ keycloak_management_user }} -p {{ keycloak_management_password }}
   ignore_errors: yes
   notify: restart keycloak
+
+- name: Wait 300 seconds for port 8080 to become open on the host, don't start checking for 60 seconds
+  wait_for:
+    port: 8080
+    delay: 60
 
