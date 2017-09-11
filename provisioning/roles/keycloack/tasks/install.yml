@@ -79,8 +79,6 @@
     owner=keycloak group=keycloak mode=0755
     src=launch.sh.j2
     dest=/usr/java/keycloak/bin/launch.sh
-  notify:
-    - reload systemd
 
 - name: keycloak systemd service enable and start
   service: name=keycloak

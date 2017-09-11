@@ -6,4 +6,5 @@
 
   roles: 
   - keycloack
-
+  - mysql
+  - tomcat

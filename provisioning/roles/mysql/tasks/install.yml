@@ -1,0 +1,25 @@
+---
+
+- name: Instalamos MariaDB
+  yum: name={{item}} state=present
+  with_items:
+   - mariadb
+   - mariadb-server
+
+- name: mariadb systemd service enable and start
+  service: name=mariadb
+           enabled=yes
+           state=started
+
+- name: Habilitar firewalld
+  service: name=firewalld state=started enabled=yes
+
+- name: Habilita los puertos en el firewall
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  with_items:
+    - 3306/tcp
+  notify: restart firewalld
+

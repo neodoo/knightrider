@@ -1,0 +1,11 @@
+---
+- name: restart mysql
+  service: 
+    name: mysql
+    state: restarted
+
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+

@@ -13,3 +13,9 @@ keycloak_home: /usr/java/keycloak
 keycloak_conf: /etc/default
 keycloak_pid: /var/run/wildfly
 
+tomcat_home: /usr/java/apache-tomcat
+
+tomcat_port_shutdown: 18005
+tomcat_port_ajp: 18009
+tomcat_port_http: 18080
+tomcat_port_https: 18443
