@@ -28,12 +28,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network :forwarded_port, guest: 80, host: 8080
+  # Keycloak
+  config.vm.network :forwarded_port, guest: 9080, host: 9080
+  config.vm.network :forwarded_port, guest: 9443, host: 9443
+  config.vm.network :forwarded_port, guest: 10990, host: 10990
+  config.vm.network :forwarded_port, guest: 10993, host: 10993
+  # Apache Tomcat
   config.vm.network :forwarded_port, guest: 8080, host: 8080
-  config.vm.network :forwarded_port, guest: 8443, host: 8443
-  config.vm.network :forwarded_port, guest: 9990, host: 9990
-  config.vm.network :forwarded_port, guest: 9993, host: 9993
-  config.vm.network :forwarded_port, guest: 18080, host: 18080
-  config.vm.network :forwarded_port, guest: 18993, host: 18993
+  config.vm.network :forwarded_port, guest: 8993, host: 8993
+  # MariaDB
   config.vm.network :forwarded_port, guest: 3306, host: 3306
 
   # Create a private network, which allows host-only access to the machine

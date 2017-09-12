@@ -1,17 +1,7 @@
 ---
 
-#- name: Create management user
-#  action: command /usr/java/keycloak/bin/add-user-keycloak.sh -r master -u {{ keycloak_management_user }} -p {{ keycloak_management_password }}
-#  ignore_errors: yes
-##  notify: restart keycloak
-
-#- name: keycloak systemd service enable and start
-#  service:
-#    name: keycloak
-#    state: restarted
-
 - name: Configure credentials
-  action: command /usr/java/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user {{ keycloak_management_user }} --password {{ keycloak_management_password }}
+  action: command /usr/java/keycloak/bin/kcadm.sh config credentials --server http://localhost:9080/auth --realm master --user {{ keycloak_management_user }} --password {{ keycloak_management_password }}
 
 - name: Create a new realm
   action: command /usr/java/keycloak/bin/kcadm.sh create realms -s realm={{ keycloak_app_realm }} -s enabled=true -o

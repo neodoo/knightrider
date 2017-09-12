@@ -6,11 +6,14 @@ Before=httpd.service
 [Service]
 Environment=LAUNCH_JBOSS_IN_BACKGROUND=1
 EnvironmentFile=-{{ keycloak_conf }}/wildfly.conf
-# TODO We can not start with keycloak user
-#User=keycloak
+
+ExecStart={{ keycloak_home }}/bin/launch.sh $WILDFLY_MODE $WILDFLY_CONFIG $WILDFLY_BIND $WILDFLY_PORT_OFFSET
+
+User=keycloak
+Group=keycloak
+
 LimitNOFILE=102642
 PIDFile={{ keycloak_pid }}/wildfly.pid
-ExecStart={{ keycloak_home }}/bin/launch.sh $WILDFLY_MODE $WILDFLY_CONFIG $WILDFLY_BIND
 StandardOutput=null
 
 [Install]

@@ -94,8 +94,8 @@
     permanent: true
     state: enabled
   with_items: 
-    - 8080/tcp
-    - 9990/tcp
+    - 9080/tcp
+    - 10990/tcp
   notify: restart firewalld
 
 - name: Create management user
@@ -103,8 +103,8 @@
   ignore_errors: yes
   notify: restart keycloak
 
-- name: Wait 300 seconds for port 8080 to become open on the host, don't start checking for 60 seconds
+- name: Wait 300 seconds for port 9080 to become open on the host, don't start checking for 60 seconds
   wait_for:
-    port: 8080
+    port: 9080
     delay: 60
 

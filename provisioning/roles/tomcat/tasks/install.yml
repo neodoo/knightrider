@@ -42,12 +42,12 @@
     permanent: true
     state: enabled
   with_items: 
-    - 18080/tcp
-    - 18443/tcp
+    - 8080/tcp
+    - 8443/tcp
   notify: restart firewalld
 
-- name: Wait 300 seconds for port 18080 to become open on the host, don't start checking for 60 seconds
+- name: Wait 300 seconds for port 8080 to become open on the host, don't start checking for 60 seconds
   wait_for:
-    port: 18080
+    port: 8080
     delay: 60
 
