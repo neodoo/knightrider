@@ -15,6 +15,12 @@
 - name: Anyadimos el usuario "tomcat"
   user: name=tomcat group=tomcat home=/usr/java/apache-tomcat
 
+- name: Descargamos el adaptador de Keycloak para Apache Tomcat
+  get_url: url=https://downloads.jboss.org/keycloak/3.3.0.CR2/adapters/keycloak-oidc/keycloak-tomcat8-adapter-dist-3.3.0.CR2.tar.gz dest=/root/software/keycloak-tomcat8-adapter-dist-3.3.0.CR2.tar.gz 
+
+- name: Descomprimimos el adaptador de Keycloak para Apache Tomcat 8
+  unarchive: src=/root/software/keycloak-tomcat8-adapter-dist-3.3.0.CR2.tar.gz dest=/usr/java/apache-tomcat/lib copy=no
+
 - name: Cambiamos el propietario de la instalación Apache Tomcat
   file: path=/usr/java/apache-tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
