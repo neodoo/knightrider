@@ -10,14 +10,13 @@
 	<name>renting-services Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-
 	<properties>
-	    <resteasy-version>3.1.4.Final</resteasy-version>
-        <jackson-version>2.9.1</jackson-version>
-        <keycloak-version>3.3.0.CR1</keycloak-version>
+		<hibernate-version>5.2.11.Final</hibernate-version>
+		<mysql-conncetor-version>5.1.42</mysql-conncetor-version>
+		<commons-logging>1.2</commons-logging>
 		<junit-version>4.8.2</junit-version>
-		<jdk>1.8</jdk>
 		<maven-compiler-version>3.7.0</maven-compiler-version>
+		<jdk>1.8</jdk>
 	</properties>
 
 	<dependencies>
@@ -26,21 +25,28 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.2.11.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.2.11.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.42</version>
+			<version>${mysql-conncetor-version}</version>
 		</dependency>
-        
+
+		<!-- Log -->
+		<dependency>
+    		<groupId>commons-logging</groupId>
+    		<artifactId>commons-logging</artifactId>
+    		<version>${commons-logging}</version>
+		</dependency>
+  
         <!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
