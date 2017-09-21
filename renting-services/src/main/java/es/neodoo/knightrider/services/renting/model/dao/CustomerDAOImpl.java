@@ -97,9 +97,9 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 
 	}
 
-	public long getNumTravels(String username) throws DAOException {
+	public long countTravels(String username) throws DAOException {
 
-		long num_travels = 0;
+		long numTravels = 0;
 
 		try {
 
@@ -108,9 +108,9 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 			Query query= em.createQuery(jpql);
 			query.setParameter("username", username);		
 
-			num_travels =  (Long) query.getSingleResult();
+			numTravels =  (Long) query.getSingleResult();
 
-			log.debug("geting numTravels of user: "+ username +" = " + num_travels);
+			log.debug("geting numTravels of user: "+ username +" = " + numTravels);
 
 		} catch (NoResultException e) {
 			log.debug("No travels for user:" + username, e);
@@ -120,7 +120,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 			throw new DAOException(e);
 		}
 
-		return num_travels;
+		return numTravels;
 
 	}
 
@@ -137,7 +137,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 
 			cost =  (Double) query.getSingleResult();
 
-			log.debug("geting cost of user: "+ username + " = " + cost);
+			log.debug("getting cost of user: "+ username + " = " + cost);
 
 		} catch (NoResultException e) {
 			log.debug("No travels for user" + username, e);
@@ -153,7 +153,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 
 	public double getTime(String username) throws DAOException {
 
-		double time =0;
+		double time = 0;
 
 		try {
 
@@ -223,7 +223,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 			log.debug("user dont has tarvels:" + username, e);
 
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
-			log.error("Error getting time: " + e);
+			log.error("Error getting travels: " + e);
 			throw new DAOException(e);
 		}
 

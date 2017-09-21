@@ -50,7 +50,7 @@ public interface CustomerDAO {
 	 * @return the number of travels of username
 	 * @throws DAOException 
 	 */
-	long getNumTravels(String username) throws DAOException;
+	long countTravels(String username) throws DAOException;
 
 	/**
 	 * 

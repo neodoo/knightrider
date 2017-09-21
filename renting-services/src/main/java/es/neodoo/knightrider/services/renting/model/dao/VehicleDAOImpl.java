@@ -240,7 +240,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 			log.debug("update rentState to: " + VEHICLE_RENT_BLOCK+ "of the vehicle with id: " + vehicleId);
 
 		} catch(IllegalStateException | EntityExistsException | TransactionRequiredException e) {
-			log.error("Error updating BD" + e);
+			log.error("Error updating vehicle to blocked" + e);
 			throw new DAOException(e);
 		}
 
@@ -259,7 +259,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 			em.persist(vehicle); 
 
 		} catch(IllegalStateException | EntityExistsException | TransactionRequiredException e){
-			log.error("Error updating BD" + e);
+			log.error("Error updating vehicle to traveling" + e);
 			throw new DAOException(e);
 		}
 
@@ -282,7 +282,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 			log.debug("Insert into VehicleBlocked user: " + username + "vehicleId: " + vehicleId);
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) { 
-			log.error("Error inserting " + e);
+			log.error("Error inserting vehicle blocked" + e);
 			throw new DAOException(e);
 		}
 
@@ -307,7 +307,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 			log.debug("Insert into vehicleTraveling user: " + username + "vehicleId: " + vehicleId + "time: " + actualTime + " vehicle: " + vehicle.toString());
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
-			log.error("Error inserting vehicleTraveling " + e);
+			log.error("Error inserting vehicle traveling " + e);
 			throw new DAOException(e);
 		}
 
@@ -334,7 +334,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 			query.setParameter(11, time);
 			query.executeUpdate();
 
-			log.debug("insert into vehicleTravel: " + vehicleTraveling.toString() + dateEnd + vehicle.toString() + cost + time);
+			log.debug("insert into vehicle travel: " + vehicleTraveling.toString() + dateEnd + vehicle.toString() + cost + time);
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error inserting vehicleTraveling " + e);
@@ -356,13 +356,13 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
-			log.error("Error deleting vehicleBlocked " + e);
+			log.error("Error deleting vehicle blocked " + e);
 			throw new DAOException(e);
 		}
 
 	}
 
-	public void deleteVehicleTraveling(int vehicleId) throws DAOException{
+	public void deleteVehicleTraveling(int vehicleId) throws DAOException {
 
 		try {
 
@@ -374,7 +374,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 			log.debug("Delete from Vehicletraveling vehicleId: " + vehicleId);
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e){
-			log.error("Error deleting vehicleBlocked " + e);
+			log.error("Error deleting vehicle traveling " + e);
 			throw new DAOException(e);
 		}
 
