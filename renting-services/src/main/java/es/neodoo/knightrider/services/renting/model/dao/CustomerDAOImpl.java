@@ -27,7 +27,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 		super();
 	}
 
-	public void insertCustomerBd(String email, String name, String surname, Date birthDate, int phone, String driveNumber, Date driveDate) throws DAOException {
+	public void createCustomer(String email, String name, String surname, Date birthDate, int phone, String driveNumber, Date driveDate) throws DAOException {
 
 		try {
 
@@ -52,7 +52,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 
 	}
 
-	public void insertUserBD(String email, String pass) throws DAOException {
+	public void createUser(String email, String pass) throws DAOException {
 
 		try {
 
@@ -72,7 +72,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 
 	}
 
-	public void insertCreditCardBD(String username, String creditCardNumber, String creditCardName, int creditCardCVS, Date creditCardDate) throws DAOException {
+	public void createCreditCard(String username, String creditCardNumber, String creditCardName, int creditCardCVS, Date creditCardDate) throws DAOException {
 
 		try {
 
@@ -204,7 +204,7 @@ public class CustomerDAOImpl implements Serializable, CustomerDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<VehicleTravel> selectTravels(String username) throws DAOException {
+	public List<VehicleTravel> getTravels(String username) throws DAOException {
 
 		List<VehicleTravel> travels = null;
 

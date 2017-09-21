@@ -19,7 +19,7 @@ public interface CustomerDAO {
 	 * @throws DAOException
 	 * Insert a new customer into BD 
 	 */
-	void insertCustomerBd(String email, String name, String surname, Date birthDate, int phone, String driveNumber,
+	void createCustomer(String email, String name, String surname, Date birthDate, int phone, String driveNumber,
 			Date driveDate) throws DAOException;
 
 	/**
@@ -29,7 +29,7 @@ public interface CustomerDAO {
 	 * @throws DAOException
 	 * insert new user into BD
 	 */
-	void insertUserBD(String email, String pass) throws DAOException;
+	void createUser(String email, String pass) throws DAOException;
 
 	/**
 	 * 
@@ -41,7 +41,7 @@ public interface CustomerDAO {
 	 * @throws DAOException
 	 * Insert a new credit card into BD
 	 */
-	void insertCreditCardBD(String username, String creditCardNumber, String creditCardName, int creditCardCVS,
+	void createCreditCard(String username, String creditCardNumber, String creditCardName, int creditCardCVS,
 			Date creditCardDate) throws DAOException;
 
 	/**
@@ -82,6 +82,6 @@ public interface CustomerDAO {
 	 * @return the list of all travels of username
 	 * @throws DAOException  
 	 */
-	List<VehicleTravel> selectTravels(String username) throws DAOException;
+	List<VehicleTravel> getTravels(String username) throws DAOException;
 
 }
