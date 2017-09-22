@@ -13,13 +13,10 @@ import java.util.Date;
 @Table(name="customer_card")
 @NamedQuery(name="CustomerCard.findAll", query="SELECT c FROM CustomerCard c")
 public class CustomerCard implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private CustomerCardPK id;
-
-	private Boolean active;
 
 	private int cvs;
 
@@ -33,7 +30,7 @@ public class CustomerCard implements Serializable {
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="email", insertable=false, updatable=false)
+	@JoinColumn(name="email")
 	private Customer customer;
 
 	public CustomerCard() {
@@ -45,14 +42,6 @@ public class CustomerCard implements Serializable {
 
 	public void setId(CustomerCardPK id) {
 		this.id = id;
-	}
-
-	public Boolean getActive() {
-		return this.active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
 	}
 
 	public int getCvs() {

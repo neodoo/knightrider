@@ -13,10 +13,10 @@ import java.util.List;
 @Table(name="rol")
 @NamedQuery(name="Rol.findAll", query="SELECT r FROM Rol r")
 public class Rol implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String rol;
 
 	//bi-directional many-to-many association to User

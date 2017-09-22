@@ -14,11 +14,10 @@ import java.util.List;
 @Table(name="customer")
 @NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
 public class Customer implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String email;
 
 	@Temporal(TemporalType.DATE)
@@ -31,13 +30,10 @@ public class Customer implements Serializable {
 	@Column(name="driving_license_id")
 	private String drivingLicenseId;
 
-	@Column(name="mobile")
-	private String mobile;
+	private int mobile;
 
-	@Column(name="name")
 	private String name;
-	
-	@Column(name="surname")
+
 	private String surname;
 
 	//bi-directional one-to-one association to User
@@ -55,11 +51,15 @@ public class Customer implements Serializable {
 
 	//bi-directional many-to-one association to VehicleBlocked
 	@OneToMany(mappedBy="customer")
-	private List<VehicleBlocked> vehicleReserveds;
+	private List<VehicleBlocked> vehicleBlockeds;
 
 	//bi-directional many-to-one association to VehicleTravel
 	@OneToMany(mappedBy="customer")
 	private List<VehicleTravel> vehicleTravels;
+
+	//bi-directional many-to-one association to VehicleTraveling
+	@OneToMany(mappedBy="customer")
+	private List<VehicleTraveling> vehicleTravelings;
 
 	public Customer() {
 	}
@@ -96,11 +96,11 @@ public class Customer implements Serializable {
 		this.drivingLicenseId = drivingLicenseId;
 	}
 
-	public String getMobile() {
+	public int getMobile() {
 		return this.mobile;
 	}
 
-	public void setMobile(String mobile) {
+	public void setMobile(int mobile) {
 		this.mobile = mobile;
 	}
 
@@ -172,26 +172,26 @@ public class Customer implements Serializable {
 		return customerCard;
 	}
 
-	public List<VehicleBlocked> getVehicleReserveds() {
-		return this.vehicleReserveds;
+	public List<VehicleBlocked> getVehicleBlockeds() {
+		return this.vehicleBlockeds;
 	}
 
-	public void setVehicleReserveds(List<VehicleBlocked> vehicleReserveds) {
-		this.vehicleReserveds = vehicleReserveds;
+	public void setVehicleBlockeds(List<VehicleBlocked> vehicleBlockeds) {
+		this.vehicleBlockeds = vehicleBlockeds;
 	}
 
-	public VehicleBlocked addVehicleReserved(VehicleBlocked vehicleReserved) {
-		getVehicleReserveds().add(vehicleReserved);
-		vehicleReserved.setCustomer(this);
+	public VehicleBlocked addVehicleBlocked(VehicleBlocked vehicleBlocked) {
+		getVehicleBlockeds().add(vehicleBlocked);
+		vehicleBlocked.setCustomer(this);
 
-		return vehicleReserved;
+		return vehicleBlocked;
 	}
 
-	public VehicleBlocked removeVehicleReserved(VehicleBlocked vehicleReserved) {
-		getVehicleReserveds().remove(vehicleReserved);
-		vehicleReserved.setCustomer(null);
+	public VehicleBlocked removeVehicleBlocked(VehicleBlocked vehicleBlocked) {
+		getVehicleBlockeds().remove(vehicleBlocked);
+		vehicleBlocked.setCustomer(null);
 
-		return vehicleReserved;
+		return vehicleBlocked;
 	}
 
 	public List<VehicleTravel> getVehicleTravels() {
@@ -214,6 +214,28 @@ public class Customer implements Serializable {
 		vehicleTravel.setCustomer(null);
 
 		return vehicleTravel;
+	}
+
+	public List<VehicleTraveling> getVehicleTravelings() {
+		return this.vehicleTravelings;
+	}
+
+	public void setVehicleTravelings(List<VehicleTraveling> vehicleTravelings) {
+		this.vehicleTravelings = vehicleTravelings;
+	}
+
+	public VehicleTraveling addVehicleTraveling(VehicleTraveling vehicleTraveling) {
+		getVehicleTravelings().add(vehicleTraveling);
+		vehicleTraveling.setCustomer(this);
+
+		return vehicleTraveling;
+	}
+
+	public VehicleTraveling removeVehicleTraveling(VehicleTraveling vehicleTraveling) {
+		getVehicleTravelings().remove(vehicleTraveling);
+		vehicleTraveling.setCustomer(null);
+
+		return vehicleTraveling;
 	}
 
 }

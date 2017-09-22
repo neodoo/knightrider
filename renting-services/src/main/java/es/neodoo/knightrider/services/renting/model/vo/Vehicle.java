@@ -2,6 +2,7 @@ package es.neodoo.knightrider.services.renting.model.vo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -12,11 +13,10 @@ import javax.persistence.*;
 @Table(name="vehicle")
 @NamedQuery(name="Vehicle.findAll", query="SELECT v FROM Vehicle v")
 public class Vehicle implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name="battery_level")
@@ -33,16 +33,27 @@ public class Vehicle implements Serializable {
 
 	private String model;
 
-	@Column(name="rent_state", columnDefinition="enum('unblocked','blocked','traveling')")
+	@Column(name="rent_state")
 	private String rentState;
-	
-	@Column(name="state", columnDefinition="enum('online','offline')")
+
 	private String state;
 
 	@Column(name="sun_roof")
-	private Boolean sunRoof;
+	private byte sunRoof;
 
 	private String vin;
+
+	//bi-directional many-to-one association to VehicleBlocked
+	@OneToMany(mappedBy="vehicle")
+	private List<VehicleBlocked> vehicleBlockeds;
+
+	//bi-directional many-to-one association to VehicleTravel
+	@OneToMany(mappedBy="vehicle")
+	private List<VehicleTravel> vehicleTravels;
+
+	//bi-directional many-to-one association to VehicleTraveling
+	@OneToMany(mappedBy="vehicle")
+	private List<VehicleTraveling> vehicleTravelings;
 
 	public Vehicle() {
 	}
@@ -119,11 +130,11 @@ public class Vehicle implements Serializable {
 		this.state = state;
 	}
 
-	public Boolean getSunRoof() {
+	public byte getSunRoof() {
 		return this.sunRoof;
 	}
 
-	public void setSunRoof(Boolean sunRoof) {
+	public void setSunRoof(byte sunRoof) {
 		this.sunRoof = sunRoof;
 	}
 
@@ -133,6 +144,72 @@ public class Vehicle implements Serializable {
 
 	public void setVin(String vin) {
 		this.vin = vin;
+	}
+
+	public List<VehicleBlocked> getVehicleBlockeds() {
+		return this.vehicleBlockeds;
+	}
+
+	public void setVehicleBlockeds(List<VehicleBlocked> vehicleBlockeds) {
+		this.vehicleBlockeds = vehicleBlockeds;
+	}
+
+	public VehicleBlocked addVehicleBlocked(VehicleBlocked vehicleBlocked) {
+		getVehicleBlockeds().add(vehicleBlocked);
+		vehicleBlocked.setVehicle(this);
+
+		return vehicleBlocked;
+	}
+
+	public VehicleBlocked removeVehicleBlocked(VehicleBlocked vehicleBlocked) {
+		getVehicleBlockeds().remove(vehicleBlocked);
+		vehicleBlocked.setVehicle(null);
+
+		return vehicleBlocked;
+	}
+
+	public List<VehicleTravel> getVehicleTravels() {
+		return this.vehicleTravels;
+	}
+
+	public void setVehicleTravels(List<VehicleTravel> vehicleTravels) {
+		this.vehicleTravels = vehicleTravels;
+	}
+
+	public VehicleTravel addVehicleTravel(VehicleTravel vehicleTravel) {
+		getVehicleTravels().add(vehicleTravel);
+		vehicleTravel.setVehicle(this);
+
+		return vehicleTravel;
+	}
+
+	public VehicleTravel removeVehicleTravel(VehicleTravel vehicleTravel) {
+		getVehicleTravels().remove(vehicleTravel);
+		vehicleTravel.setVehicle(null);
+
+		return vehicleTravel;
+	}
+
+	public List<VehicleTraveling> getVehicleTravelings() {
+		return this.vehicleTravelings;
+	}
+
+	public void setVehicleTravelings(List<VehicleTraveling> vehicleTravelings) {
+		this.vehicleTravelings = vehicleTravelings;
+	}
+
+	public VehicleTraveling addVehicleTraveling(VehicleTraveling vehicleTraveling) {
+		getVehicleTravelings().add(vehicleTraveling);
+		vehicleTraveling.setVehicle(this);
+
+		return vehicleTraveling;
+	}
+
+	public VehicleTraveling removeVehicleTraveling(VehicleTraveling vehicleTraveling) {
+		getVehicleTravelings().remove(vehicleTraveling);
+		vehicleTraveling.setVehicle(null);
+
+		return vehicleTraveling;
 	}
 
 }

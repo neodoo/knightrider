@@ -4,21 +4,18 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 
-
-
 /**
- * The persistent class for the vehicle_reserved database table.
+ * The persistent class for the vehicle_blocked database table.
  * 
  */
 @Entity
-@Table(name="vehicle_reserved")
+@Table(name="vehicle_blocked")
 @NamedQuery(name="VehicleBlocked.findAll", query="SELECT v FROM VehicleBlocked v")
 public class VehicleBlocked implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	//bi-directional many-to-one association to Customer
@@ -30,8 +27,6 @@ public class VehicleBlocked implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_vehicle")
 	private Vehicle vehicle;
-	
-	private Boolean active;
 
 	public VehicleBlocked() {
 	}
@@ -58,14 +53,6 @@ public class VehicleBlocked implements Serializable {
 
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
 	}
 
 }

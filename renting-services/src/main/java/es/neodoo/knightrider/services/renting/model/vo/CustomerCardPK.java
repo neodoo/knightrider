@@ -41,8 +41,8 @@ public class CustomerCardPK implements Serializable {
 		}
 		CustomerCardPK castOther = (CustomerCardPK)other;
 		return 
-				(this.id == castOther.id)
-				&& this.email.equals(castOther.email);
+			(this.id == castOther.id)
+			&& this.email.equals(castOther.email);
 	}
 
 	public int hashCode() {
@@ -50,7 +50,7 @@ public class CustomerCardPK implements Serializable {
 		int hash = 17;
 		hash = hash * prime + this.id;
 		hash = hash * prime + this.email.hashCode();
-
+		
 		return hash;
 	}
 }

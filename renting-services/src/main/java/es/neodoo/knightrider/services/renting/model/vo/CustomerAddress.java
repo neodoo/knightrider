@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Table(name="customer_address")
 @NamedQuery(name="CustomerAddress.findAll", query="SELECT c FROM CustomerAddress c")
 public class CustomerAddress implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String address;

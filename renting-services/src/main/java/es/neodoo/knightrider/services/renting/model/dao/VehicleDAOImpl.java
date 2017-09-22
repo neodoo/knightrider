@@ -1,7 +1,5 @@
 package es.neodoo.knightrider.services.renting.model.dao;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -13,17 +11,12 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceException;
 
-import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
-import es.neodoo.knightrider.services.renting.model.vo.VehicleBlocked;
 
 
-public class VehicleDAOImpl implements Serializable, VehicleDAO {
-
-	private static final long serialVersionUID = 1L;
+public class VehicleDAOImpl implements VehicleDAO {
 
 	private final String VEHICLE_STATE_ONLINE = "online";
 
@@ -41,6 +34,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 		super();
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Vehicle> getVehiclesUnblocked() throws DAOException {
 
@@ -69,7 +63,8 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 	}
 
-	public Vehicle getVehicleBlocked(String username) throws DAOException {
+	@Override
+	public Vehicle getVehicleWithStatusBlocked(String username) throws DAOException {
 
 		Vehicle vehicle = null;
 
@@ -96,7 +91,8 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 	}
 
-	public Vehicle getVehicleTraveling(String username) throws DAOException {
+	@Override
+	public Vehicle getVehicleWithStatusTraveling(String username) throws DAOException {
 
 		Vehicle vehicle = null;
 
@@ -123,7 +119,8 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 	}
 
-	public Vehicle selectVehicle(int vehicleId) throws DAOException {
+	@Override
+	public Vehicle getVehicle(int vehicleId) throws DAOException {
 
 		Vehicle vehicle = null;
 
@@ -150,61 +147,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 	}
 
-	public VehicleBlocked selectVehicleBlocked(String username) throws DAOException {
-
-		VehicleBlocked vehicleBlocked = null;
-
-		try{
-
-			String jpql = "SELECT v FROM VehicleBlocked v WHERE v.customer.email = :email";
-
-			Query query = em.createQuery(jpql);
-			query.setParameter("email", username);
-
-
-			vehicleBlocked = (VehicleBlocked) query.getSingleResult();
-
-			log.debug("user: " + username + "blocked vehicle: " + vehicleBlocked.toString());
-
-		} catch(NoResultException e){
-			log.debug("Vehicle blocked not found for user " + username);
-
-		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
-			log.error("Error selecting vehicleBlocked : " + e);
-			throw new DAOException(e);
-		}
-
-		return vehicleBlocked;
-
-	}
-
-	public VehicleTraveling selectVehicleTraveling(String username) throws DAOException {
-
-		VehicleTraveling vehicleTraveling = null;
-
-		try {
-
-			String jpql = "SELECT v FROM VehicleTraveling v WHERE v.customer.email = :user";
-
-			Query query = em.createQuery(jpql);
-			query.setParameter("user", username);
-
-			vehicleTraveling = (VehicleTraveling) query.getSingleResult();
-
-			log.debug("User (" + username + ") are traveling with vehicle: " + vehicleTraveling.toString());
-
-		} catch(NoResultException e){
-			log.debug("Vehicle traveling not found for user " + username);
-
-		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
-			log.error("Error selecting vehicleTraveling: " + e);
-			throw new DAOException(e);
-		}
-
-		return vehicleTraveling;
-
-	}
-
+	@Override
 	public Vehicle updateVehicleToUnblocked(int vehicleId) throws DAOException {
 
 		Vehicle vehicle = null;
@@ -227,6 +170,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 	}
 
+	@Override
 	public Vehicle updateVehicleToBlocked(int vehicleId) throws DAOException{
 
 		Vehicle vehicle = null;
@@ -248,6 +192,7 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 
 	}
 
+	@Override
 	public Vehicle updateVehicleToTraveling(int vehicleId) throws DAOException {
 
 		Vehicle vehicle = null;
@@ -264,119 +209,6 @@ public class VehicleDAOImpl implements Serializable, VehicleDAO {
 		}
 
 		return vehicle;
-
-	}
-
-	public void insertVehicleBlocked(String username, int vehicleId) throws DAOException {
-
-		try {
-
-			String jpql = "INSERT INTO vehicle_blocked(id, email, id_vehicle) VALUES(?,?,?,?)";
-
-			Query query = em.createNativeQuery(jpql);
-			query.setParameter(1, null);
-			query.setParameter(2, username);
-			query.setParameter(3, vehicleId);
-			query.executeUpdate();
-
-			log.debug("Insert into VehicleBlocked user: " + username + "vehicleId: " + vehicleId);
-
-		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) { 
-			log.error("Error inserting vehicle blocked" + e);
-			throw new DAOException(e);
-		}
-
-	}
-
-	public void insertVehicleTraveling(String username, int vehicleId,Timestamp actualTime, Vehicle vehicle) throws DAOException {
-
-		try {
-
-			String jpql = "INSERT INTO vehicle_rented (id, email, id_vehicle, date_start, battery_start, latitude_start, longitude_start) VALUES(?,?,?,?,?,?,?)";
-
-			Query query = em.createNativeQuery(jpql);
-			query.setParameter(1, null);
-			query.setParameter(2, username);
-			query.setParameter(3, vehicleId);
-			query.setParameter(4, actualTime);
-			query.setParameter(5, vehicle.getBatteryLevel());
-			query.setParameter(6, vehicle.getLatitude());
-			query.setParameter(7, vehicle.getLongitude());
-			query.executeUpdate();
-
-			log.debug("Insert into vehicleTraveling user: " + username + "vehicleId: " + vehicleId + "time: " + actualTime + " vehicle: " + vehicle.toString());
-
-		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
-			log.error("Error inserting vehicle traveling " + e);
-			throw new DAOException(e);
-		}
-
-	}
-
-	public void insertTravel(VehicleTraveling vehicleTraveling, Vehicle vehicle, Timestamp dateEnd, Double cost, double time) throws DAOException {
-
-		try {
-
-			String jpql = "INSERT INTO vehicle_travel (id, id_vehicle, email, date_start, latitude_start, "
-					+ "longitude_start, date_end, latitude_end, longitude_end, cost, time) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-
-			Query query = em.createNativeQuery(jpql);
-			query.setParameter(1, null);
-			query.setParameter(2, vehicleTraveling.getVehicle().getId());
-			query.setParameter(3, vehicleTraveling.getCustomer().getEmail());
-			query.setParameter(4, vehicleTraveling.getDateStart());
-			query.setParameter(5, vehicleTraveling.getLatitudeStart());
-			query.setParameter(6, vehicleTraveling.getLongitudeStart());
-			query.setParameter(7, dateEnd);
-			query.setParameter(8, vehicle.getLatitude());
-			query.setParameter(9, vehicle.getLongitude());
-			query.setParameter(10, cost);
-			query.setParameter(11, time);
-			query.executeUpdate();
-
-			log.debug("insert into vehicle travel: " + vehicleTraveling.toString() + dateEnd + vehicle.toString() + cost + time);
-
-		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
-			log.error("Error inserting vehicleTraveling " + e);
-			throw new DAOException(e);
-		}
-
-	}
-
-	public void deleteVehicleBlocked(int vehicleId) throws DAOException {
-
-		try {		
-
-			String jpql = "DELETE FROM VehicleBlocked v WHERE v.vehicle.id = :id";
-			Query query = em.createQuery(jpql);
-			query.setParameter("id", vehicleId);
-			query.executeUpdate();
-
-			log.debug("Delete from VehicleBlocked vehicleId: " + vehicleId);
-
-
-		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
-			log.error("Error deleting vehicle blocked " + e);
-			throw new DAOException(e);
-		}
-
-	}
-
-	public void deleteVehicleTraveling(int vehicleId) throws DAOException {
-
-		try {
-
-			String jpql = "DELETE FROM VehicleTraveling v WHERE v.vehicle.id = :id";
-			Query query = em.createQuery(jpql);
-			query.setParameter("id", vehicleId);
-			query.executeUpdate();
-
-			log.debug("Delete from Vehicletraveling vehicleId: " + vehicleId);
-
-		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e){
-			log.error("Error deleting vehicle traveling " + e);
-			throw new DAOException(e);
-		}
 
 	}
 

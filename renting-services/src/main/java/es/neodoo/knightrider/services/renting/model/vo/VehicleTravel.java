@@ -1,9 +1,8 @@
 package es.neodoo.knightrider.services.renting.model.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 /**
@@ -14,11 +13,13 @@ import javax.persistence.*;
 @Table(name="vehicle_travel")
 @NamedQuery(name="VehicleTravel.findAll", query="SELECT v FROM VehicleTravel v")
 public class VehicleTravel implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+
+	private double cost;
 
 	@Column(name="date_end")
 	private Timestamp dateEnd;
@@ -37,11 +38,7 @@ public class VehicleTravel implements Serializable {
 
 	@Column(name="longitude_start")
 	private double longitudeStart;
-	
-	@Column(name="cost")
-	private double cost;
-	
-	@Column(name="time")
+
 	private double time;
 
 	//bi-directional many-to-one association to Customer
@@ -63,6 +60,14 @@ public class VehicleTravel implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public double getCost() {
+		return this.cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
 	public Timestamp getDateEnd() {
@@ -113,6 +118,14 @@ public class VehicleTravel implements Serializable {
 		this.longitudeStart = longitudeStart;
 	}
 
+	public double getTime() {
+		return this.time;
+	}
+
+	public void setTime(double time) {
+		this.time = time;
+	}
+
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -127,22 +140,6 @@ public class VehicleTravel implements Serializable {
 
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
-	}
-	
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
-	public double getTime() {
-		return time;
-	}
-
-	public void setTime(double time) {
-		this.time = time;
 	}
 
 }
