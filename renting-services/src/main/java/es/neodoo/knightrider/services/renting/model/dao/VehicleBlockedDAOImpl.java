@@ -21,7 +21,7 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 	private EntityManager em;
 
 	@Override
-	public VehicleBlocked selectVehicleBlocked(String username) throws DAOException {
+	public VehicleBlocked getVehicleBlocked(String username) throws DAOException {
 
 		VehicleBlocked vehicleBlocked = null;
 

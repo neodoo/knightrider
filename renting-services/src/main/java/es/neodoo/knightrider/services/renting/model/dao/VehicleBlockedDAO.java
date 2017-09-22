@@ -5,7 +5,7 @@ import es.neodoo.knightrider.services.renting.model.vo.VehicleBlocked;
 
 public interface VehicleBlockedDAO {
 
-	VehicleBlocked selectVehicleBlocked(String username) throws DAOException;
+	VehicleBlocked getVehicleBlocked(String username) throws DAOException;
 
 	void createVehicleBlocked(String username, int vehicleId) throws DAOException;
 
