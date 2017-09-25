@@ -12,23 +12,29 @@ import org.apache.commons.logging.LogFactory;
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Customer;
 import es.neodoo.knightrider.services.renting.model.vo.CustomerCard;
+import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class CustomerCardDAOImpl implements CustomerCardDAO {
 
 	private static final Log log = LogFactory.getLog(CustomerCardDAOImpl.class);
 
 	private EntityManager em;
-	
+
+	public CustomerCardDAOImpl() {
+		super();
+	}	
 
 	@Override
 	public void createCreditCard(String email, String creditCardNumber, String creditCardName, int creditCardCVS, Date creditCardDate) throws DAOException {
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 			
 			CustomerCard customerCard = new CustomerCard();	
 			Customer customer = new Customer();
 			customer.setEmail(email);
-			customerCard.setCustomer(customer);
+			//customerCard.setCustomer(customer);
 			customerCard.setNumber(creditCardNumber);
 			customerCard.setName(creditCardName);
 			customerCard.setCvs(creditCardCVS);
@@ -41,6 +47,8 @@ public class CustomerCardDAOImpl implements CustomerCardDAO {
 		} catch(TransactionRequiredException  | IllegalArgumentException | EntityExistsException  e) {
 			log.error("Error inserting creditCard into BD " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 	}

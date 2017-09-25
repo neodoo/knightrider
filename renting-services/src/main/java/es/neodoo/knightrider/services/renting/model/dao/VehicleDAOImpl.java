@@ -14,7 +14,7 @@ import javax.persistence.NonUniqueResultException;
 
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
-
+import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class VehicleDAOImpl implements VehicleDAO {
 
@@ -27,7 +27,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 	private final String VEHICLE_RENT_TRAVELING ="traveling";
 
 	private static final Log log = LogFactory.getLog(VehicleDAOImpl.class);
-
+	
 	private EntityManager em;
 
 	public VehicleDAOImpl() {
@@ -37,11 +37,13 @@ public class VehicleDAOImpl implements VehicleDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Vehicle> getVehiclesUnblocked() throws DAOException {
-
+		
 		List<Vehicle> vehicles = null;
 
 		try {
 
+			em = PersistenceListener.createEntityManager();
+			
 			String jpql = "SELECT v FROM Vehicle v WHERE v.state = :state AND v.rentState = :rentState";
 
 			Query query = em.createQuery(jpql);
@@ -57,6 +59,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error getting vehicles unblocked: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicles;
@@ -70,6 +74,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 		try {
 
+			em = PersistenceListener.createEntityManager();
+
 			String jpql = "SELECT v FROM Vehicle v " + 
 					" WHERE v.id = ( SELECT vr.vehicle FROM VehicleBlocked  vr WHERE vr.customer.email = :user) ";
 
@@ -80,11 +86,15 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 			log.debug("Vehicle blocked from username " + username + ": " + vehicle.toString());
 
+			
+			
 		} catch (NoResultException e) {
 			log.debug("Vehicle blocked not found for username " + username);
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error getting the vehicleBlocked:" + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicle;
@@ -97,6 +107,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 		Vehicle vehicle = null;
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT v FROM Vehicle v WHERE v.id = "
 					+ "( SELECT vr.vehicle FROM VehicleTraveling  vr WHERE vr.customer.email = :user) ";
@@ -113,6 +125,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("error getting the vehicleTraveling: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicle;
@@ -125,6 +139,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 		Vehicle vehicle = null;
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT v FROM Vehicle v WHERE v.id= :vehicle ";
 
@@ -141,7 +157,9 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error selecting vehicle (" + vehicleId + "): " +  e);
 			throw new DAOException(e);
-		} 
+		} finally {
+			em.close();
+		}
 
 		return vehicle;
 
@@ -154,6 +172,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 		try {
 
+			em = PersistenceListener.createEntityManager();
+
 			vehicle = em.find(Vehicle.class, vehicleId);
 			vehicle.setRentState(VEHICLE_RENT_UNBLOCK);
 			em.persist(vehicle);
@@ -164,6 +184,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch(IllegalStateException | EntityExistsException | TransactionRequiredException e) {
 			log.error("Error updating BD" + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicle;
@@ -177,6 +199,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 		try {
 
+			em = PersistenceListener.createEntityManager();
+
 			vehicle = em.find(Vehicle.class, vehicleId);
 			vehicle.setRentState(VEHICLE_RENT_BLOCK);
 			em.persist(vehicle); 
@@ -186,7 +210,10 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch(IllegalStateException | EntityExistsException | TransactionRequiredException e) {
 			log.error("Error updating vehicle to blocked" + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
+
 
 		return vehicle;
 
@@ -199,6 +226,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 		try{
 
+			em = PersistenceListener.createEntityManager();
+
 			vehicle = em.find(Vehicle.class, vehicleId);
 			vehicle.setRentState(VEHICLE_RENT_TRAVELING);
 			em.persist(vehicle); 
@@ -206,6 +235,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch(IllegalStateException | EntityExistsException | TransactionRequiredException e){
 			log.error("Error updating vehicle to traveling" + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicle;

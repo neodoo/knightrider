@@ -13,6 +13,7 @@ import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Customer;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleBlocked;
+import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 
@@ -25,8 +26,10 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 
 		VehicleBlocked vehicleBlocked = null;
 
-		try{
+		try {
 
+			em = PersistenceListener.createEntityManager();
+			
 			String jpql = "SELECT v FROM VehicleBlocked v WHERE v.customer.email = :email";
 
 			Query query = em.createQuery(jpql);
@@ -43,6 +46,8 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error selecting vehicleBlocked : " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicleBlocked;
@@ -53,6 +58,8 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 	public void createVehicleBlocked(String username, int vehicleId) throws DAOException {
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			VehicleBlocked vehicleBlocked = new VehicleBlocked();
 			Customer customer = new Customer();
@@ -68,6 +75,8 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) { 
 			log.error("Error inserting vehicle blocked" + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 	}
@@ -77,6 +86,8 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 
 		try {		
 
+			em = PersistenceListener.createEntityManager();
+
 			String jpql = "DELETE FROM VehicleBlocked v WHERE v.vehicle.id = :id";
 			Query query = em.createQuery(jpql);
 			query.setParameter("id", vehicleId);
@@ -84,10 +95,11 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 
 			log.debug("Delete from VehicleBlocked vehicleId: " + vehicleId);
 
-
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error deleting vehicle blocked " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 	}

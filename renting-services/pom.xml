@@ -7,14 +7,15 @@
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>renting-services Maven Webapp</name>
+	<name>renting-services</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<hibernate-version>5.2.11.Final</hibernate-version>
+		<hibernate-version>4.3.10.Final</hibernate-version>
 		<mysql-connector-version>5.1.42</mysql-connector-version>
-		<commons-logging>1.2</commons-logging>
-		<junit-version>4.8.2</junit-version>
+		<commons-logging-version>1.2</commons-logging-version>
+		<slf4j-log4j12-version>1.7.12</slf4j-log4j12-version>
+     	<junit-version>4.8.2</junit-version>
 		<maven-compiler-version>3.7.0</maven-compiler-version>
 		<jdk>1.8</jdk>
 	</properties>
@@ -40,13 +41,44 @@
 			<version>${mysql-connector-version}</version>
 		</dependency>
 
+        <!-- Tomcat 8 (Java 8, Servlet 3.1) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- 
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        -->
+        
 		<!-- Log -->
-		<dependency>
+		<!-- 
+		-->
+        <dependency>
     		<groupId>commons-logging</groupId>
     		<artifactId>commons-logging</artifactId>
-    		<version>${commons-logging}</version>
+    		<version>${commons-logging-version}</version>
 		</dependency>
-  
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-log4j12-version}</version>
+        </dependency>
+        
         <!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>

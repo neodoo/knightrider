@@ -15,6 +15,7 @@ import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Customer;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
+import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 	
@@ -28,6 +29,8 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 		VehicleTraveling vehicleTraveling = null;
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT v FROM VehicleTraveling v WHERE v.customer.email = :user";
 
@@ -44,6 +47,8 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error selecting vehicleTraveling: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return vehicleTraveling;
@@ -55,6 +60,8 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 
 		try {
 			
+			em = PersistenceListener.createEntityManager();
+
 			VehicleTraveling vehicleTraveling = new VehicleTraveling();
 			Customer customer = new Customer();
 			customer.setEmail(username);
@@ -72,6 +79,8 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error inserting vehicle traveling " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 	}
@@ -80,6 +89,8 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 	public void deleteVehicleTraveling(int vehicleId) throws DAOException {
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "DELETE FROM VehicleTraveling v WHERE v.vehicle.id = :id";
 			Query query = em.createQuery(jpql);
@@ -91,6 +102,8 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e){
 			log.error("Error deleting vehicle traveling " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 	}

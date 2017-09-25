@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.User;
+import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -20,6 +21,8 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 
+			em = PersistenceListener.createEntityManager();
+			
 			User user = new User();
 			user.setEmail(email);
 			user.setPassword(pass);

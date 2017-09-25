@@ -16,6 +16,7 @@ import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
+import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 
@@ -27,6 +28,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 	public void createTravel(VehicleTraveling vehicleTraveling, Vehicle vehicle, Timestamp dateEnd, Double cost, double time) throws DAOException {
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			VehicleTravel vehicleTravel = new VehicleTravel();
 			vehicleTravel.setCustomer(vehicleTraveling.getCustomer());
@@ -46,6 +49,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error inserting vehicleTraveling " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 	}
@@ -56,6 +61,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		long numTravels = 0;
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT count(*) FROM VehicleTravel v WHERE v.customer.email = :username";
 
@@ -72,6 +79,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error getting  num travels: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return numTravels;
@@ -84,6 +93,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		double cost = 0;
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT SUM(v.cost) FROM VehicleTravel v WHERE v.customer.email = :username";
 
@@ -100,6 +111,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error getting cost: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return cost;
@@ -112,6 +125,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		double time = 0;
 
 		try {
+
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT SUM(v.time) FROM VehicleTravel v WHERE v.customer.email = :username";
 
@@ -126,6 +141,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error getting time: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return time;
@@ -139,6 +156,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		List<VehicleTravel> travels = null;
 
 		try{
+			
+			em = PersistenceListener.createEntityManager();
 
 			String jpql = "SELECT v FROM VehicleTravel v WHERE v.customer.email = :username";
 
@@ -155,6 +174,8 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		} catch (NonUniqueResultException | IllegalStateException | IllegalArgumentException e) {
 			log.error("Error getting travels: " + e);
 			throw new DAOException(e);
+		} finally {
+			em.close();
 		}
 
 		return travels;

@@ -46,8 +46,8 @@ public class Customer implements Serializable {
 	private List<CustomerAddress> customerAddresses;
 
 	//bi-directional many-to-one association to CustomerCard
-	@OneToMany(mappedBy="customer")
-	private List<CustomerCard> customerCards;
+	//@OneToMany(mappedBy="customer")
+	//private List<CustomerCard> customerCards;
 
 	//bi-directional many-to-one association to VehicleBlocked
 	@OneToMany(mappedBy="customer")
@@ -150,27 +150,27 @@ public class Customer implements Serializable {
 		return customerAddress;
 	}
 
-	public List<CustomerCard> getCustomerCards() {
-		return this.customerCards;
-	}
+	//public List<CustomerCard> getCustomerCards() {
+	//	return this.customerCards;
+	//}
 
-	public void setCustomerCards(List<CustomerCard> customerCards) {
-		this.customerCards = customerCards;
-	}
+	//public void setCustomerCards(List<CustomerCard> customerCards) {
+	//	this.customerCards = customerCards;
+	//}
 
-	public CustomerCard addCustomerCard(CustomerCard customerCard) {
-		getCustomerCards().add(customerCard);
-		customerCard.setCustomer(this);
+	//public CustomerCard addCustomerCard(CustomerCard customerCard) {
+	//	getCustomerCards().add(customerCard);
+	//	customerCard.setCustomer(this);
 
-		return customerCard;
-	}
+	//	return customerCard;
+	//}
 
-	public CustomerCard removeCustomerCard(CustomerCard customerCard) {
-		getCustomerCards().remove(customerCard);
-		customerCard.setCustomer(null);
+	//public CustomerCard removeCustomerCard(CustomerCard customerCard) {
+	//	getCustomerCards().remove(customerCard);
+	//	customerCard.setCustomer(null);
 
-		return customerCard;
-	}
+	//	return customerCard;
+	//}
 
 	public List<VehicleBlocked> getVehicleBlockeds() {
 		return this.vehicleBlockeds;

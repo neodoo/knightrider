@@ -29,9 +29,9 @@ public class CustomerCard implements Serializable {
 	private String number;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="email")
-	private Customer customer;
+	//@ManyToOne
+	//@JoinColumn(name="email")
+	//private Customer customer;
 
 	public CustomerCard() {
 	}
@@ -76,12 +76,12 @@ public class CustomerCard implements Serializable {
 		this.number = number;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
-	}
+	//	public Customer getCustomer() {
+	//	return this.customer;
+	//}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+	//public void setCustomer(Customer customer) {
+	//	this.customer = customer;
+	//}
 
 }
