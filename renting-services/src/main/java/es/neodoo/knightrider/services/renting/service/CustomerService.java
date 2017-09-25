@@ -14,9 +14,11 @@ import es.neodoo.knightrider.services.renting.model.dao.CustomerCardDAO;
 import es.neodoo.knightrider.services.renting.model.dao.CustomerDAO;
 import es.neodoo.knightrider.services.renting.model.dao.UserDAO;
 import es.neodoo.knightrider.services.renting.model.dao.VehicleTravelDAO;
+import es.neodoo.knightrider.services.renting.model.dao.VehicleTravelingDAO;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
+import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
 
-public class CustomerServices {
+public class CustomerService {
 
 	private final int NUMBER_OF_DECIMALS = 2;
 
@@ -25,10 +27,12 @@ public class CustomerServices {
 	VehicleTravelDAO vehicleTravelDAO;
 
 	UserDAO userDAO;
+	
+	VehicleTravelingDAO vehicleTravelingDAO;
 
 	CustomerCardDAO customerCardDAO;
 
-	private static final Log log = LogFactory.getLog(CustomerServices.class);
+	private static final Log log = LogFactory.getLog(CustomerService.class);
 
 	public long getNumTravels(String username) throws ServiceException {
 
@@ -159,6 +163,24 @@ public class CustomerServices {
 			throw new ServiceException("Can not create customer: " + e);
 		}
 
+	}
+	
+	public VehicleTraveling showTravelingDetail(String username) throws ServiceException {
+		
+		VehicleTraveling vehicleTraveling = null;
+		
+		try {
+			
+			vehicleTraveling = vehicleTravelingDAO.getVehicleTraveling(username);
+			log.debug("Showing traveling details of user" + username);
+			
+		} catch (DAOException e) {
+			log.error("Can not showing the traveling details:" + e);
+			throw new ServiceException("Can not show traveling details" + e);
+		}
+		
+		return vehicleTraveling;
+		
 	}
 
 }

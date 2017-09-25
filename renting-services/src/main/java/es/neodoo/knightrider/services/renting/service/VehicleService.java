@@ -21,7 +21,7 @@ import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleBlocked;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
 
-public class VehicleServices {
+public class VehicleService {
 
 	VehicleDAO vehicleDAO;
 	
@@ -39,7 +39,7 @@ public class VehicleServices {
 	
 	private final int CONVERT_MS_TO_SECONDS = 60000;
 	
-	private static final Log log = LogFactory.getLog(VehicleServices.class);
+	private static final Log log = LogFactory.getLog(VehicleService.class);
 
 	public List<Vehicle> getVehiclesUnblocked() throws ServiceException {
 
@@ -261,24 +261,6 @@ public class VehicleServices {
 
 		return bd.doubleValue();
 
-	}
-	
-	public VehicleTraveling showTravelingDetail(String username) throws ServiceException {
-		
-		VehicleTraveling vehicleTraveling = null;
-		
-		try {
-			
-			vehicleTraveling = vehicleTravelingDAO.getVehicleTraveling(username);
-			log.debug("Showing traveling details of user" + username);
-			
-		} catch (DAOException e) {
-			log.error("Can not showing the traveling details:" + e);
-			throw new ServiceException("Can not show traveling details" + e);
-		}
-		
-		return vehicleTraveling;
-		
 	}
 	
 }
