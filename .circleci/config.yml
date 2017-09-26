@@ -1,0 +1,18 @@
+version: 2
+
+machine:
+  timezone:
+    Europe/Madrid
+  java:
+    version: openjdk8
+
+jobs:
+  build:
+
+     steps: 
+       - checkout
+
+       - run: 
+           name: Execute Maven
+           command: mvn clean compile package -DskipTests
+

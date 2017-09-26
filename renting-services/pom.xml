@@ -4,6 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.neodoo.knightrider</groupId>
 	<artifactId>renting-services</artifactId>
+
+      	<parent>
+		<groupId>es.neodoo.knightrider</groupId>
+    		<artifactId>knightrider</artifactId>
+    		<version>0.1.0-SNAPSHOT</version>
+  	</parent>
+
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
@@ -12,16 +19,16 @@
 
 	<properties>
 		<mysql-connector-version>6.0.6</mysql-connector-version>
-        <hibernate-version>5.2.11.Final</hibernate-version>
+       		<hibernate-version>5.2.11.Final</hibernate-version>
 		<servlet-version>3.1.0</servlet-version>
-        <tomcat-servlet-version>8.5.21</tomcat-servlet-version>
+        	<tomcat-servlet-version>8.5.21</tomcat-servlet-version>
 		<reasteasy-version>2.2.3.GA</reasteasy-version>
 		<jackson-databind>2.9.1</jackson-databind>
 		<commons-logging-version>1.2</commons-logging-version>
-        <log4j-version>1.2.17</log4j-version>
+        	<log4j-version>1.2.17</log4j-version>
 		<slf4j-version>1.7.25</slf4j-version>
-     	<junit-version>4.8.2</junit-version>
-     	<maven-compiler-version>3.7.0</maven-compiler-version>
+     		<junit-version>4.8.2</junit-version>
+     		<maven-compiler-version>3.7.0</maven-compiler-version>
 		<jdk>1.8</jdk>
 	</properties>
 
@@ -71,12 +78,12 @@
         </dependency>
         -->
         
-		<!-- Reasteasy libraries -->
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<version>${reasteasy-version}</version>
-		</dependency>
+	<!-- Reasteasy libraries -->
+	<dependency>
+		<groupId>org.jboss.resteasy</groupId>
+		<artifactId>resteasy-jaxrs</artifactId>
+		<version>${reasteasy-version}</version>
+	</dependency>
 
 		<!-- 
 		<dependency>
