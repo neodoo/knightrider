@@ -142,6 +142,8 @@ CREATE TABLE `vehicle` (
   `battery_range` double NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
+  `inside_temp` double NOT NULL,
+  `outside_temp` double NOT NULL,
   `sun_roof` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;

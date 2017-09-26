@@ -81,7 +81,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'1010DKR','S','red','online','unblocked',40,99,41.6563497,-0.876566,1),(2,'2020RRS','S','green','online','unblocked',75,310,41.662,-0.8713,0),(3,'1818GGJ','X','blue','online','unblocked',90,454,41.65021,-0.8799,1),(4,'2323CVB','3','red','online','unblocked',25,41.659,41.659,-0.899,1);
+INSERT INTO `vehicle` VALUES (1,'1010DKR','S','red','online','unblocked',40,99,41.6563497,-0.876566,23.50,22.45,1),(2,'2020RRS','S','green','online','unblocked',75,310,41.662,-0.8713,22.22,23.23,0),(3,'1818GGJ','X','blue','online','unblocked',90,454,41.65021,-0.8799,23.13,30.05,1),(4,'2323CVB','3','red','online','unblocked',25,41.659,41.659,-0.899,33.33,35.50,1);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
