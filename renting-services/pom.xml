@@ -13,13 +13,24 @@
 	<properties>
 		<hibernate-version>4.3.10.Final</hibernate-version>
 		<mysql-connector-version>5.1.42</mysql-connector-version>
+		<tomcat-version>3.1.0</tomcat-version>
+		<reasteasy-version>2.2.3.GA</reasteasy-version>
 		<commons-logging-version>1.2</commons-logging-version>
 		<slf4j-log4j12-version>1.7.12</slf4j-log4j12-version>
      	<junit-version>4.8.2</junit-version>
-		<maven-compiler-version>3.7.0</maven-compiler-version>
+     	<maven-compiler-version>3.7.0</maven-compiler-version>
 		<jdk>1.8</jdk>
 	</properties>
 
+	<repositories>
+	
+	   <repository>
+		  <id>JBoss repository</id>
+		  <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+	   </repository>
+	
+	</repositories>
+	
 	<dependencies>
 
 		<!-- Database libraries (JPA and MySQL driver) -->
@@ -45,8 +56,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
+            <version>${tomcat-version}</version>
         </dependency>
         
         <!-- 
@@ -63,21 +73,48 @@
             <version>1.2</version>
         </dependency>
         -->
-        
-		<!-- Log -->
+
+		<!-- Reasteasy libraries -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${reasteasy-version}</version>
+		</dependency>
+
 		<!-- 
-		-->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${reasteasy-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>${reasteasy-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jettison-provider</artifactId>
+			<version>${reasteasy-version}</version>
+		</dependency>
+		 -->
+		        	
+		<!-- Log -->
         <dependency>
     		<groupId>commons-logging</groupId>
     		<artifactId>commons-logging</artifactId>
     		<version>${commons-logging-version}</version>
 		</dependency>
 
+		<!-- 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j-log4j12-version}</version>
         </dependency>
+ 		-->
         
         <!-- Junit -->
 		<dependency>
