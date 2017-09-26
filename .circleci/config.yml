@@ -3,6 +3,8 @@ version: 2
 
 jobs:
   build:
+     
+    working_directory: ~/knightrider
 
     machine:
       timezone:
@@ -10,23 +12,11 @@ jobs:
       java:
         version: openjdk8
 
-     working_directory: ~/knightrider
+    steps: 
 
-     steps: 
+      - checkout
 
-       - checkout
-
-       - restore_cache:
-           key: knightrider-{{ checksum "pom.xml" }}
-
-       - run: mvn dependency:go-offline
-
-       - save_cache:
-           paths:
-             - ~/.m2
-           key: knightrider-{{ checksum "pom.xml" }}
-
-       - run: 
-           name: Execute Maven
-           command: mvn clean compile package -DskipTests
+      - run: 
+          name: Execute Maven
+          command: mvn clean compile package -DskipTests
 
