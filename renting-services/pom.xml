@@ -15,6 +15,7 @@
 		<mysql-connector-version>5.1.42</mysql-connector-version>
 		<tomcat-version>3.1.0</tomcat-version>
 		<reasteasy-version>2.2.3.GA</reasteasy-version>
+		<jackson-databind>2.9.1</jackson-databind>
 		<commons-logging-version>1.2</commons-logging-version>
 		<slf4j-log4j12-version>1.7.12</slf4j-log4j12-version>
      	<junit-version>4.8.2</junit-version>
@@ -100,7 +101,14 @@
 			<version>${reasteasy-version}</version>
 		</dependency>
 		 -->
-		        	
+		 
+		 <!-- Jackson Databind-->
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>${jackson-databind}</version>
+		</dependency>
+			        	
 		<!-- Log -->
         <dependency>
     		<groupId>commons-logging</groupId>
