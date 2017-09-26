@@ -11,13 +11,15 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<hibernate-version>4.3.10.Final</hibernate-version>
-		<mysql-connector-version>5.1.42</mysql-connector-version>
-		<tomcat-version>3.1.0</tomcat-version>
+		<mysql-connector-version>6.0.6</mysql-connector-version>
+        <hibernate-version>5.2.11.Final</hibernate-version>
+		<servlet-version>3.1.0</servlet-version>
+        <tomcat-servlet-version>8.5.21</tomcat-servlet-version>
 		<reasteasy-version>2.2.3.GA</reasteasy-version>
 		<jackson-databind>2.9.1</jackson-databind>
 		<commons-logging-version>1.2</commons-logging-version>
-		<slf4j-log4j12-version>1.7.12</slf4j-log4j12-version>
+        <log4j-version>1.2.17</log4j-version>
+		<slf4j-version>1.7.25</slf4j-version>
      	<junit-version>4.8.2</junit-version>
      	<maven-compiler-version>3.7.0</maven-compiler-version>
 		<jdk>1.8</jdk>
@@ -34,6 +36,13 @@
 	
 	<dependencies>
 
+        <!-- MySQL driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-version}</version>
+        </dependency>
+
 		<!-- Database libraries (JPA and MySQL driver) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -47,34 +56,21 @@
 			<version>${hibernate-version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-version}</version>
-		</dependency>
-
-        <!-- Tomcat 8 (Java 8, Servlet 3.1) -->
+        <!-- Tomcat 8.5.x (Java 7+, Servlet 3.1, JSP 2.3, EL 3.0, WebSocket 1.1, JASPIC 1.1 ) -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${tomcat-version}</version>
+            <version>${servlet-version}</version>
         </dependency>
         
         <!-- 
         <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>${tomcat-servlet-version}</version>
         </dependency>
         -->
-
+        
 		<!-- Reasteasy libraries -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -110,17 +106,32 @@
 		</dependency>
 			        	
 		<!-- Log -->
-        <dependency>
+		
+		<dependency>
     		<groupId>commons-logging</groupId>
     		<artifactId>commons-logging</artifactId>
     		<version>${commons-logging-version}</version>
 		</dependency>
+        
+        <!-- 
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        -->
+        
+        <!-- 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-version}</version>
+        </dependency>
 
-		<!-- 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j-log4j12-version}</version>
+            <version>${slf4j-version}</version>
         </dependency>
  		-->
         

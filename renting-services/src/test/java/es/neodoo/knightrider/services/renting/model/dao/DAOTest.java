@@ -12,7 +12,7 @@ public class DAOTest {
 
 	private static final String PERSISTENCE_UNIT = "KnightriderPU";
 				
-	@Test
+	//@Test
 	public void connectToDatabase() {
 		
 		try {

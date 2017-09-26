@@ -24,10 +24,13 @@ public class VehicleRestImpl implements VehicleRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response test() {
 
+		log.info("Entering test rest method... ");
 		Response.ResponseBuilder builder = null;
 
 		builder = Response.ok();
 
+		log.info(" Ok !");
+		
 		return builder.build();
 
 	}

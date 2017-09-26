@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<persistence version="2.0"
-    xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
- 
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+    version="2.1">
+
    <persistence-unit name="KnightriderPU" transaction-type="RESOURCE_LOCAL">
 
     <!-- Persistence provider -->
-    <!--
+    <!-- 
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    -->
+     -->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     
-    <!--
+    <!-- JNDI connection -->
     <non-jta-data-source>java:comp/env/jdbc/knightrider</non-jta-data-source>
-    -->
     
     <!-- Entity classes -->
     <class>es.neodoo.knightrider.services.renting.model.vo.Customer</class>
@@ -27,30 +28,26 @@
     <class>es.neodoo.knightrider.services.renting.model.vo.VehicleBlocked</class>
     <class>es.neodoo.knightrider.services.renting.model.vo.VehicleTravel</class>
     <class>es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling</class>
-    
+
     <properties>
 
-      <!--
-      <property name="hibernate.connection.datasource" value="java:comp/env/jdbc/knightrider"/>
+      <!-- Configuring JDBC properties 
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/knightrider" />
+      <property name="javax.persistence.jdbc.user" value="root" />
+      <property name="javax.persistence.jdbc.password" value="" />  
       -->
       
-      <!-- The JDBC driver of your database -->
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-      <!-- The JDBC URL to the database instance -->
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/knightrider" />
-      
-      <!-- The database username -->
-      <property name="javax.persistence.jdbc.user" value="root" />
-      <!-- The database password -->
-      <property name="javax.persistence.jdbc.password" value="" />
-
-      <!-- 
-      <property name="hibernate.archive.autodetection" value="class"/>
+      <!-- Hibernate properties 
       <property name="hibernate.show_sql" value="true" />
       <property name="hibernate.format_sql" value="true" />
-      <property name="hibernate.hbm2ddl.auto" value="update" />
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-      <property name="connection.autocommit" value="false" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+      <property name="hibernate.hbm2ddl.auto" value="validate" />
+      -->
+
+      <!-- JNDI Connection 
+      <property name="hibernate.connection.datasource" value="java:comp/env/jdbc/knightrider"/>
+      <property name="hibernate.id.new_generator_mappings" value ="true"/>
       -->
       
       <!-- Configuring Connection Pool 
@@ -60,6 +57,7 @@
       <property name="hibernate.c3p0.max_statements" value="50" />
       <property name="hibernate.c3p0.idle_test_period" value="2000" />
       -->
+      
     </properties>
 
   </persistence-unit>
