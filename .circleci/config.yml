@@ -1,16 +1,30 @@
 version: 2
 
-machine:
-  timezone:
-    Europe/Madrid
-  java:
-    version: openjdk8
 
 jobs:
   build:
 
+    machine:
+      timezone:
+        Europe/Madrid
+      java:
+        version: openjdk8
+
+     working_directory: ~/knightrider
+
      steps: 
+
        - checkout
+
+       - restore_cache:
+           key: knightrider-{{ checksum "pom.xml" }}
+
+       - run: mvn dependency:go-offline
+
+       - save_cache:
+           paths:
+             - ~/.m2
+           key: knightrider-{{ checksum "pom.xml" }}
 
        - run: 
            name: Execute Maven
