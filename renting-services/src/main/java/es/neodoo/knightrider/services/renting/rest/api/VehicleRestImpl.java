@@ -1,7 +1,5 @@
 package es.neodoo.knightrider.services.renting.rest.api;
 
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,27 +12,12 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import es.neodoo.knightrider.services.renting.exceptions.ServiceException;
-import es.neodoo.knightrider.services.renting.exceptions.UserHasAnotherVehicleBlocked;
-import es.neodoo.knightrider.services.renting.exceptions.VehicleIsNotAvailable;
-import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
-import es.neodoo.knightrider.services.renting.rest.params.UpdateBDParamResponse;
-import es.neodoo.knightrider.services.renting.rest.params.UpdateBDResponse;
-import es.neodoo.knightrider.services.renting.rest.params.VehicleParamResponse;
-import es.neodoo.knightrider.services.renting.rest.params.VehicleResponse;
-import es.neodoo.knightrider.services.renting.service.VehicleService;
-import es.neodoo.knightrider.services.renting.service.VehicleServiceImpl;
-
 @Path("/vehicles")
 public class VehicleRestImpl implements VehicleRest {
 
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(VehicleRestImpl.class);
 	
-	VehicleService vehicleService = new VehicleServiceImpl(); 
-
 	@Override
 	@GET
 	@Path("/test")

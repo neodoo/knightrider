@@ -11,15 +11,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import es.neodoo.knightrider.services.renting.model.vo.Customer;
-import es.neodoo.knightrider.services.renting.service.CustomerService;
-import es.neodoo.knightrider.services.renting.service.CustomerServiceImpl;
 
 @Path("/customer")
 public class CustomerRestImpl implements CustomerRest {
 	
-	@SuppressWarnings("unused")
-	private CustomerService customerService = new CustomerServiceImpl();
-
 	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(Customer.class.getName());
 	
