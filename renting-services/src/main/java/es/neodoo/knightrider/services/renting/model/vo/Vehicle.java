@@ -30,6 +30,12 @@ public class Vehicle implements Serializable {
 	private double latitude;
 
 	private double longitude;
+	
+	@Column(name="inside_temp")
+	private double insideTemp;
+
+	@Column(name="outside_temp")
+	private double outsideTemp;
 
 	private String model;
 
@@ -106,6 +112,21 @@ public class Vehicle implements Serializable {
 		this.longitude = longitude;
 	}
 
+	public double getInsideTemp() {
+		return this.insideTemp;
+	}
+
+	public void setModel(double insideTemp) {
+		this.insideTemp = insideTemp;
+	}
+	
+	public double getOutsideTemp() {
+		return this.outsideTemp;
+	}
+
+	public void setOutsideTemp(double outsideTemp) {
+		this.outsideTemp = outsideTemp;
+	}
 	public String getModel() {
 		return this.model;
 	}
