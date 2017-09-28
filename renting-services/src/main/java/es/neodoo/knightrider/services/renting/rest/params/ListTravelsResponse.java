@@ -10,13 +10,16 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
+import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
+
 public class ListTravelsResponse {
 	private  List<ListTravelsParamResponse> response = new ArrayList<ListTravelsParamResponse>();
 
 	private int count;
 
 	public ListTravelsResponse() {}
-	
+
 	public ListTravelsResponse(List<ListTravelsParamResponse> response, int count) {
 		this.response = response;
 		this.count = count;
@@ -64,6 +67,24 @@ public class ListTravelsResponse {
 		lTravelsResponse = mapper.readValue(jsonInString, ListTravelsResponse.class);
 
 		return lTravelsResponse;
-	
+
 	}
+
+	public ListTravelsResponse buildTravelResponse(List<VehicleTravel> travels){
+
+		ListTravelsResponse listTravelsResponse = new ListTravelsResponse();
+
+		for (VehicleTravel t : travels){
+
+			ListTravelsParamResponse listTravelsParamResponse = new ListTravelsParamResponse(t);
+			listTravelsResponse.addResponse(listTravelsParamResponse);
+
+		}
+
+		listTravelsResponse.setCount(listTravelsResponse.getResponse().size());
+
+		return listTravelsResponse;
+
+	}
+
 }

@@ -1,15 +1,15 @@
 package es.neodoo.knightrider.services.renting.rest.params;
 
-public class ShowMyProfileParamResponse {
-	
+public class MyProfileParamResponse {
+
 	private long num_travels;
-	
+
 	private double cost;
-	
+
 	private double time;
-	
+
 	private double average;
-	
+
 	private String name;
 
 	public String getName() {
@@ -52,14 +52,15 @@ public class ShowMyProfileParamResponse {
 		this.average = average;
 	}
 
-	public ShowMyProfileParamResponse(long num_travels, double cost, double time, double average) {
+	public MyProfileParamResponse(long num_travels, double time, double cost, double average, String name) {
 		this.num_travels = num_travels;
 		this.cost = cost;
 		this.time = time;
 		this.average = average;
+		this.name = name;
 	}
 
-	public ShowMyProfileParamResponse() {
+	public MyProfileParamResponse() {
 	}
-	
+
 }

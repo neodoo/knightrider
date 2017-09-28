@@ -1,5 +1,7 @@
 package es.neodoo.knightrider.services.renting.rest.params;
 
+import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
+
 public class VehicleParamResponse {
 	
 	private Integer id_vehicle;
@@ -132,23 +134,21 @@ public class VehicleParamResponse {
 		this.sun_roof = sun_roof;
 	}
 
-	public VehicleParamResponse(Integer id_vehicle, String state, String rent_state, String color, String vin,
-			int battery_level, double battery_range, double latitude, double longitude, double inside_temp,
-			double outside_temp, byte sun_roof, String model) {
+	public VehicleParamResponse(Vehicle vehicle) {
 		super();
-		this.id_vehicle = id_vehicle;
-		this.state = state;
-		this.rent_state = rent_state;
-		this.color = color;
-		this.vin = vin;
-		this.battery_level = battery_level;
-		this.battery_range = battery_range;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.inside_temp = inside_temp;
-		this.outside_temp = outside_temp;
-		this.sun_roof = convertByteToBoolean(sun_roof);
-		this.model = model;
+		this.id_vehicle = vehicle.getId();
+		this.state = vehicle.getState();
+		this.rent_state = vehicle.getRentState();
+		this.color = vehicle.getColor();
+		this.vin = vehicle.getVin();
+		this.battery_level = vehicle.getBatteryLevel();
+		this.battery_range = vehicle.getBatteryRange();
+		this.latitude = vehicle.getLatitude();
+		this.longitude = vehicle.getLongitude();
+		this.inside_temp = vehicle.getInsideTemp();
+		this.outside_temp = vehicle.getOutsideTemp();
+		this.sun_roof = convertByteToBoolean(vehicle.getSunRoof());
+		this.model = vehicle.getModel();
 	}
 
 	public VehicleParamResponse() {

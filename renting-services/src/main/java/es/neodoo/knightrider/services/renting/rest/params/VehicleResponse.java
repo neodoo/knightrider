@@ -10,15 +10,17 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
+
 
 public class VehicleResponse {
-	
+
 	private  List<VehicleParamResponse> response = new ArrayList<VehicleParamResponse>();
 
 	private int count;
 
 	public VehicleResponse() {}
-	
+
 	public VehicleResponse(List<VehicleParamResponse> response, int count) {
 		this.response = response;
 		this.count = count;
@@ -41,6 +43,33 @@ public class VehicleResponse {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public VehicleResponse buildVehicleResponse(List<Vehicle> vehicles){
+
+		VehicleResponse vehicleResponse = new VehicleResponse();
+
+		for (Vehicle v : vehicles){
+
+			VehicleParamResponse vehiclesParamResponse = new VehicleParamResponse(v);
+			vehicleResponse.addResponse(vehiclesParamResponse);
+
+		}
+
+		vehicleResponse.setCount(vehicleResponse.getResponse().size());
+
+		return vehicleResponse;
+
+	}
+	
+	public VehicleResponse buildVehicleResponse(Vehicle vehicle){
+		
+		VehicleResponse vehicleResponse = new VehicleResponse();
+		VehicleParamResponse vehiclesParamResponse = new VehicleParamResponse(vehicle);
+		vehicleResponse.addResponse(vehiclesParamResponse);
+		vehicleResponse.setCount(vehicleResponse.getResponse().size());
+		return vehicleResponse;
+		
 	}
 
 	public String toJson() throws JsonProcessingException {
@@ -66,6 +95,6 @@ public class VehicleResponse {
 		lVehiclesResponse = mapper.readValue(jsonInString, VehicleResponse.class);
 
 		return lVehiclesResponse;
-	
+
 	}
 }

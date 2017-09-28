@@ -2,7 +2,9 @@ package es.neodoo.knightrider.services.renting.rest.params;
 
 import java.sql.Timestamp;
 
-public class ShowRentDetailParamResponse {
+import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
+
+public class TravelingDetailParamResponse {
 	
 	private int battery_start;
 	
@@ -12,7 +14,7 @@ public class ShowRentDetailParamResponse {
 		return battery_start;
 	}
 
-	public ShowRentDetailParamResponse(int battery_start, Timestamp date_start) {
+	public TravelingDetailParamResponse(int battery_start, Timestamp date_start) {
 		this.battery_start = battery_start;
 		this.date_start = date_start;
 	}
@@ -29,6 +31,13 @@ public class ShowRentDetailParamResponse {
 		this.date_start = timestamp;
 	}
 
-	public ShowRentDetailParamResponse() {}
+	public TravelingDetailParamResponse() {}
+	
+	public TravelingDetailParamResponse (VehicleTraveling vehicleTraveling) {
+		
+		this.battery_start = vehicleTraveling.getBatteryStart();
+		this.date_start = vehicleTraveling.getDateStart();
+		
+	}
 
 }

@@ -21,6 +21,19 @@ public class UpdateBDResponse {
 		this.response = response;
 	}
 
+
+	public UpdateBDResponse buildUpdateBDResponse(Boolean result, String reason) {
+
+		UpdateBDResponse updateBDResponse = new UpdateBDResponse();
+		UpdateBDParamResponse updateBDParamResponse = new UpdateBDParamResponse();
+		updateBDParamResponse.setResult(result);
+		updateBDParamResponse.setReason(reason);
+		updateBDResponse.setResponse(updateBDParamResponse);
+
+		return updateBDResponse;
+
+	}
+
 	public String toJson() throws JsonProcessingException {
 
 		String jsonInString = null;
@@ -44,7 +57,7 @@ public class UpdateBDResponse {
 		updateBDResponse = mapper.readValue(jsonInString, UpdateBDResponse.class);
 
 		return updateBDResponse;
-	
+
 	}
 
 	public UpdateBDResponse(){}

@@ -2,26 +2,28 @@ package es.neodoo.knightrider.services.renting.rest.params;
 
 import java.sql.Timestamp;
 
+import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
+
 public class ListTravelsParamResponse {
-	
+
 	private String vin;
-	
+
 	private String model;
-	
+
 	private Timestamp date_start;
-	
+
 	private double latitude_start;
-	
+
 	private double longitude_start;
-	
+
 	private Timestamp date_end;
-	
+
 	private double latitude_end;
-	
+
 	private double longitude_end;
-	
+
 	private double cost;
-	
+
 	private double time;
 
 	public String getVin() {
@@ -104,22 +106,20 @@ public class ListTravelsParamResponse {
 		this.time = time;
 	}
 
-	public ListTravelsParamResponse(String vin, String model, Timestamp date_start, double latitude_start,
-			double longitude_start, Timestamp date_end, double latitude_end, double longitude_end, double cost,
-			double time) {
-		this.vin = vin;
-		this.model = model;
-		this.date_start = date_start;
-		this.latitude_start = latitude_start;
-		this.longitude_start = longitude_start;
-		this.date_end = date_end;
-		this.latitude_end = latitude_end;
-		this.longitude_end = longitude_end;
-		this.cost = cost;
-		this.time = time;
+	public ListTravelsParamResponse(VehicleTravel travel) {
+		this.vin = travel.getVehicle().getVin();
+		this.model = travel.getVehicle().getModel();
+		this.date_start = travel.getDateStart();
+		this.latitude_start = travel.getLatitudeStart();
+		this.longitude_start = travel.getLongitudeStart();
+		this.date_end = travel.getDateEnd();
+		this.latitude_end = travel.getLatitudeEnd();
+		this.longitude_end = travel.getLongitudeEnd();
+		this.cost = travel.getCost();
+		this.time = travel.getTime();
 	}
 
 	public ListTravelsParamResponse() {
 	}
-	
+
 }
