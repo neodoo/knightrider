@@ -15,6 +15,10 @@ public class UserDAOImpl implements UserDAO {
 	private static final Log log = LogFactory.getLog(UserDAOImpl.class);
 
 	private EntityManager em;
+	
+	public UserDAOImpl() {
+		super();
+	}
 
 	@Override
 	public void createUser(String email, String pass) throws DAOException {

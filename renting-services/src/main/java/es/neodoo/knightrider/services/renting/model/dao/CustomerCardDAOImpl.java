@@ -34,7 +34,6 @@ public class CustomerCardDAOImpl implements CustomerCardDAO {
 			CustomerCard customerCard = new CustomerCard();	
 			Customer customer = new Customer();
 			customer.setEmail(email);
-			//customerCard.setCustomer(customer);
 			customerCard.setNumber(creditCardNumber);
 			customerCard.setName(creditCardName);
 			customerCard.setCvs(creditCardCVS);

@@ -20,6 +20,10 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 	private static final Log log = LogFactory.getLog(VehicleBlockedDAOImpl.class);
 
 	private EntityManager em;
+	
+	public VehicleBlockedDAOImpl() {
+		super();
+	}
 
 	@Override
 	public VehicleBlocked getVehicleBlocked(String username) throws DAOException {

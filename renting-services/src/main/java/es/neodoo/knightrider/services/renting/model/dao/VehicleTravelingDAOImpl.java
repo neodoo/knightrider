@@ -23,6 +23,10 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 	
 	private EntityManager em;
 	
+	public VehicleTravelingDAOImpl() {
+		super();
+	}
+	
 	@Override
 	public VehicleTraveling getVehicleTraveling(String username) throws DAOException {
 
@@ -99,7 +103,7 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 
 			log.debug("Delete from Vehicletraveling vehicleId: " + vehicleId);
 
-		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e){
+		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error deleting vehicle traveling " + e);
 			throw new DAOException(e);
 		} finally {

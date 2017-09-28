@@ -23,6 +23,10 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 	private static final Log log = LogFactory.getLog(VehicleTravelDAOImpl.class);
 
 	private EntityManager em;
+	
+	public VehicleTravelDAOImpl() {
+		super();
+	}
 
 	@Override
 	public void createTravel(VehicleTraveling vehicleTraveling, Vehicle vehicle, Timestamp dateEnd, Double cost, double time) throws DAOException {
