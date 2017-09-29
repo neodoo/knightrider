@@ -29,11 +29,11 @@ public class VehicleServiceImpl implements VehicleService {
 
 	VehicleDAO vehicleDAO = new VehicleDAOImpl();;
 
-	VehicleBlockedDAO vehicleBlockedDAO = new VehicleBlockedDAOImpl();
+	VehicleBlockedDAO vehicleBlockedDAO = null;
 
-	VehicleTravelingDAO vehicleTravelingDAO = new VehicleTravelingDAOImpl();
+	VehicleTravelingDAO vehicleTravelingDAO = null;
 
-	VehicleTravelDAO vehicleTravelDAO = new VehicleTravelDAOImpl();
+	VehicleTravelDAO vehicleTravelDAO = null;
 
 	private final String VEHICLE_RENT_UNBLOCK = "unblocked";
 
@@ -46,7 +46,13 @@ public class VehicleServiceImpl implements VehicleService {
 	private static final Log log = LogFactory.getLog(VehicleServiceImpl.class);
 
 	public VehicleServiceImpl(){
+		
 		super();
+		vehicleDAO = new VehicleDAOImpl();;
+		vehicleBlockedDAO = new VehicleBlockedDAOImpl();
+		vehicleTravelingDAO = new VehicleTravelingDAOImpl();
+		vehicleTravelDAO = new VehicleTravelDAOImpl();
+
 	}
 
 	@Override
@@ -114,6 +120,7 @@ public class VehicleServiceImpl implements VehicleService {
 		try {
 
 			vehicleBlocked = vehicleBlockedDAO.getVehicleBlocked(username);
+
 			if (vehicleBlocked != null){
 
 				log.debug("the user has another vehicle blocked");
@@ -126,7 +133,7 @@ public class VehicleServiceImpl implements VehicleService {
 				if(vehicle.getRentState().equals(VEHICLE_RENT_UNBLOCK)){
 
 					vehicleDAO.updateVehicleToBlocked(vehicleId);
-					vehicleBlockedDAO.createVehicleBlocked(username, vehicleId);	
+					vehicleBlockedDAO.createVehicleBlocked(username, vehicleId);
 					blocked = true;	// Ok, vehicle is blocked for this user
 					log.debug("User " + username + " block the vehicle " + vehicleId + "correctly");
 
@@ -195,8 +202,10 @@ public class VehicleServiceImpl implements VehicleService {
 				vehicle = vehicleDAO.getVehicle(vehicleId);
 
 				if(!vehicle.getRentState().equals(VEHICLE_RENT_UNBLOCK));{ // vehicle is not available
+
 					log.info("User" + username + "can't start traveling because vehicle" + vehicleId + "is already in use");
 					throw new VehicleIsNotAvailable("Vehicle : " + vehicleId + "is already blocked");
+
 				}
 
 			}
@@ -206,15 +215,18 @@ public class VehicleServiceImpl implements VehicleService {
 				vehicle = vehicleDAO.updateVehicleToTraveling(vehicleId);
 				vehicleBlockedDAO.deleteVehicleBlocked(vehicleId);
 				startTravelingDate = getTime();
-				vehicleTravelingDAO.createVehicleTraveling(username, vehicleId, startTravelingDate, vehicle);
+				vehicleTravelingDAO.createVehicleTraveling(username, startTravelingDate, vehicle);
 				start = true;
 				log.info("User" + username + "start traveling with vehicle" + vehicleId);
 
 			} else { //user has another blocked vehicle
+
 				start = false;
 				log.debug("the user have another vehicle blocked, so he cant start traveling with this one");
 				throw new UserHasAnotherVehicleBlocked("User has another vehicle Blocked");
+
 			}
+			
 		} catch (DAOException e) {
 			throw new ServiceException("Can not unblocked the vehicle");
 		}

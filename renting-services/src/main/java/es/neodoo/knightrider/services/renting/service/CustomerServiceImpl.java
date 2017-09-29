@@ -29,20 +29,27 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private final int NUMBER_OF_DECIMALS = 2;
 
-	CustomerDAO customerDAO = new CustomerDAOImpl();
+	CustomerDAO customerDAO = null;
 
-	VehicleTravelDAO vehicleTravelDAO = new VehicleTravelDAOImpl();
+	VehicleTravelDAO vehicleTravelDAO = null;
 
-	UserDAO userDAO = new UserDAOImpl();
+	UserDAO userDAO = null;
 	
-	VehicleTravelingDAO vehicleTravelingDAO = new VehicleTravelingDAOImpl();
+	VehicleTravelingDAO vehicleTravelingDAO = null;
 
-	CustomerCardDAO customerCardDAO = new CustomerCardDAOImpl();
+	CustomerCardDAO customerCardDAO = null;
 
 	private static final Log log = LogFactory.getLog(CustomerServiceImpl.class);
 	
 	public CustomerServiceImpl(){
+		
 		super();
+		customerDAO = new CustomerDAOImpl();
+		vehicleTravelDAO = new VehicleTravelDAOImpl();
+		userDAO = new UserDAOImpl();
+		vehicleTravelingDAO = new VehicleTravelingDAOImpl();
+		customerCardDAO = new CustomerCardDAOImpl();
+
 	}
 
 	@Override
