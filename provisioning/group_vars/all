@@ -20,3 +20,7 @@ tomcat_port_ajp: 8009
 tomcat_port_http: 8080
 tomcat_port_https: 8443
 
+application_mysql_user: knightrider
+application_mysql_password: .knightrider8$
+application_mysql_db: knightrider
+

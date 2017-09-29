@@ -1,0 +1,45 @@
+---
+
+- name: Instalamos algunas dependencias basicas
+  yum: name={{item}} state=present
+  with_items:
+   - git
+   - MySQL-python
+
+- name: Knightrider Git clone
+  git:
+    repo: 'https://github.com/neodoo/knightrider.git'
+    dest: /root/software/knightrider
+
+- name: Create database
+  mysql_db: db={{ application_mysql_db }} state=present
+
+- name: Create database user
+  mysql_user: user={{ application_mysql_user }} password={{ application_mysql_password }} priv={{ application_mysql_db }}.*:ALL state=present
+
+- name: Create database schema
+  mysql_db: name={{ application_mysql_db }} login_user={{ application_mysql_user }} login_password={{ application_mysql_password }}
+    target=/root/software/knightrider/renting-services/database/schema.sql
+    state=import
+
+- name: Create database data
+  mysql_db: name={{ application_mysql_db }} login_user={{ application_mysql_user }} login_password={{ application_mysql_password }}
+    target=/root/software/knightrider/renting-services/database/data.sql
+    state=import
+
+- name: Compile Knightrider project with Maven
+  shell: "source /etc/profile.d/apache-maven.sh && mvn -f /root/software/knightrider/pom.xml clean package -DskipTests=true"
+
+- name: tomcat stop
+  service: name=tomcat state=stopped
+
+- name: Delete renting-services war directory in tomcat webapps
+  file: path=/usr/java/apache-tomcat/webapps/renting-services.war state=absent
+
+- name: Delete renting-services war file in tomcat webapps
+  file: path=/usr/java/apache-tomcat/webapps/renting-services state=absent
+
+- name: Copy renting-services war file
+  command: cp /root/software/knightrider/renting-services/target/renting-services.war /usr/java/apache-tomcat/webapps/ 
+  notify: restart tomcat
+

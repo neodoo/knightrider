@@ -2,6 +2,3 @@
 
 - include: install.yml
 
-# This can be done directly by Main class in keycloak-client project
-- include: users.yml
-

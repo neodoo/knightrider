@@ -15,6 +15,7 @@
   <!-- Projects module -->
   <modules>
     <module>renting-services</module>
+    <module>car-services</module>
   </modules>
   
   <!-- Organization -->

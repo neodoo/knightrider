@@ -4,7 +4,7 @@
   get_url: url=http://apache.rediris.es/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz dest=/root/software/apache-tomcat-8.5.20.tar.gz
 
 - name: Descomprimimos el proyecto Apache Tomcat
-  unarchive: src=/root/software//apache-tomcat-8.5.20.tar.gz dest=/usr/java copy=no
+  unarchive: src=/root/software/apache-tomcat-8.5.20.tar.gz dest=/usr/java copy=no
 
 - name: Creamos link para Apache Tomcat
   file: path=/usr/java/apache-tomcat src=/usr/java/apache-tomcat-8.5.20 state=link
