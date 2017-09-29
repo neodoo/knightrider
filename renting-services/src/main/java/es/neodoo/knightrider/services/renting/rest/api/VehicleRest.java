@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,10 +30,22 @@ import es.neodoo.knightrider.services.renting.service.VehicleServiceImpl;
 public class VehicleRest {
 
 	private static final Log log = LogFactory.getLog(VehicleRest.class);
-
-	VehicleService vehicleService = new VehicleServiceImpl();
-	VehicleResponse vehicleResponse = new VehicleResponse();
-	UpdateBDResponse updateBDResponse = new UpdateBDResponse();
+	
+	private VehicleService vehicleService = null;
+	
+	public VehicleRest() {
+		super();
+		this.vehicleService =  new VehicleServiceImpl(); ;
+	}
+	
+	private ResponseBuilder addCorsSupport(ResponseBuilder response){
+		
+		return response.header("Access-Control-Allow-Origin", "*")
+        .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+        .header("Access-Control-Allow-Credentials", "true")
+        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+        .header("Access-Control-Max-Age", "1209600");
+	}
 
 	@GET
 	@Path("/test")
@@ -53,16 +66,17 @@ public class VehicleRest {
 	public Response getVehiclesUnblocked() {
 
 		List<Vehicle> vehiclesWithStatusUnblocked = null;
-		VehicleResponse vehicleWithStatusUnblockedResponse = null;
+		VehicleResponse vehicleWithStatusUnblockedResponse =  new VehicleResponse();
 		String json = null;
 
 		try {
 
 			vehiclesWithStatusUnblocked  = vehicleService.getVehiclesWithStatusUnblocked();
-			vehicleWithStatusUnblockedResponse = vehicleResponse.buildVehicleResponse(vehiclesWithStatusUnblocked);
+			vehicleWithStatusUnblockedResponse = vehicleWithStatusUnblockedResponse.buildVehicleResponse(vehiclesWithStatusUnblocked);
 
 		} catch (Exception e) {
-			vehicleWithStatusUnblockedResponse = null;
+			vehicleWithStatusUnblockedResponse.addResponse(null);
+			vehicleWithStatusUnblockedResponse.setCount(0);
 			log.error("Error geting unblocked vehicles:" + e);
 		}
 
@@ -74,8 +88,8 @@ public class VehicleRest {
 			log.error("Eror converting Response to Json:" + e);
 		}
 
-		return Response.status(200).entity(json).build();
-
+		return  addCorsSupport(Response.status(200)).entity(json).build();
+	            
 	}
 
 	@GET
@@ -84,24 +98,29 @@ public class VehicleRest {
 	public Response blocked(@QueryParam("username") String username) {
 
 		Vehicle vehicleWithStatusBlocked = null;
-		VehicleResponse vehicleWithStatusBlockedResponse = null;
+		VehicleResponse vehicleWithStatusBlockedResponse = new VehicleResponse();
 		String json = null;
 
 		try {
 
 			vehicleWithStatusBlocked = vehicleService.getVehicleWithStatusBlocked(username);
-			vehicleWithStatusBlockedResponse = vehicleResponse.buildVehicleResponse(vehicleWithStatusBlocked);
+			vehicleWithStatusBlockedResponse = vehicleWithStatusBlockedResponse.buildVehicleResponse(vehicleWithStatusBlocked);
 
 		} catch (Exception e) {
-			vehicleWithStatusBlockedResponse = null;
+			vehicleWithStatusBlockedResponse.addResponse(null);
+			vehicleWithStatusBlockedResponse.setCount(0);
 			log.error("Error geting blocked vehicles:" + e);
 		}
+		
 		try {
+			
 			json = vehicleWithStatusBlockedResponse.toJson();
+			
 		} catch (JsonProcessingException e) {
 			log.error("Eror converting Response to Json:" + e);
 		}
-		return Response.status(200).entity(json).build();
+		
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
@@ -111,16 +130,17 @@ public class VehicleRest {
 	public Response travelingVehicles(@QueryParam("username") String username) {
 
 		Vehicle vehicleWithStatusTraveling = null;
-		VehicleResponse vehicleWithStatusTravelingResponse = null;
+		VehicleResponse vehicleWithStatusTravelingResponse = new VehicleResponse();
 		String json = null;
 
 		try {
 
 			vehicleWithStatusTraveling = vehicleService.getVehicleWithStatusTraveling(username);
-			vehicleWithStatusTravelingResponse = vehicleResponse.buildVehicleResponse(vehicleWithStatusTraveling);
+			vehicleWithStatusTravelingResponse = vehicleWithStatusTravelingResponse.buildVehicleResponse(vehicleWithStatusTraveling);
 
 		} catch (Exception e) {
-			vehicleWithStatusTravelingResponse = null;
+			vehicleWithStatusTravelingResponse.setCount(0);
+			vehicleWithStatusTravelingResponse.addResponse(null);
 			log.error("Error geting traveling vehicles:" + e);
 		}		
 
@@ -131,7 +151,8 @@ public class VehicleRest {
 		} catch (JsonProcessingException e) {
 			log.error("Eror converting Response to Json:" + e);
 		}
-		return Response.status(200).entity(json).build();
+		
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
@@ -141,20 +162,19 @@ public class VehicleRest {
 	public Response block(@PathParam("vehicleId") int vehicleId, @QueryParam("username") String username) {
 
 		Boolean blocked = false;
-		UpdateBDResponse blockVehicleResponse = null;
-
+		UpdateBDResponse blockVehicleResponse = new UpdateBDResponse();
 		String json = null;
 
 		try {
 
 			blocked = vehicleService.block(username, vehicleId);
-			blockVehicleResponse = updateBDResponse.buildUpdateBDResponse(blocked,"Succesful");
+			blockVehicleResponse = blockVehicleResponse.buildUpdateBDResponse(blocked,"Succesful");
 
 		} catch (UserHasAnotherVehicleBlocked | VehicleIsNotAvailable e) {
-			blockVehicleResponse = updateBDResponse.buildUpdateBDResponse(false , e.getMessage().toString());
+			blockVehicleResponse = blockVehicleResponse.buildUpdateBDResponse(false , e.getMessage().toString());
 			log.error("Error blocking vehicle:" + e);
 		} catch (Exception e) {
-			blockVehicleResponse = updateBDResponse.buildUpdateBDResponse(false , "An error ocurred");
+			blockVehicleResponse = blockVehicleResponse.buildUpdateBDResponse(false , "An error ocurred");
 			log.error("Error blocking vehicle:" + e);
 		}
 
@@ -166,7 +186,7 @@ public class VehicleRest {
 			log.error("Eror converting Response to Json:" + e);
 		}
 
-		return Response.status(200).entity(json).build();
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
@@ -176,17 +196,16 @@ public class VehicleRest {
 	public Response unblock(@PathParam("vehicleId") int vehicleId, @QueryParam("username") String username) {
 
 		Boolean blocked = false;
-		UpdateBDResponse unblockVehicleResponse = null;
-
+		UpdateBDResponse unblockVehicleResponse = new UpdateBDResponse();
 		String json = null;
 
 		try {
 
 			blocked = vehicleService.unblock(username, vehicleId);
-			unblockVehicleResponse = updateBDResponse.buildUpdateBDResponse(blocked,"Succesful");
+			unblockVehicleResponse = unblockVehicleResponse.buildUpdateBDResponse(blocked,"Succesful");
 
 		} catch (ServiceException e) {
-			unblockVehicleResponse = updateBDResponse.buildUpdateBDResponse(false,"An error ocurred");
+			unblockVehicleResponse = unblockVehicleResponse.buildUpdateBDResponse(false,"An error ocurred");
 			log.error("Error unblocking vehicle:" + e);
 		} catch (Exception e){
 			log.error(e);
@@ -201,7 +220,7 @@ public class VehicleRest {
 			log.error("Eror converting Response to Json:" + e);
 		}
 
-		return Response.status(200).entity(json).build();
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
@@ -211,20 +230,19 @@ public class VehicleRest {
 	public Response travelStart(@PathParam("vehicleId") int vehicleId, @QueryParam("username") String username) {
 
 		Boolean startTravel = false;
-		UpdateBDResponse startTravelResponse = null;
-
+		UpdateBDResponse startTravelResponse = new UpdateBDResponse();
 		String json = null;
 
 		try {
 
 			startTravel = vehicleService.travelStart(username, vehicleId);
-			startTravelResponse = updateBDResponse.buildUpdateBDResponse(startTravel,"Your travel start now");
+			startTravelResponse = startTravelResponse.buildUpdateBDResponse(startTravel,"Your travel start now");
 
 		} catch (UserHasAnotherVehicleBlocked | VehicleIsNotAvailable e) {
-			startTravelResponse = updateBDResponse.buildUpdateBDResponse(false, e.getMessage().toString());
+			startTravelResponse = startTravelResponse.buildUpdateBDResponse(false, e.getMessage().toString());
 			log.error("Error starting travel:" + e);
 		} catch (Exception e){
-			startTravelResponse = updateBDResponse.buildUpdateBDResponse(false,"An error ocurred");
+			startTravelResponse = startTravelResponse.buildUpdateBDResponse(false,"An error ocurred");
 			log.error("Error starting travel:" + e);
 		}
 
@@ -236,7 +254,7 @@ public class VehicleRest {
 			log.error("Eror converting Response to Json:" + e);
 		}
 
-		return Response.status(200).entity(json).build();
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
@@ -246,17 +264,16 @@ public class VehicleRest {
 	public Response travelFinish(@PathParam("vehicleId") int vehicleId, @QueryParam("username") String username) {
 
 		double finishTravelCost = 0;
-		UpdateBDResponse startTravelResponse = null;
-
+		UpdateBDResponse startTravelResponse = new UpdateBDResponse();
 		String json = null;
 
 		try {
 
 			finishTravelCost = vehicleService.travelFinish(username, vehicleId);
-			startTravelResponse = updateBDResponse.buildUpdateBDResponse(true, String.valueOf(finishTravelCost));
+			startTravelResponse = startTravelResponse.buildUpdateBDResponse(true, String.valueOf(finishTravelCost));
 
 		}  catch (Exception e){
-			startTravelResponse = updateBDResponse.buildUpdateBDResponse(false,"An error ocurred");
+			startTravelResponse = startTravelResponse.buildUpdateBDResponse(false,"An error ocurred");
 			log.error("Error finishing travel:" + e);
 		}
 
@@ -268,7 +285,7 @@ public class VehicleRest {
 			log.error("Eror converting Response to Json:" + e);
 		}
 
-		return Response.status(200).entity(json).build();
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
