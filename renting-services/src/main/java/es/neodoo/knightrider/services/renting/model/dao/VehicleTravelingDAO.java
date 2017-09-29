@@ -10,7 +10,7 @@ public interface VehicleTravelingDAO {
 
 	VehicleTraveling getVehicleTraveling(String username) throws DAOException;
 
-	void createVehicleTraveling(String username, int vehicleId, Timestamp actualTime, Vehicle vehicle)
+	void createVehicleTraveling(String username, Timestamp actualTime, Vehicle vehicle)
 			throws DAOException;
 
 	void deleteVehicleTraveling(int vehicleId) throws DAOException;

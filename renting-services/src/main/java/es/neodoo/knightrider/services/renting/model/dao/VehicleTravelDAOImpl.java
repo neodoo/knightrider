@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
+import es.neodoo.knightrider.services.renting.model.vo.Customer;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
@@ -34,10 +35,14 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 		try {
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
+			
+			Customer customer = em.getReference(Customer.class, vehicleTraveling.getCustomer().getEmail());
+			Vehicle vehicleReferenced = em.getReference(Vehicle.class, vehicle.getId()); 
 
 			VehicleTravel vehicleTravel = new VehicleTravel();
-			vehicleTravel.setCustomer(vehicleTraveling.getCustomer());
-			vehicleTravel.setVehicle(vehicle);
+			vehicleTravel.setCustomer(customer);
+			vehicleTravel.setVehicle(vehicleReferenced);
 			vehicleTravel.setDateStart(vehicleTraveling.getDateStart());
 			vehicleTravel.setLatitudeStart(vehicleTraveling.getLatitudeStart());
 			vehicleTravel.setLongitudeStart(vehicleTraveling.getLongitudeStart());
@@ -46,6 +51,7 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 			vehicleTravel.setLongitudeEnd(vehicle.getLongitude());
 			vehicleTravel.setCost(cost);
 			vehicleTravel.setTime(time);
+			
 			em.persist(vehicleTravel);
 
 			log.debug("insert into vehicle travel: " + vehicleTraveling.toString() + dateEnd + vehicle.toString() + cost + time);
@@ -54,6 +60,7 @@ public class VehicleTravelDAOImpl implements VehicleTravelDAO {
 			log.error("Error inserting vehicleTraveling " + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 

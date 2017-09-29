@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Customer;
 import es.neodoo.knightrider.services.renting.model.vo.CustomerCard;
+import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class CustomerCardDAOImpl implements CustomerCardDAO {
@@ -30,10 +31,12 @@ public class CustomerCardDAOImpl implements CustomerCardDAO {
 		try {
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
 			
-			CustomerCard customerCard = new CustomerCard();	
-			Customer customer = new Customer();
+			Customer customer = em.getReference(Customer.class, email);
 			customer.setEmail(email);
+
+			CustomerCard customerCard = new CustomerCard();	
 			customerCard.setNumber(creditCardNumber);
 			customerCard.setName(creditCardName);
 			customerCard.setCvs(creditCardCVS);
@@ -47,6 +50,7 @@ public class CustomerCardDAOImpl implements CustomerCardDAO {
 			log.error("Error inserting creditCard into BD " + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 

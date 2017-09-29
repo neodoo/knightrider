@@ -64,14 +64,15 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 		try {
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
 
+			Customer customer = em.getReference(Customer.class, username);
+			Vehicle vehicle = em.getReference(Vehicle.class, vehicleId); 
+			
 			VehicleBlocked vehicleBlocked = new VehicleBlocked();
-			Customer customer = new Customer();
-			customer.setEmail(username);
-			Vehicle vehicle = new Vehicle();
-			vehicle.setId(vehicleId);
 			vehicleBlocked.setCustomer(customer);
 			vehicleBlocked.setVehicle(vehicle);
+			
 			em.persist(vehicleBlocked);
 
 			log.debug("Insert into VehicleBlocked user: " + username + "vehicleId: " + vehicleId);
@@ -80,6 +81,7 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 			log.error("Error inserting vehicle blocked" + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 
@@ -91,6 +93,7 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 		try {		
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
 
 			String jpql = "DELETE FROM VehicleBlocked v WHERE v.vehicle.id = :id";
 			Query query = em.createQuery(jpql);
@@ -103,6 +106,7 @@ public class VehicleBlockedDAOImpl implements VehicleBlockedDAO {
 			log.error("Error deleting vehicle blocked " + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 

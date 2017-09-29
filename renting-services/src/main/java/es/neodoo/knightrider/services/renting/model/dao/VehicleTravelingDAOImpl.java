@@ -60,30 +60,31 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 	}
 
 	@Override
-	public void createVehicleTraveling(String username, int vehicleId,Timestamp actualTime, Vehicle vehicle) throws DAOException {
+	public void createVehicleTraveling(String username,Timestamp actualTime, Vehicle vehicle) throws DAOException {
 
 		try {
 			
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
+			
+			Customer customer = em.getReference(Customer.class, username);
 
 			VehicleTraveling vehicleTraveling = new VehicleTraveling();
-			Customer customer = new Customer();
-			customer.setEmail(username);
 			vehicleTraveling.setCustomer(customer);
 			vehicleTraveling.setVehicle(vehicle);
 			vehicleTraveling.setDateStart(actualTime);
 			vehicleTraveling.setLatitudeStart(vehicle.getLatitude());
 			vehicleTraveling.setLongitudeStart(vehicle.getLongitude());
 			vehicleTraveling.setBatteryStart(vehicle.getBatteryLevel());
+			
 			em.persist(vehicleTraveling);
-
-
-			log.debug("Insert into vehicleTraveling user: " + username + "vehicleId: " + vehicleId + "time: " + actualTime + " vehicle: " + vehicle.toString());
+			log.debug("Insert into vehicleTraveling user: " + username + "vehicleId: " + vehicle.getId() + "time: " + actualTime + " vehicle: " + vehicle.toString());
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error inserting vehicle traveling " + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 
@@ -95,6 +96,7 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 		try {
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
 
 			String jpql = "DELETE FROM VehicleTraveling v WHERE v.vehicle.id = :id";
 			Query query = em.createQuery(jpql);
@@ -107,6 +109,7 @@ public class VehicleTravelingDAOImpl implements VehicleTravelingDAO {
 			log.error("Error deleting vehicle traveling " + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 

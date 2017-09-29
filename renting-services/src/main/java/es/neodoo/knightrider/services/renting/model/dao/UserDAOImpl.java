@@ -26,6 +26,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
 			
 			User user = new User();
 			user.setEmail(email);
@@ -37,6 +38,9 @@ public class UserDAOImpl implements UserDAO {
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e) {
 			log.error("Error inserting user into BD " + e);
 			throw new DAOException(e);
+		} finally {
+			em.getTransaction().commit();
+			em.close();
 		}
 
 	}

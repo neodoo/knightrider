@@ -31,6 +31,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		try {
 
 			em = PersistenceListener.createEntityManager();
+			em.getTransaction().begin();
 			
 			Customer customer = new Customer();
 			customer.setEmail(email);
@@ -40,14 +41,15 @@ public class CustomerDAOImpl implements CustomerDAO {
 			customer.setMobile(phone);
 			customer.setDrivingLicenseId(driveNumber);
 			customer.setDrivingLicenseDate(driveDate);
+			
 			em.persist(customer);
-
 			log.debug("insert new customer into BD: " + email + name);
 
 		} catch(IllegalStateException | IllegalArgumentException | PersistenceException e){
 			log.error("Error inserting customer into BD " + e);
 			throw new DAOException(e);
 		} finally {
+			em.getTransaction().commit();
 			em.close();
 		}
 
@@ -66,7 +68,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 			Query query= em.createQuery(jpql);
 			query.setParameter("username", username);		
-
 			name =  (String) query.getSingleResult();
 
 			log.debug("geting name of user: " + username + " = " +  name);
