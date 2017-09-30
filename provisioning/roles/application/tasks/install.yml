@@ -43,6 +43,17 @@
     src=renting-services.context.xml.j2
     dest=/usr/java/apache-tomcat/conf/Catalina/{{ car_services_hostname }}/ROOT.xml
 
+- name: Delete unnecessary directories in tomcat webapps
+  file: path=/usr/java/apache-tomcat/webapps/docs state=absent
+
+- file: path=/usr/java/apache-tomcat/webapps/examples state=absent
+
+- file: path=/usr/java/apache-tomcat/webapps/host-manager state=absent
+
+- file: path=/usr/java/apache-tomcat/webapps/manager state=absent
+
+- file: path=/usr/java/apache-tomcat/webapps/ROOT state=absent
+
 - name: Delete car-services war directory in tomcat webapps
   file: path=/usr/java/apache-tomcat/webapps/car-services.war state=absent
 
