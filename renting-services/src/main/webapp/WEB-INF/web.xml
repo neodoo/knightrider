@@ -37,7 +37,7 @@
   
   <context-param>
     <param-name>resteasy.resources</param-name>
-    <param-value>es.neodoo.knightrider.services.renting.rest.api.CustomerRest, es.neodoo.knightrider.services.renting.rest.api.VehicleRest</param-value>
+    <param-value>es.neodoo.knightrider.services.renting.rest.api.CustomerRestImpl, es.neodoo.knightrider.services.renting.rest.api.VehicleRestImpl</param-value>
   </context-param>
   
   <!-- This need same with resteasy servlet url-pattern. 

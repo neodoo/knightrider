@@ -1,54 +1,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>es.neodoo.knightrider</groupId>
+	<groupId>es.neodoo.knightrider.api</groupId>
 	<artifactId>renting-services</artifactId>
-
-      	<parent>
+	
+	<parent>
 		<groupId>es.neodoo.knightrider</groupId>
-    		<artifactId>knightrider</artifactId>
-    		<version>0.1.0-SNAPSHOT</version>
-  	</parent>
-
+		<artifactId>knightrider</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+	
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-
+	
 	<name>renting-services</name>
 	<url>http://maven.apache.org</url>
-
+	
 	<properties>
 		<mysql-connector-version>6.0.6</mysql-connector-version>
-       		<hibernate-version>5.2.11.Final</hibernate-version>
+		<hibernate-version>5.2.11.Final</hibernate-version>
 		<servlet-version>3.1.0</servlet-version>
-        	<tomcat-servlet-version>8.5.21</tomcat-servlet-version>
+		<tomcat-servlet-version>8.5.21</tomcat-servlet-version>
 		<reasteasy-version>2.2.3.GA</reasteasy-version>
 		<jackson-databind>2.9.1</jackson-databind>
 		<commons-logging-version>1.2</commons-logging-version>
-        	<log4j-version>1.2.17</log4j-version>
+		<log4j-version>1.2.17</log4j-version>
 		<slf4j-version>1.7.25</slf4j-version>
-     		<junit-version>4.8.2</junit-version>
-     		<maven-compiler-version>3.7.0</maven-compiler-version>
+		<junit-version>4.8.2</junit-version>
+		<maven-compiler-version>3.7.0</maven-compiler-version>
 		<jdk>1.8</jdk>
 	</properties>
-
+	
 	<repositories>
 	
-	   <repository>
-		  <id>JBoss repository</id>
-		  <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-	   </repository>
+		<repository>
+			<id>JBoss repository</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
 	
 	</repositories>
 	
 	<dependencies>
 
-        <!-- MySQL driver -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector-version}</version>
-        </dependency>
+		<!-- MySQL driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-version}</version>
+		</dependency>
 
 		<!-- Database libraries (JPA and MySQL driver) -->
 		<dependency>
@@ -63,28 +63,28 @@
 			<version>${hibernate-version}</version>
 		</dependency>
 
-        <!-- Tomcat 8.5.x (Java 7+, Servlet 3.1, JSP 2.3, EL 3.0, WebSocket 1.1, JASPIC 1.1 ) -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-version}</version>
-        </dependency>
-        
-        <!-- 
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-servlet-api</artifactId>
-            <version>${tomcat-servlet-version}</version>
-        </dependency>
-        -->
-        
-	<!-- Reasteasy libraries -->
-	<dependency>
-		<groupId>org.jboss.resteasy</groupId>
-		<artifactId>resteasy-jaxrs</artifactId>
-		<version>${reasteasy-version}</version>
-	</dependency>
-
+		<!-- Tomcat 8.5.x (Java 7+, Servlet 3.1, JSP 2.3, EL 3.0, WebSocket 1.1, JASPIC 1.1 ) -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-version}</version>
+		</dependency>
+		
+		<!-- 
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>${tomcat-servlet-version}</version>
+		</dependency>
+		-->
+		
+		<!-- Reasteasy libraries -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${reasteasy-version}</version>
+		</dependency>
+	
 		<!-- 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -103,46 +103,46 @@
 			<artifactId>resteasy-jettison-provider</artifactId>
 			<version>${reasteasy-version}</version>
 		</dependency>
-		 -->
-		 
-		 <!-- Jackson Databind-->
+		-->
+		
+		<!-- Jackson Databind-->
 		<dependency>
-    		<groupId>com.fasterxml.jackson.core</groupId>
-    		<artifactId>jackson-databind</artifactId>
-    		<version>${jackson-databind}</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-databind}</version>
 		</dependency>
-			        	
+			
 		<!-- Log -->
 		
 		<dependency>
-    		<groupId>commons-logging</groupId>
-    		<artifactId>commons-logging</artifactId>
-    		<version>${commons-logging-version}</version>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons-logging-version}</version>
 		</dependency>
-        
-        <!-- 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j-version}</version>
-        </dependency>
-        -->
-        
-        <!-- 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j-version}</version>
-        </dependency>
- 		-->
-        
-        <!-- Junit -->
+		<!-- 
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j-version}</version>
+			</dependency>
+		-->
+		
+		<!-- 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		-->
+		
+		<!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -151,7 +151,7 @@
 		</dependency>
 		
 	</dependencies>
-
+	
 	<build>
 	
 		<finalName>renting-services</finalName>
