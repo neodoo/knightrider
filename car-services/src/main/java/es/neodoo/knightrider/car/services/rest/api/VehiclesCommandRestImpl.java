@@ -19,15 +19,16 @@ import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInv
 @Path("/vehicle")
 @Produces("application/json")
 @Consumes("application/json")
-public class VehiclesCommandService {
+public class VehiclesCommandRestImpl implements VehiclesCommandRest {
 
-	private final static Logger log = Logger.getLogger(VehiclesCommandService.class.getName());
+	private final static Logger log = Logger.getLogger(VehiclesCommandRestImpl.class.getName());
 	
+	@Override
 	@Path("/{vehicleId}/wake_up")
 	@POST
 	public Response WakeUpCar(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException{
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -44,11 +45,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/set_valet_mode")
 	@POST
 	public Response SetValetMode(@PathParam("vehicleId") int vehicleId, @QueryParam("onoff")Boolean on, @QueryParam("pin") int pin) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -65,11 +67,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/reset_valet_pin")
 	@POST
 	public Response ResetValetPin(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -86,11 +89,12 @@ public class VehiclesCommandService {
 
 	}
 
+	@Override
 	@POST
 	@Path("/{vehicleId}/command/charge_port_door_open")
 	public Response OpenChargePort(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -107,11 +111,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/charge_standard")
 	@POST
 	public Response setChargeLimitToStandard(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -128,11 +133,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/charge_max_range")
 	@POST
 	public Response setChargeLimitToMaxRange(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -149,11 +155,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/set_charge_limit")
 	@POST
 	public Response setChargeLimit(@PathParam("vehicleId") int vehicleId, @QueryParam("percent")int percent) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -171,11 +178,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/charge_start")
 	@POST
 	public Response startCharging(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -192,11 +200,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/charge_stop")
 	@POST
 	public Response stopCharging(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -213,11 +222,12 @@ public class VehiclesCommandService {
 
 	}
 
+	@Override
 	@Path("/{vehicleId}/command/flash_lights")
 	@POST
 	public Response flashLights(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -234,11 +244,15 @@ public class VehiclesCommandService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see es.neodoo.knightrider.car.services.rest.api.VehiclesCommandRest#honkHorn(int)
+	 */
+	@Override
 	@Path("/{vehicleId}/command/honk_horn")
 	@POST
 	public Response honkHorn(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -255,11 +269,12 @@ public class VehiclesCommandService {
 
 	}
 
+	@Override
 	@Path("/{vehicleId}/command/door_unlock")
 	@POST
 	public Response unlockDoors(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -276,11 +291,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/door_lock")
 	@POST
 	public Response lockDoors(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -296,11 +312,13 @@ public class VehiclesCommandService {
 		return Response.status(200).entity(json).build();
 
 	}
+
+	@Override
 	@Path("/{vehicleId}/command/set_temps")
 	@POST
 	public Response setTemperature(@PathParam("vehicleId") int vehicleId, @QueryParam("driver_temp")double driverTemp, @QueryParam("passenger_temp") double passengerTemp) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -317,11 +335,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/auto_conditioning_start")
 	@POST
 	public Response startHvacSystem(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -338,11 +357,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/auto_conditioning_stop")
 	@POST
 	public Response stopHvacSystem(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -359,11 +379,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/sun_roof_control")
 	@POST
 	public Response MovePanoRoof(@PathParam("vehicleId") int vehicleId, @QueryParam("state")String state, @QueryParam("percent") int percent) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -380,11 +401,12 @@ public class VehiclesCommandService {
 
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/remote_start_drive")
 	@POST
 	public Response remoteStart(@PathParam("vehicleId") int vehicleId, @QueryParam("password")String password) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 
@@ -401,11 +423,12 @@ public class VehiclesCommandService {
 	
 	}
 	
+	@Override
 	@Path("/{vehicleId}/command/trunk_open")
 	@POST
 	public Response openTrunk(@PathParam("vehicleId") int vehicleId, @QueryParam("which")String which) throws TeslaInvokerException {
 	
-		String json=null;
+		String json = null;
 		
 		try {
 		

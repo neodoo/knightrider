@@ -18,14 +18,15 @@ import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInv
 
 @Path("/vehicles")
 @Produces(MediaType.APPLICATION_JSON)
-public class VehiclesService {
+public class VehiclesRestImpl implements VehiclesRest {
 
-	private final static Logger log = Logger.getLogger(VehiclesService.class.getName());
+	private final static Logger log = Logger.getLogger(VehiclesRestImpl.class.getName());
 
+	@Override
 	@GET
 	public Response listVehicles() throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 			
@@ -42,11 +43,12 @@ public class VehiclesService {
 	
 	}
 
+	@Override
 	@Path("/{vehicleId}/mobile_enabled")
 	@GET
 	public Response mobileAcces(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException  {
 
-		String json=null;
+		String json = null;
 
 		try {
 			
@@ -63,11 +65,12 @@ public class VehiclesService {
 	
 	}
 
+	@Override
 	@Path("/{vehicleId}/data_request/charge_state")
 	@GET
 	public Response chargeState(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 			
@@ -84,11 +87,12 @@ public class VehiclesService {
 	
 	}
 
+	@Override
 	@Path("/{vehicleId}/data_request/climate_state")
 	@GET
 	public Response climateSettings(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 			
@@ -105,11 +109,12 @@ public class VehiclesService {
 	
 	}
 
+	@Override
 	@Path("/{vehicleId}/data_request/drive_state")
 	@GET
 	public Response drivingAndPosition(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 			
@@ -126,11 +131,12 @@ public class VehiclesService {
 	
 	}
 	
+	@Override
 	@Path("/{vehicleId}/data_request/gui_settings")
 	@GET
 	public Response guiSettings(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 		
-		String json=null;
+		String json = null;
 		
 		try {
 			
@@ -147,11 +153,12 @@ public class VehiclesService {
 	
 	}
 
+	@Override
 	@Path("/{vehicleId}/data_request/vehicle_state")
 	@GET
 	public Response vehicleState(@PathParam("vehicleId") int vehicleId) throws TeslaInvokerException {
 
-		String json=null;
+		String json = null;
 
 		try {
 			
