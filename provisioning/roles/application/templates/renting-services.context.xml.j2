@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="" reloadable="true">
+
+	<Resource name="jdbc/knightrider" auth="Container" type="javax.sql.DataSource"
+		username="{{ application_mysql_user }}" password="{{ application_mysql_password }}" driverClassName="com.mysql.cj.jdbc.Driver"
+        	maxTotal="100"  maxIdle="30" maxWaitMillis="10000" 
+		url="jdbc:mysql://localhost:3306/{{ application_mysql_db }}" />
+
+</Context>

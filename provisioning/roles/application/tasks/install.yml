@@ -33,6 +33,35 @@
 - name: tomcat stop
   service: name=tomcat state=stopped
 
+- name: Configuramos el hostname para los servicios car-services
+  file:
+    path: '/usr/java/apache-tomcat/conf/Catalina/{{ car_services_hostname }}'
+    state: directory
+
+- template:
+    owner=tomcat group=tomcat
+    src=renting-services.context.xml.j2
+    dest=/usr/java/apache-tomcat/conf/Catalina/{{ car_services_hostname }}/ROOT.xml
+
+- name: Delete car-services war directory in tomcat webapps
+  file: path=/usr/java/apache-tomcat/webapps/car-services.war state=absent
+
+- name: Delete car-services war file in tomcat webapps
+  file: path=/usr/java/apache-tomcat/webapps/car-services state=absent
+
+- name: Copy car-services war file
+  command: cp /root/software/knightrider/car-services/target/car-services.war /usr/java/apache-tomcat/webapps/ 
+
+- name: Configuramos el hostname para los servicios renting-services
+  file:
+    path: '/usr/java/apache-tomcat/conf/Catalina/{{ renting_services_hostname }}'
+    state: directory
+
+- template:
+    owner=tomcat group=tomcat
+    src=renting-services.context.xml.j2
+    dest=/usr/java/apache-tomcat/conf/Catalina/{{ renting_services_hostname }}/ROOT.xml
+
 - name: Delete renting-services war directory in tomcat webapps
   file: path=/usr/java/apache-tomcat/webapps/renting-services.war state=absent
 
