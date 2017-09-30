@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="" reloadable="true">
+<Context path="/renting-services" debug="0" reloadable="true" override="true">
 
+	<!--
         <Valve className="org.keycloak.adapters.tomcat.KeycloakAuthenticatorValve"/>
+	-->
 
 	<Resource name="jdbc/knightrider" auth="Container" type="javax.sql.DataSource"
 		username="{{ application_mysql_user }}" password="{{ application_mysql_password }}" driverClassName="com.mysql.cj.jdbc.Driver"

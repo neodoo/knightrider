@@ -24,6 +24,9 @@ application_mysql_user: knightrider
 application_mysql_password: .knightrider8$
 application_mysql_db: knightrider
 
-renting_services_hostname: drivip.neodoo.es
-car_services_hostname: tesla.neodoo.es
+#renting_services_hostname: drivip.neodoo.es
+renting_services_hostname: localhost
+
+#car_services_hostname: tesla.neodoo.es
+car_services_hostname: localhost
 

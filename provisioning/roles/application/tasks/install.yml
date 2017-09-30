@@ -40,8 +40,8 @@
 
 - template:
     owner=tomcat group=tomcat
-    src=renting-services.context.xml.j2
-    dest=/usr/java/apache-tomcat/conf/Catalina/{{ car_services_hostname }}/ROOT.xml
+    src=car-services.context.xml.j2
+    dest=/usr/java/apache-tomcat/conf/Catalina/{{ car_services_hostname }}/car-services.xml
 
 - name: Delete unnecessary directories in tomcat webapps
   file: path=/usr/java/apache-tomcat/webapps/docs state=absent
@@ -71,7 +71,7 @@
 - template:
     owner=tomcat group=tomcat
     src=renting-services.context.xml.j2
-    dest=/usr/java/apache-tomcat/conf/Catalina/{{ renting_services_hostname }}/ROOT.xml
+    dest=/usr/java/apache-tomcat/conf/Catalina/{{ renting_services_hostname }}/renting-services.xml
 
 - name: Delete renting-services war directory in tomcat webapps
   file: path=/usr/java/apache-tomcat/webapps/renting-services.war state=absent
