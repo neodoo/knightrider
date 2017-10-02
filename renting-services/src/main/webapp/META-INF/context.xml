@@ -4,7 +4,7 @@
 	<Valve className="org.keycloak.adapters.tomcat.KeycloakAuthenticatorValve"/>         
 	
 	<Resource name="jdbc/knightrider" auth="Container" type="javax.sql.DataSource"
-		username="root" password="password.1" driverClassName="com.mysql.cj.jdbc.Driver"
+		username="knightrider" password=".knightrider8$" driverClassName="com.mysql.cj.jdbc.Driver"
         maxTotal="100"  maxIdle="30" maxWaitMillis="10000" 
 		url="jdbc:mysql://localhost:3306/knightrider" />
 
