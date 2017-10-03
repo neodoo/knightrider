@@ -56,5 +56,22 @@
 	<servlet-name>resteasy-servlet</servlet-name>
 	<url-pattern>/api/1/*</url-pattern>
   </servlet-mapping>
+  
+   <!-- Security -->
+  	<security-constraint>
+    	<web-resource-collection>
+        	<web-resource-name>*</web-resource-name>
+        	<url-pattern>/api/1/vehicles/*</url-pattern>
+        	<url-pattern>/api/1/vehicle/*</url-pattern>
+    	</web-resource-collection>
+    	<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<login-config>
+    	<auth-method>KEYCLOAK</auth-method>
+     	<realm-name>knightrider_realm</realm-name>
+	</login-config>
 
 </web-app>

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,7 +17,6 @@ import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInv
 
 @Path("/vehicle")
 @Produces("application/json")
-@Consumes("application/json")
 public class VehiclesCommandRestImpl implements VehiclesCommandRest {
 
 	private final static Logger log = Logger.getLogger(VehiclesCommandRestImpl.class.getName());
