@@ -51,16 +51,14 @@ public class VehicleRestImpl implements VehicleRest {
 	 * @see es.neodoo.knightrider.services.renting.rest.api.VehicleRest#test()
 	 */
 	@Override
-	@GET
+	@POST
 	@Path("/test")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response test() {
 
-		Response.ResponseBuilder builder = null;
-
-		builder = Response.ok();
-
-		return builder.build();
+		String json = "Test succesfull";
+		
+		return  addCorsSupport(Response.status(200)).entity(json).build();
 
 	}
 
@@ -180,7 +178,7 @@ public class VehicleRestImpl implements VehicleRest {
 	@Path("/{vehicleId}/block")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response block(@PathParam("vehicleId") int vehicleId, @QueryParam("username") String username) {
-
+		log.info("KEYCLOACK TEST");
 		Boolean blocked = false;
 		UpdateBDResponse blockVehicleResponse = new UpdateBDResponse();
 		String json = null;
