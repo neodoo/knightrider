@@ -65,7 +65,7 @@
 	<url-pattern>/api/1/*</url-pattern>
   </servlet-mapping>
    
-   <!--  
+   <!-- Security -->
   	<security-constraint>
     	<web-resource-collection>
         	<web-resource-name>*</web-resource-name>
@@ -73,21 +73,13 @@
         	<http-method>POST</http-method>
     	</web-resource-collection>
     	<auth-constraint>
-        	<role-name>user</role-name>
-    	</auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
 	</security-constraint>
-
-    <security-role>
-        <role-name>user</role-name>
-    </security-role>
-       <security-role>
-        <role-name>knightrider_rol</role-name>
-    </security-role>
 
 	<login-config>
     	<auth-method>KEYCLOAK</auth-method>
      	<realm-name>knightrider_realm</realm-name>
 	</login-config>
-	-->
  
 </web-app>
