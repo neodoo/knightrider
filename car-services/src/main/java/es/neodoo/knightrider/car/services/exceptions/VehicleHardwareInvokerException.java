@@ -1,13 +1,13 @@
 package es.neodoo.knightrider.car.services.exceptions;
 
 @SuppressWarnings("serial")
-public class TeslaInvokerException extends Exception {
+public class VehicleHardwareInvokerException extends Exception {
 	
-	public TeslaInvokerException(String msg){
+	public VehicleHardwareInvokerException(String msg){
 		super(msg);
 	}
 	
-	public TeslaInvokerException(Exception msg){
+	public VehicleHardwareInvokerException(Exception msg){
 		super(msg);
 	}
 
