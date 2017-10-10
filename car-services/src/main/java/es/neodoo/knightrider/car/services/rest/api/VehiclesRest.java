@@ -2,22 +2,22 @@ package es.neodoo.knightrider.car.services.rest.api;
 
 import javax.ws.rs.core.Response;
 
-import es.neodoo.knightrider.car.services.exceptions.TeslaInvokerException;
+import es.neodoo.knightrider.car.services.exceptions.VehicleHardwareInvokerException;
 
 public interface VehiclesRest {
 
-	Response listVehicles() throws TeslaInvokerException;
+	Response listVehicles() throws VehicleHardwareInvokerException;
 
-	Response mobileAcces(int vehicleId) throws TeslaInvokerException;
+	Response mobileAcces(int vehicleId) throws VehicleHardwareInvokerException;
 
-	Response chargeState(int vehicleId) throws TeslaInvokerException;
+	Response chargeState(int vehicleId) throws VehicleHardwareInvokerException;
 
-	Response climateSettings(int vehicleId) throws TeslaInvokerException;
+	Response climateSettings(int vehicleId) throws VehicleHardwareInvokerException;
 
-	Response drivingAndPosition(int vehicleId) throws TeslaInvokerException;
+	Response drivingAndPosition(int vehicleId) throws VehicleHardwareInvokerException;
 
-	Response guiSettings(int vehicleId) throws TeslaInvokerException;
+	Response guiSettings(int vehicleId) throws VehicleHardwareInvokerException;
 
-	Response vehicleState(int vehicleId) throws TeslaInvokerException;
+	Response vehicleState(int vehicleId) throws VehicleHardwareInvokerException;
 
 }
