@@ -1,290 +1,398 @@
 package es.neodoo.knightrider.car.services.simulation.hardware;
 
-import es.neodoo.knightrider.car.services.rest.params.ChargeStateParamResponse;
-import es.neodoo.knightrider.car.services.rest.params.ChargeStateResponse;
-import es.neodoo.knightrider.car.services.rest.params.ClimateSettingsParamResponse;
-import es.neodoo.knightrider.car.services.rest.params.ClimateSettingsResponse;
-import es.neodoo.knightrider.car.services.rest.params.DrivingAndPositionParamResponse;
-import es.neodoo.knightrider.car.services.rest.params.DrivingAndPositionResponse;
-import es.neodoo.knightrider.car.services.rest.params.FlashLightsResponse;
-import es.neodoo.knightrider.car.services.rest.params.GuiSettingsParamResponse;
-import es.neodoo.knightrider.car.services.rest.params.GuiSettingsResponse;
-import es.neodoo.knightrider.car.services.rest.params.HonkHornResponse;
-import es.neodoo.knightrider.car.services.rest.params.LockDoorsResponse;
-import es.neodoo.knightrider.car.services.rest.params.MobileAccesResponse;
-import es.neodoo.knightrider.car.services.rest.params.MovePanoRoofResponse;
-import es.neodoo.knightrider.car.services.rest.params.OpenChargePortResponse;
-import es.neodoo.knightrider.car.services.rest.params.OpenTrunkResponse;
-import es.neodoo.knightrider.car.services.rest.params.RemoteStartResponse;
-import es.neodoo.knightrider.car.services.rest.params.ResetValetPinResponse;
-import es.neodoo.knightrider.car.services.rest.params.ResponseParamVehicleCommands;
-import es.neodoo.knightrider.car.services.rest.params.SetChargeLimitResponse;
-import es.neodoo.knightrider.car.services.rest.params.SetChargeLimitToMaxRangeResponse;
-import es.neodoo.knightrider.car.services.rest.params.SetChargeLimitToStandardResponse;
-import es.neodoo.knightrider.car.services.rest.params.SetTemperatureResponse;
-import es.neodoo.knightrider.car.services.rest.params.SetValetModeResponse;
-import es.neodoo.knightrider.car.services.rest.params.StartChargingResponse;
-import es.neodoo.knightrider.car.services.rest.params.StartHvacSystemResponse;
-import es.neodoo.knightrider.car.services.rest.params.StopChargingResponse;
-import es.neodoo.knightrider.car.services.rest.params.StopHvacSystemResponse;
-import es.neodoo.knightrider.car.services.rest.params.UnlockDoorsResponse;
-import es.neodoo.knightrider.car.services.rest.params.VehicleStateParamResponse;
-import es.neodoo.knightrider.car.services.rest.params.VehicleStateResponse;
-import es.neodoo.knightrider.car.services.rest.params.WakeUpCarResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import es.neodoo.knightrider.car.services.exceptions.VehicleHardwareInvokerException;
 
 public class VehicleHardwareInvoker {
-	
-	public WakeUpCarResponse wakeUpCar(int vehicleId){
-		
-		WakeUpCarResponse wakeUpCarResponse = new WakeUpCarResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		wakeUpCarResponse.setResponse(responseParamVehicleCommands);
-		
-		return wakeUpCarResponse;
-		
+
+	private static final Log log = LogFactory.getLog(VehicleHardwareInvoker.class);
+
+
+	public VehicleHardwareInvoker() {
+		super();
 	}
 
-	public SetValetModeResponse setValetMode(int vehicleId, Boolean on, int pin){
-		
-		SetValetModeResponse setValetModeResponse = new SetValetModeResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		setValetModeResponse.setResponse(responseParamVehicleCommands);
-		
-		return setValetModeResponse;
-	
-	}
-	
-	public ResetValetPinResponse resetValetPin(int vehicleId){
-		
-		ResetValetPinResponse resetValetPinResponse = new ResetValetPinResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		resetValetPinResponse.setResponse(responseParamVehicleCommands);
-		
-		return resetValetPinResponse;
-		
+	public boolean wakeUpCar(int vehicleId) throws VehicleHardwareInvokerException {
+
+		boolean wakeUpCar = false;
+
+		try {
+			wakeUpCar = true;
+		} catch (Exception e) {
+			log.error("error waking up vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error waking up vehicle");
+		}
+
+		return wakeUpCar;
+
 	}
 
-	public OpenChargePortResponse openChargeDoor(int vehicleId) {
-		
-		OpenChargePortResponse openChargePortResponse = new OpenChargePortResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		openChargePortResponse.setResponse(responseParamVehicleCommands);
-		
-		return openChargePortResponse;
-	
-	}
-	
-	
+	public boolean setValetMode(int vehicleId, Boolean on, int pin) throws VehicleHardwareInvokerException {
+
+		boolean setValetMode = false;
+
+		try {
+			setValetMode = true;
+		} catch (Exception e) {
+			log.error("error setting valet mode vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error setting valet mode of the vehicle");
+		}
+
+		return setValetMode;
 
 
-	public SetChargeLimitToStandardResponse setChargeLimitToStandard(int vehicleId) {
-		
-		SetChargeLimitToStandardResponse setChargeLimitToStandardResponse = new SetChargeLimitToStandardResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(false, "Already_standard");
-		setChargeLimitToStandardResponse.setResponse(responseParamVehicleCommands);
-		
-		return setChargeLimitToStandardResponse;
-	
-	}
-	
-	public SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRange(int vehicleId) {
-		
-		SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse = new SetChargeLimitToMaxRangeResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(false, "Already_max_range");
-		setChargeLimitToMaxRangeResponse.setResponse(responseParamVehicleCommands);
-		
-		return setChargeLimitToMaxRangeResponse;
-	
 	}
 
-	public SetChargeLimitResponse setChargeLimitT(int vehicleId, int percent) {
-		
-		SetChargeLimitResponse setChargeLimitResponse = new SetChargeLimitResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		setChargeLimitResponse.setResponse(responseParamVehicleCommands);
-		
-		return setChargeLimitResponse;
-	
+	public boolean resetValetPin(int vehicleId) throws VehicleHardwareInvokerException {
+
+		boolean resetValetMode = false;
+
+		try {
+			resetValetMode = true;
+		} catch (Exception e) {
+			log.error("error reseting valet mode vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error reseting valet mode of the vehicle");
+		}
+
+		return resetValetMode;
+
+
 	}
 
-	public StartChargingResponse startCharging(int vehicleId) {
-		
-		StartChargingResponse startChargingResponse = new StartChargingResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(false, "Already_started");
-		startChargingResponse.setResponse(responseParamVehicleCommands);
+	public boolean openChargeDoor(int vehicleId) throws VehicleHardwareInvokerException  {
 
-		return startChargingResponse;
-	
+		boolean openChargeDoor = false;
+
+		try {
+			openChargeDoor = true;
+		} catch (Exception e) {
+			log.error("error opening cahrge door vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error opening charge door of the vehicle");
+		}
+
+		return openChargeDoor;
+
 	}
 
-	public StopChargingResponse stopCharging(int vehicleId) {
-		
-		StopChargingResponse stopChargingResponse = new StopChargingResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(false, "not_charging");
-		stopChargingResponse.setResponse(responseParamVehicleCommands);
-		
-		return stopChargingResponse;
-	
+
+
+
+	public boolean setChargeLimitToStandard(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean setChargeLimitToStandard = false;
+
+		try {
+			setChargeLimitToStandard = true;
+		} catch (Exception e) {
+			log.error("error setting charge limit to standard of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error setting cahrge limit to standard of the vehicle");
+		}
+
+		return setChargeLimitToStandard;
+
 	}
 
-	public FlashLightsResponse flashLights(int vehicleId) {
+	public boolean setChargeLimitToMaxRange(int vehicleId) throws VehicleHardwareInvokerException  {
 
-		FlashLightsResponse flashLightsResponse = new FlashLightsResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		flashLightsResponse.setResponse(responseParamVehicleCommands);
-		
-		return flashLightsResponse;
-	
+		boolean setChargeLimitToMaxRange = false;
+
+		try {
+			setChargeLimitToMaxRange = true;
+		} catch (Exception e) {
+			log.error("error setting charge limit to max range of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error setting limit to max range of the of the vehicle");
+		}
+
+		return setChargeLimitToMaxRange;
+
 	}
 
-	public HonkHornResponse honkHorn(int vehicleId) {
+	public boolean setChargeLimit(int vehicleId, int percent) throws VehicleHardwareInvokerException  {
 
-		HonkHornResponse honkHornResponse = new HonkHornResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		honkHornResponse.setResponse(responseParamVehicleCommands);
-		return honkHornResponse;
+		boolean setChargeLimit = false;
+
+		try {
+			setChargeLimit = true;
+		} catch (Exception e) {
+			log.error("error setting charge limit of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error setting charge limit of the vehicle");
+		}
+
+		return setChargeLimit;
+
+	}
+
+	public boolean startCharging(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean startCharging = false;
+
+		try {
+			startCharging = true;
+		} catch (Exception e) {
+			log.error("error start charging vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error start charging of the vehicle");
+		}
+
+		return startCharging;
+
+	}
+
+	public boolean stopCharging(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean stopCharging = false;
+
+		try {
+			stopCharging = true;
+		} catch (Exception e) {
+			log.error("error stop charging  vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error stop charging the vehicle");
+		}
+
+		return stopCharging;
+
+	}
+
+	public boolean flashLights(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean flashLights = false;
+
+		try {
+			flashLights = true;
+		} catch (Exception e) {
+			log.error("error flash lights vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error flash lights of the vehicle");
+		}
+
+		return flashLights;
+	}
+
+	public boolean honkHorn(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean honkHorn = false;
+
+		try {
+			honkHorn = true;
+		} catch (Exception e) {
+			log.error("error honk horn vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error honk horn of the vehicle");
+		}
+
+		return honkHorn;
 	}	
 
-	public UnlockDoorsResponse unlockDoors(int vehicleId) {
-		
-		UnlockDoorsResponse unlockDoorsResponse = new UnlockDoorsResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		unlockDoorsResponse.setResponse(responseParamVehicleCommands);
-		
-		return unlockDoorsResponse;
-	
+	public boolean unlockDoors(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean unlockDoors = false;
+
+		try {
+			unlockDoors = true;
+		} catch (Exception e) {
+			log.error("error unlocking doors of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error unlocking doors of the vehicle");
+		}
+
+		return unlockDoors;
+
 	}
 
-	public LockDoorsResponse lockDoors(int vehicleId) {
-		
-		LockDoorsResponse lockDoorsResponse = new LockDoorsResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		lockDoorsResponse.setResponse(responseParamVehicleCommands);
-	
-		return lockDoorsResponse;
-	
+	public boolean lockDoors(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean lockDoors = false;
+
+		try {
+			lockDoors = true;
+		} catch (Exception e) {
+			log.error("error locking doors of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error locking doors of the vehicle");
+		}
+
+		return lockDoors;
+
 	}
 
-	public SetTemperatureResponse setTemperature(int vehicleId, double driverTemp, double passengerTemp) {
-		
-		SetTemperatureResponse setTemperatureResponse = new SetTemperatureResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		setTemperatureResponse.setResponse(responseParamVehicleCommands);
-	
-		return setTemperatureResponse;
-	
+	public boolean setTemperature(int vehicleId, double driverTemp, double passengerTemp) throws VehicleHardwareInvokerException {
+
+		boolean setTemperature = false;
+
+		try {
+			setTemperature = true;
+		} catch (Exception e) {
+			log.error("error setting temperature of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error setting temperature of the vehicle");
+		}
+
+		return setTemperature;
 	}
 
-	public StartHvacSystemResponse startHvacSystem(int vehicleId) {
-		
-		StartHvacSystemResponse startHvacSystemResponse = new StartHvacSystemResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		startHvacSystemResponse.setResponse(responseParamVehicleCommands);
-		
-		return startHvacSystemResponse;
-	
+	public boolean startHvacSystem(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean startHvacSystem = false;
+
+		try {
+			startHvacSystem = true;
+		} catch (Exception e) {
+			log.error("error starting HVAC system of the vehicle vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error starting HVAC system of the vehicle");
+		}
+
+		return startHvacSystem;
+
 	}
 
-	public StopHvacSystemResponse stopHvacSystem(int vehicleId) {
-		
-		StopHvacSystemResponse stopHvacSystemResponse = new StopHvacSystemResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		stopHvacSystemResponse.setResponse(responseParamVehicleCommands);
-		
-		return stopHvacSystemResponse;
-	
+	public boolean stopHvacSystem(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean stopHvacSystem = false;
+
+		try {
+			stopHvacSystem = true;
+		} catch (Exception e) {
+			log.error("error stopping HVAC system of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error stopping HVAC system of the vehicle");
+		}
+
+		return stopHvacSystem;
+
 	}
 
-	public MovePanoRoofResponse movePanoRoof(int vehicleId, String state, int percent) {
-		
-		MovePanoRoofResponse movePanoRoofResponse = new MovePanoRoofResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		movePanoRoofResponse.setResponse(responseParamVehicleCommands);
-		
-		return movePanoRoofResponse;
-	
+	public boolean movePanoRoof(int vehicleId, String state, int percent) throws VehicleHardwareInvokerException  {
+
+		boolean movePanoRoof = false;
+
+		try {
+			movePanoRoof = true;
+		} catch (Exception e) {
+			log.error("error moving pano roof of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error moving pano roof of the vehicle");
+		}
+
+		return movePanoRoof;
+
 	}
 
-	public RemoteStartResponse remoteStart(int vehicleId) {
-		
-		RemoteStartResponse remoteStartResponse = new RemoteStartResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		remoteStartResponse.setResponse(responseParamVehicleCommands);
-		
-		return remoteStartResponse;
-	
+	public boolean remoteStart(int vehicleId) throws VehicleHardwareInvokerException  {
+
+		boolean remoteStart = false;
+
+		try {
+			remoteStart = true;
+		} catch (Exception e) {
+			log.error("error remote starting of the vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error remote starting of the vehicle");
+		}
+
+		return remoteStart;
+
 	}
 
-	public OpenTrunkResponse openTrunk(int vehicleId, String which) {
-		
-		OpenTrunkResponse openTrunkResponse = new OpenTrunkResponse();
-		ResponseParamVehicleCommands responseParamVehicleCommands= new ResponseParamVehicleCommands(true, "");
-		openTrunkResponse.setResponse(responseParamVehicleCommands);
-		
-		return openTrunkResponse;
-		
+	public boolean openTrunk(int vehicleId, String which) throws VehicleHardwareInvokerException {
+
+		boolean openTrunk = false;
+
+		try {
+			openTrunk = true;
+		} catch (Exception e) {
+			log.error("error opning trunk of vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error opening trunk of the vehicle");
+		}
+
+		return openTrunk;
+
 	}
 
-	public MobileAccesResponse mobileAcces(int vehicleId) {
-	
-		MobileAccesResponse mobileAccesResponse = new MobileAccesResponse();
-		mobileAccesResponse.setResponse(true);
-		return mobileAccesResponse;
+	public boolean mobileAcces(int vehicleId) throws VehicleHardwareInvokerException {
+
+		boolean mobileAcces = false;
+
+		try {
+			mobileAcces = true;
+		} catch (Exception e) {
+			log.error("error accesing with mobile at vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error accesing mobile at the vehicle");
+		}
+
+		return mobileAcces;
 	}
 
-	public ChargeStateResponse chargeState(int vehicleId) {
-		
-		ChargeStateResponse chargeStateResponse = new ChargeStateResponse();
-		ChargeStateParamResponse chargeStateParamResponse= new ChargeStateParamResponse("complete", false, 123, true, 123.79, 321.321, 5.5, 91, -0.5, 
-				null, null, 0, 50, 0, 0, null, -1.0, true);
-		chargeStateResponse.setResponse(chargeStateParamResponse);
-		
-		return chargeStateResponse;
-	
+	public String chargeState(int vehicleId) throws VehicleHardwareInvokerException {
+
+		String chargeState = null;
+
+		try {
+			chargeState = "Complete";
+		} catch (Exception e) {
+			log.error("error with charge state with vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error with charge state with the vehicle");
+		}
+
+		return chargeState;
+
 	}
 
-	public ClimateSettingsResponse climateState(int vehicleId) {
-		
-		ClimateSettingsResponse climateSettingsResponse = new ClimateSettingsResponse();
-		ClimateSettingsParamResponse climateSettingsParamResponse= new ClimateSettingsParamResponse(17.0, 9.5, 22.6, 22.6, false, null, false, 0);
-		climateSettingsResponse.setResponse(climateSettingsParamResponse);
-		
-		return climateSettingsResponse;
-	
+	public double climateSettings(int vehicleId) throws VehicleHardwareInvokerException {
+
+		Double climateSettings = null;
+
+		try {
+			climateSettings = 17.0;
+		} catch (Exception e) {
+			log.error("error with climate settings with vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error with climnate settings with the vehicle");
+		}
+
+		return climateSettings;
+
 	}
 
-	public DrivingAndPositionResponse drivingAndPositionState(int vehicleId) {
-		
-		DrivingAndPositionResponse drivingAndPositionResponse = new DrivingAndPositionResponse();
-		DrivingAndPositionParamResponse drivingAndPositionParamResponse= new DrivingAndPositionParamResponse(null, null, 33.4564564567, -85.565467546, 4, 1359863204);
-		drivingAndPositionResponse.setResponse(drivingAndPositionParamResponse);
-		
-		return drivingAndPositionResponse;
+	public String drivingAndPositionState(int vehicleId) throws VehicleHardwareInvokerException {
+
+		String drivingAndPositionState = null;
+
+		try {
+			drivingAndPositionState = null;
+		} catch (Exception e) {
+			log.error("error with climate settings with vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error with climnate settings with the vehicle");
+		}
+
+		return drivingAndPositionState;
+
 	}
 
-	public GuiSettingsResponse guiSetting(int vehicleId) {
-		
-		GuiSettingsResponse guiSettingsResponse = new GuiSettingsResponse();
-		GuiSettingsParamResponse guiSettingsParamResponse= new GuiSettingsParamResponse("mi/hr", "F", "mi/hr", false, "Rated");
-		guiSettingsResponse.setResponse(guiSettingsParamResponse);
-		
-		return guiSettingsResponse;
-		
+	public String guiSettings(int vehicleId) throws VehicleHardwareInvokerException {
+
+		String guiSettings = null;
+
+		try {
+			guiSettings = "mi/hr";
+		} catch (Exception e) {
+			log.error("error with gui settings with vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error with gui settings with the vehicle");
+		}
+
+		return guiSettings;
+
 	}
 
-	public VehicleStateResponse vehicleState(int vehicleId) {
-		
-		VehicleStateResponse vehicleStateResponse = new VehicleStateResponse();
-		VehicleStateParamResponse vehicleStateParamResponse= new VehicleStateParamResponse(false, false, false, false, false, false, "1.19.43", true, false,
-				"unknown", 0, false, "Base19", false, "Colored", "Base");
-		vehicleStateResponse.setResponse(vehicleStateParamResponse);
-		
-		return null;
-	
+	public boolean vehicleState(int vehicleId) throws VehicleHardwareInvokerException {
+
+		boolean vehicleState = false;
+
+		try {
+			vehicleState = false;
+		} catch (Exception e) {
+			log.error("error with vehicle state with vehicle:" + vehicleId);
+			throw new VehicleHardwareInvokerException ("error with vehcile state with the vehicle");
+		}
+
+		return vehicleState;
+
+
 	}
 
-	
-	
-	
-	
+
+
+
+
 }
