@@ -66,5 +66,14 @@ public class DrivingAndPositionResponse {
 		response=drivingAndPositionParamResponse;
 	
 	}
+	
+	public DrivingAndPositionResponse buildDrivingAndPositionResponse(String climateSettings) {
+
+		DrivingAndPositionResponse drivingAndPositionResponse = new DrivingAndPositionResponse();
+		DrivingAndPositionParamResponse drivingAndPositionParamResponse= new DrivingAndPositionParamResponse(climateSettings, null, 33.4564564567, -85.565467546, 4, 1359863204);
+		drivingAndPositionResponse.setResponse(drivingAndPositionParamResponse);
+
+		return drivingAndPositionResponse;
+	}
 
 }

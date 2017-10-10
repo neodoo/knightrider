@@ -67,5 +67,15 @@ public class ClimateSettingsResponse {
 		response=climateSettingsParamResponse;
 	
 	}
+	
+	public ClimateSettingsResponse buildClimateSettingsResponse(double climateSettings) {
+
+		ClimateSettingsResponse climateSettingsResponse = new ClimateSettingsResponse();
+		ClimateSettingsParamResponse climateSettingsParamResponse = new ClimateSettingsParamResponse(climateSettings, 9.5, 22.6, 22.6, false, null, false, 0);
+		climateSettingsResponse.setResponse(climateSettingsParamResponse);
+
+		return climateSettingsResponse;
+
+	}
 
 }

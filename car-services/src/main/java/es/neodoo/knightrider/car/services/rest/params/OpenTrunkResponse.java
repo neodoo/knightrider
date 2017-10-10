@@ -53,5 +53,17 @@ public class OpenTrunkResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public OpenTrunkResponse buildOpenTrunkResponse(Boolean result, String reason) {
+
+		OpenTrunkResponse openTrunkResponse = new OpenTrunkResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		openTrunkResponse.setResponse(responseParamVehicleCommands);
+
+		return openTrunkResponse;
+
+	}
 
 }

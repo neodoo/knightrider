@@ -60,5 +60,17 @@ public class OpenChargePortResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public OpenChargePortResponse buildOpenChargePortResponse(Boolean result, String reason) {
+
+		OpenChargePortResponse openChargePortResponse = new OpenChargePortResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		openChargePortResponse.setResponse(responseParamVehicleCommands);
+
+		return openChargePortResponse;
+
+	}
 
 }

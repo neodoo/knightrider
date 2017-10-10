@@ -53,5 +53,17 @@ public class LockDoorsResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public LockDoorsResponse buildLockDoorsResponse(Boolean result, String reason) {
+
+		LockDoorsResponse lockDoorsResponse = new LockDoorsResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		lockDoorsResponse.setResponse(responseParamVehicleCommands);
+
+		return lockDoorsResponse;
+
+	}
 
 }

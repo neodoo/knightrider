@@ -53,5 +53,17 @@ public class StopHvacSystemResponse {
 		response=responseParamVehicleCommands;
 
 	}
+	
+	public StopHvacSystemResponse buildStopHvacSystemResponse(Boolean result, String reason) {
+
+		StopHvacSystemResponse stopHvacSystemResponse = new StopHvacSystemResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		stopHvacSystemResponse.setResponse(responseParamVehicleCommands);
+
+		return stopHvacSystemResponse;
+
+	}
 
 }

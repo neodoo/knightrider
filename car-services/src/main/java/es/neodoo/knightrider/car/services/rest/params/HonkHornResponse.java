@@ -53,5 +53,17 @@ public class HonkHornResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public HonkHornResponse buildHonkHornResponse(Boolean result, String reason) {
+
+		HonkHornResponse honkHornResponse = new HonkHornResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		honkHornResponse.setResponse(responseParamVehicleCommands);
+
+		return honkHornResponse;
+
+	}
 
 }

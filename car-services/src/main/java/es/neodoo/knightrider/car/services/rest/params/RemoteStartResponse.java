@@ -53,5 +53,17 @@ public class RemoteStartResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public RemoteStartResponse buildRemoteStartResponse(Boolean result, String reason) {
+
+		RemoteStartResponse remoteStartResponse = new RemoteStartResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		remoteStartResponse.setResponse(responseParamVehicleCommands);
+
+		return remoteStartResponse;
+
+	}
 
 }

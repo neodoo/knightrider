@@ -53,5 +53,17 @@ public class StartChargingResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public StartChargingResponse buildStartChargingResponse(Boolean result, String reason) {
+
+		StartChargingResponse startChargingResponse = new StartChargingResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		startChargingResponse.setResponse(responseParamVehicleCommands);
+
+		return startChargingResponse;
+
+	}
 
 }

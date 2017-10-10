@@ -62,5 +62,17 @@ public class WakeUpCarResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public WakeUpCarResponse buildWakeUpResponse(Boolean result, String reason) {
+
+		WakeUpCarResponse wakeUpCarResponse = new WakeUpCarResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		wakeUpCarResponse.setResponse(responseParamVehicleCommands);
+
+		return wakeUpCarResponse;
+
+	}
 
 }

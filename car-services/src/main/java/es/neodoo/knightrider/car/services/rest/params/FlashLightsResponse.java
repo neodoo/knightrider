@@ -52,4 +52,17 @@ public class FlashLightsResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public FlashLightsResponse buildFlashLightsResponse(Boolean result, String reason) {
+
+		FlashLightsResponse flashLightsResponse = new FlashLightsResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		flashLightsResponse.setResponse(responseParamVehicleCommands);
+
+		return flashLightsResponse;
+
+	}
+	
 }

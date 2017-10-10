@@ -65,5 +65,17 @@ public class GuiSettingsResponse {
 		response=guiSettingsParamResponse;
 	
 	}
+	
+	public GuiSettingsResponse buildGuiSettingsResponse(String guiSettings) {
+
+		GuiSettingsResponse guiSettingsResponse = new GuiSettingsResponse();
+		GuiSettingsParamResponse guiSettingsParamResponse= new GuiSettingsParamResponse(guiSettings, "F", "mi/hr", false, "Rated");
+		guiSettingsResponse.setResponse(guiSettingsParamResponse);
+
+		return guiSettingsResponse;
+
+	}
+	
+	
 
 }

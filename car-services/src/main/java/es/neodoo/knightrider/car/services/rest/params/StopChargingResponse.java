@@ -53,5 +53,17 @@ public class StopChargingResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public StopChargingResponse buildStopChargingResponse(Boolean result, String reason) {
+
+		StopChargingResponse stopChargingResponse = new StopChargingResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		stopChargingResponse.setResponse(responseParamVehicleCommands);
+
+		return stopChargingResponse;
+
+	}
 
 }

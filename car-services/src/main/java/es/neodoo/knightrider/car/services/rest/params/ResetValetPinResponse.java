@@ -54,5 +54,17 @@ public class ResetValetPinResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public ResetValetPinResponse buildResetValetPinResponse(Boolean result, String reason) {
+
+		ResetValetPinResponse resetValetPinResponse = new ResetValetPinResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		resetValetPinResponse.setResponse(responseParamVehicleCommands);
+
+		return resetValetPinResponse;
+
+	}
 
 }

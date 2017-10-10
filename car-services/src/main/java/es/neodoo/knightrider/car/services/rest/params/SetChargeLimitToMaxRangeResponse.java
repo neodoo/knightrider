@@ -54,11 +54,23 @@ public class SetChargeLimitToMaxRangeResponse {
 	}
 
 	public SetChargeLimitToMaxRangeResponse(){}
-	
+
 	public SetChargeLimitToMaxRangeResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
+
 		response=responseParamVehicleCommands;
-	
+
+	}
+
+	public SetChargeLimitToMaxRangeResponse buildSetChargeLimitToMaxRangeResponse(Boolean result, String reason) {
+
+		SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse = new SetChargeLimitToMaxRangeResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		setChargeLimitToMaxRangeResponse.setResponse(responseParamVehicleCommands);
+
+		return setChargeLimitToMaxRangeResponse;
+
 	}
 
 }

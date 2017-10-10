@@ -72,5 +72,16 @@ public class ChargeStateResponse {
 	}
 
 	public ChargeStateResponse(){}
+	
+	public ChargeStateResponse buildChargeStateResponse(String chargingState) {
+
+		ChargeStateResponse chargeStateResponse = new ChargeStateResponse();
+		ChargeStateParamResponse chargeStateParamResponse = new ChargeStateParamResponse(chargingState, false, 123, true, 123.79, 321.321, 5.5, 91, -0.5, 
+				null, null, 0, 50, 0, 0, null, -1.0, true);
+		chargeStateResponse.setResponse(chargeStateParamResponse);
+
+		return chargeStateResponse;
+
+	}
 
 }

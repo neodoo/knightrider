@@ -52,5 +52,14 @@ public class MobileAccesResponse {
 		return mAResponse;
 	
 	}
+	
+	public MobileAccesResponse buildMobileAccesResponse(Boolean result) {
+
+		MobileAccesResponse mobileAccesResponse = new MobileAccesResponse();
+		mobileAccesResponse.setResponse(result);
+
+		return mobileAccesResponse;
+
+	}
 
 }

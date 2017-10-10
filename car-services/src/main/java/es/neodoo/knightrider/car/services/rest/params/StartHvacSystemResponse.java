@@ -53,5 +53,17 @@ public class StartHvacSystemResponse {
 		response=responseParamVehicleCommands;
 
 	}
+	
+	public StartHvacSystemResponse buildStartHvacSystemResponse(Boolean result, String reason) {
+
+		StartHvacSystemResponse startHvacSystemResponse = new StartHvacSystemResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		startHvacSystemResponse.setResponse(responseParamVehicleCommands);
+
+		return startHvacSystemResponse;
+
+	}
 
 }

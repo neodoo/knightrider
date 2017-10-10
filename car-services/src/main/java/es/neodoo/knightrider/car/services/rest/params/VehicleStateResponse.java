@@ -77,5 +77,16 @@ public class VehicleStateResponse {
 		response=vehicleStateParamResponse;
 	
 	}
+	
+	public VehicleStateResponse buildVehicleStateResponse(boolean vehicleStateParams) {
+
+		VehicleStateResponse vehicleStateResponse = new VehicleStateResponse();
+		VehicleStateParamResponse vehicleStateParamResponse= new VehicleStateParamResponse(vehicleStateParams, false, false, false, false, false, "1.19.43", true, false,
+				"unknown", 0, false, "Base19", false, "Colored", "Base");
+		vehicleStateResponse.setResponse(vehicleStateParamResponse);
+
+
+		return vehicleStateResponse;
+	}
 
 }

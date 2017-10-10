@@ -60,5 +60,17 @@ public class SetChargeLimitToStandardResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public SetChargeLimitToStandardResponse buildSetChargeLimitToStandardResponse(Boolean result, String reason) {
+
+		SetChargeLimitToStandardResponse setChargeLimitToStandardResponse = new SetChargeLimitToStandardResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		setChargeLimitToStandardResponse.setResponse(responseParamVehicleCommands);
+
+		return setChargeLimitToStandardResponse;
+
+	}
 
 }

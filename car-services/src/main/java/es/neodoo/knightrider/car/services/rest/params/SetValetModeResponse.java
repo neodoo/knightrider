@@ -62,5 +62,17 @@ public class SetValetModeResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public SetValetModeResponse buildSetValetModeResponse(Boolean result, String reason) {
+
+		SetValetModeResponse setValetModeResponse = new SetValetModeResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		setValetModeResponse.setResponse(responseParamVehicleCommands);
+
+		return setValetModeResponse;
+
+	}
 
 }

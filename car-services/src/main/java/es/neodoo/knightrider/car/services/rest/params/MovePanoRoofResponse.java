@@ -53,5 +53,17 @@ public class MovePanoRoofResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public MovePanoRoofResponse buildMovePanoRoofResponse(Boolean result, String reason) {
+
+		MovePanoRoofResponse movePanoRoofResponse = new MovePanoRoofResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		movePanoRoofResponse.setResponse(responseParamVehicleCommands);
+
+		return movePanoRoofResponse;
+
+	}
 
 }

@@ -53,5 +53,17 @@ public class SetTemperatureResponse {
 		response=responseParamVehicleCommands;
 	
 	}
+	
+	public SetTemperatureResponse buildSetTemperatureResponse(Boolean result, String reason) {
+
+		SetTemperatureResponse setTemperatureResponse = new SetTemperatureResponse();
+		ResponseParamVehicleCommands responseParamVehicleCommands = new ResponseParamVehicleCommands();
+		responseParamVehicleCommands.setResult(result);
+		responseParamVehicleCommands.setReason(reason);
+		setTemperatureResponse.setResponse(responseParamVehicleCommands);
+
+		return setTemperatureResponse;
+
+	}
 
 }
