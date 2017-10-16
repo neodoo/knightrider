@@ -15,8 +15,9 @@ import java.util.Date;
 public class CustomerCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CustomerCardPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
 	private int cvs;
 
@@ -29,18 +30,18 @@ public class CustomerCard implements Serializable {
 	private String number;
 
 	//bi-directional many-to-one association to Customer
-	//@ManyToOne
-	//@JoinColumn(name="email")
-	//private Customer customer;
+	@ManyToOne
+	@JoinColumn(name="email")
+	private Customer customer;
 
 	public CustomerCard() {
 	}
 
-	public CustomerCardPK getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(CustomerCardPK id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -76,12 +77,12 @@ public class CustomerCard implements Serializable {
 		this.number = number;
 	}
 
-	//	public Customer getCustomer() {
-	//	return this.customer;
-	//}
+	public Customer getCustomer() {
+		return this.customer;
+	}
 
-	//public void setCustomer(Customer customer) {
-	//	this.customer = customer;
-	//}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 }

@@ -25,6 +25,7 @@ import es.neodoo.knightrider.services.renting.model.dao.VehicleTravelingDAOImpl;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
 
+
 public class CustomerServiceImpl implements CustomerService {
 
 	private final int NUMBER_OF_DECIMALS = 2;
@@ -34,15 +35,15 @@ public class CustomerServiceImpl implements CustomerService {
 	VehicleTravelDAO vehicleTravelDAO = null;
 
 	UserDAO userDAO = null;
-	
+
 	VehicleTravelingDAO vehicleTravelingDAO = null;
 
 	CustomerCardDAO customerCardDAO = null;
 
 	private static final Log log = LogFactory.getLog(CustomerServiceImpl.class);
-	
+
 	public CustomerServiceImpl(){
-		
+
 		super();
 		customerDAO = new CustomerDAOImpl();
 		vehicleTravelDAO = new VehicleTravelDAOImpl();
@@ -178,25 +179,22 @@ public class CustomerServiceImpl implements CustomerService {
 			String driveDate, String pass, String creditCardNumber, String creditCardName, int creditCardCVS, String creditCardDate) throws ServiceException{
 
 		boolean register = false;
-		
-		try {
 
+		try {
 			userDAO.createUser(email, pass);
 			customerDAO.createCustomer(email, name, surname, getDate("yyyy-mm-dd",birthDate), phone, driveNumber, getDate("yyyy-mm-dd",driveDate));
 			customerCardDAO.createCreditCard(email, creditCardNumber, creditCardName, creditCardCVS, getDate("yyyy-mm-dd",creditCardDate));
 			register = true;
 			log.info( email + "register done");
 
-		} catch(DAOException e) {			
+		} catch(DAOException | ParseException e) {			
 			throw new ServiceException("Can not create customer: " + e);
-		} catch (ParseException e) {
-			throw new ServiceException("Can not Parse Date: " + e);
 		}
-		
+
 		return register;
 
 	}
-	
+
 	private Date getDate(String dateFormat, String date) throws ParseException{
 		SimpleDateFormat format = new SimpleDateFormat(dateFormat);
 		return (Date) format.parse(date);
@@ -204,21 +202,21 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public VehicleTraveling getTravelingDetail(String username) throws ServiceException {
-		
+
 		VehicleTraveling vehicleTraveling = null;
-		
+
 		try {
-			
+
 			vehicleTraveling = vehicleTravelingDAO.getVehicleTraveling(username);
 			log.debug("Showing traveling details of user" + username);
-			
+
 		} catch (DAOException e) {
 			log.error("Can not showing the traveling details:" + e);
 			throw new ServiceException("Can not show traveling details" + e);
 		}
-		
+
 		return vehicleTraveling;
-		
+
 	}
 
 }

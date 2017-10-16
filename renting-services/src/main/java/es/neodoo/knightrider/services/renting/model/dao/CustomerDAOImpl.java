@@ -13,6 +13,7 @@ import org.apache.commons.logging.*;
 
 import es.neodoo.knightrider.services.renting.exceptions.DAOException;
 import es.neodoo.knightrider.services.renting.model.vo.Customer;
+import es.neodoo.knightrider.services.renting.model.vo.User;
 import es.neodoo.knightrider.services.renting.web.PersistenceListener;
 
 public class CustomerDAOImpl implements CustomerDAO {
@@ -34,6 +35,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 			em.getTransaction().begin();
 			
 			Customer customer = new Customer();
+			User user = em.getReference(User.class, email);
+
+			customer.setUser(user);
 			customer.setEmail(email);
 			customer.setName(name);
 			customer.setSurname(surname);

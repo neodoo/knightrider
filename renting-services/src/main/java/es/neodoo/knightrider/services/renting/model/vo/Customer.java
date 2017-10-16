@@ -17,7 +17,6 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String email;
 
 	@Temporal(TemporalType.DATE)
@@ -42,12 +41,12 @@ public class Customer implements Serializable {
 	private User user;
 
 	//bi-directional many-to-one association to CustomerAddress
-	@OneToMany(mappedBy="customer")
-	private List<CustomerAddress> customerAddresses;
+	//@OneToMany(mappedBy="customer")
+	//private List<CustomerAddress> customerAddresses;
 
 	//bi-directional many-to-one association to CustomerCard
-	//@OneToMany(mappedBy="customer")
-	//private List<CustomerCard> customerCards;
+	@OneToMany(mappedBy="customer")
+	private List<CustomerCard> customerCards;
 
 	//bi-directional many-to-one association to VehicleBlocked
 	@OneToMany(mappedBy="customer")
@@ -128,49 +127,49 @@ public class Customer implements Serializable {
 		this.user = user;
 	}
 
-	public List<CustomerAddress> getCustomerAddresses() {
-		return this.customerAddresses;
+//	public List<CustomerAddress> getCustomerAddresses() {
+//		return this.customerAddresses;
+//	}
+//
+//	public void setCustomerAddresses(List<CustomerAddress> customerAddresses) {
+//		this.customerAddresses = customerAddresses;
+//	}
+
+//	public CustomerAddress addCustomerAddress(CustomerAddress customerAddress) {
+//		getCustomerAddresses().add(customerAddress);
+//		customerAddress.setCustomer(this);
+//
+//		return customerAddress;
+//	}
+//
+//	public CustomerAddress removeCustomerAddress(CustomerAddress customerAddress) {
+//		getCustomerAddresses().remove(customerAddress);
+//		customerAddress.setCustomer(null);
+//
+//		return customerAddress;
+//	}
+
+	public List<CustomerCard> getCustomerCards() {
+		return this.customerCards;
 	}
 
-	public void setCustomerAddresses(List<CustomerAddress> customerAddresses) {
-		this.customerAddresses = customerAddresses;
+	public void setCustomerCards(List<CustomerCard> customerCards) {
+		this.customerCards = customerCards;
 	}
 
-	public CustomerAddress addCustomerAddress(CustomerAddress customerAddress) {
-		getCustomerAddresses().add(customerAddress);
-		customerAddress.setCustomer(this);
+	public CustomerCard addCustomerCard(CustomerCard customerCard) {
+		getCustomerCards().add(customerCard);
+		customerCard.setCustomer(this);
 
-		return customerAddress;
+		return customerCard;
 	}
 
-	public CustomerAddress removeCustomerAddress(CustomerAddress customerAddress) {
-		getCustomerAddresses().remove(customerAddress);
-		customerAddress.setCustomer(null);
+	public CustomerCard removeCustomerCard(CustomerCard customerCard) {
+		getCustomerCards().remove(customerCard);
+		customerCard.setCustomer(null);
 
-		return customerAddress;
+		return customerCard;
 	}
-
-	//public List<CustomerCard> getCustomerCards() {
-	//	return this.customerCards;
-	//}
-
-	//public void setCustomerCards(List<CustomerCard> customerCards) {
-	//	this.customerCards = customerCards;
-	//}
-
-	//public CustomerCard addCustomerCard(CustomerCard customerCard) {
-	//	getCustomerCards().add(customerCard);
-	//	customerCard.setCustomer(this);
-
-	//	return customerCard;
-	//}
-
-	//public CustomerCard removeCustomerCard(CustomerCard customerCard) {
-	//	getCustomerCards().remove(customerCard);
-	//	customerCard.setCustomer(null);
-
-	//	return customerCard;
-	//}
 
 	public List<VehicleBlocked> getVehicleBlockeds() {
 		return this.vehicleBlockeds;

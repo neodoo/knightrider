@@ -1,5 +1,6 @@
 package es.neodoo.knightrider.services.renting.rest.api;
 
+
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -25,6 +26,7 @@ import es.neodoo.knightrider.services.renting.rest.params.TravelingDetailRespons
 import es.neodoo.knightrider.services.renting.rest.params.UpdateBDResponse;
 import es.neodoo.knightrider.services.renting.service.CustomerService;
 import es.neodoo.knightrider.services.renting.service.CustomerServiceImpl;
+import es.neodoo.knightrider.services.renting.service.KeycloakService;
 
 @Path("/customer")
 public class CustomerRestImpl implements CustomerRest {
@@ -33,18 +35,36 @@ public class CustomerRestImpl implements CustomerRest {
 
 	private CustomerService customerService = null;
 	
+	private KeycloakService keycloakService = null;
+
+	private static final String KEYCLOAK_SERVER = "http://192.168.1.144:9080/auth";
+	
+	private static final String KEYCLOAK_REALM = "master";
+
+	private static final String KEYCLOAK_CLIENT = "admin-cli";
+	
+	private static final String KEYCLOAK_ADMIN_USERNAME = "admin";
+	
+	private static final String KEYCLOAK_ADMIN_PASSWORD = ".admin8$";
+	
+	private static final String KEYCLOAK_KNIGHTRIDER_REALM = "knightrider_realm";
+	
+	private static final String KEYCLOAK_KNIGHTRIDER_CLIENT = "knightrider_client";
+
+
 	public CustomerRestImpl() {
 		super();
-		this.customerService =  new CustomerServiceImpl(); ;
+		this.customerService =  new CustomerServiceImpl();
+		this.keycloakService = new KeycloakService(KEYCLOAK_SERVER, KEYCLOAK_REALM, KEYCLOAK_ADMIN_USERNAME, KEYCLOAK_ADMIN_PASSWORD, KEYCLOAK_CLIENT);
 	}
-	
+
 	private ResponseBuilder addCorsSupport(ResponseBuilder response){
-		
+
 		return response.header("Access-Control-Allow-Origin", "*")
-        .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-        .header("Access-Control-Allow-Credentials", "true")
-        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-        .header("Access-Control-Max-Age", "1209600");
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+				.header("Access-Control-Max-Age", "1209600");
 	}
 
 	/* (non-Javadoc)
@@ -78,7 +98,7 @@ public class CustomerRestImpl implements CustomerRest {
 		}
 
 		return  addCorsSupport(Response.status(200)).entity(json).build();
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -108,7 +128,7 @@ public class CustomerRestImpl implements CustomerRest {
 			myProfileResponse = myProfileResponse.buildMyProfileResponse(numTravels, time, cost, average, name);
 
 		} catch (Exception e) {
-			myProfileResponse = null;
+			myProfileResponse = myProfileResponse.buildMyProfileResponse(numTravels, time, cost, average, name);
 			log.error("Eror geting profile:" + e);
 		}
 
@@ -121,7 +141,7 @@ public class CustomerRestImpl implements CustomerRest {
 		}
 
 		return  addCorsSupport(Response.status(200)).entity(json).build();
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -156,7 +176,7 @@ public class CustomerRestImpl implements CustomerRest {
 		}
 
 		return  addCorsSupport(Response.status(200)).entity(json).build();
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -175,7 +195,8 @@ public class CustomerRestImpl implements CustomerRest {
 		String json = null;
 
 		try {
-
+			
+			keycloakService.createUser(KEYCLOAK_KNIGHTRIDER_REALM, KEYCLOAK_KNIGHTRIDER_CLIENT, email, pass, name, surname, email);
 			register = customerService.createCustomer(email, name, surname, birthDate, phone, driveNumber, driveDate, pass, creditCardNumber, creditCardName, creditCardCVS, creditCardDate);
 			registerResponse = registerResponse.buildUpdateBDResponse(register, "You user was created");
 
@@ -184,6 +205,7 @@ public class CustomerRestImpl implements CustomerRest {
 			log.error("Error in the register:" + e);
 		} catch (Exception e){
 			registerResponse = registerResponse.buildUpdateBDResponse(false, "Error in the register.");
+			log.error("Error in the register:" + e);
 		}
 
 		try {
@@ -195,7 +217,7 @@ public class CustomerRestImpl implements CustomerRest {
 		}
 
 		return  addCorsSupport(Response.status(200)).entity(json).build();
-		
+
 	}
-	
+
 }
