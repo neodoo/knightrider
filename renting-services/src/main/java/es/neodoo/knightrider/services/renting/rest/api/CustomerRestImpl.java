@@ -119,12 +119,12 @@ public class CustomerRestImpl implements CustomerRest {
 		String json = null;
 
 		try {
-
+			
+			name =customerService.getName(username);
 			numTravels = customerService.getNumTravels(username);
 			time = customerService.getTime(username);
 			cost = customerService.getCost(username);
 			average = customerService.getAverage(username);
-			name =customerService.getName(username);
 			myProfileResponse = myProfileResponse.buildMyProfileResponse(numTravels, time, cost, average, name);
 
 		} catch (Exception e) {
@@ -193,7 +193,7 @@ public class CustomerRestImpl implements CustomerRest {
 		boolean register = false;	
 		UpdateBDResponse registerResponse = new UpdateBDResponse();
 		String json = null;
-
+		
 		try {
 			
 			keycloakService.createUser(KEYCLOAK_KNIGHTRIDER_REALM, KEYCLOAK_KNIGHTRIDER_CLIENT, email, pass, name, surname, email);
