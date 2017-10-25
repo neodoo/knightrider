@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar color='navbarColor'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title class="title">
+            <img  class="logo-img" alt="logo" src="assets/img/logo-negativo.png" > 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+ <ion-content padding class="content">
+
+    <div class="tittle">CREAR CUENTA 1/4</div>
+
+    <form class="form-content" [formGroup]="registerForm" (ngSubmit)="siguiente()" novalidate>
+        <ion-list class= "register-list"> 
+            <ion-item color='navbarColor'>
+              <ion-label stacked class="input-data">Nombre:</ion-label>
+              <ion-input formControlName="name" type="text" placeholder="Nombre"></ion-input>
+          </ion-item>
+          <ion-item color='navbarColor'*ngIf="registerForm.get('name').errors && registerForm.get('name').dirty">
+              <p color="danger" ion-text *ngIf="registerForm.get('name').hasError('required')">Necesitas introducir tu nombre</p>
+          </ion-item>
+          <ion-item color='navbarColor'>
+              <ion-label stacked class="input-data">Apellidos:</ion-label>
+              <ion-input formControlName="surname" type="text" placeholder="Apellidos"></ion-input>
+          </ion-item>
+          <ion-item color='navbarColor' *ngIf="registerForm.get('surname').errors && registerForm.get('surname').dirty">
+            <p color="danger" ion-text *ngIf="registerForm.get('surname').hasError('required')">Necesitas poner tus apellidos</p>
+          </ion-item>
+          <ion-item color='navbarColor'>
+              <ion-label stacked class="input-data">E-mail:</ion-label>
+              <ion-input formControlName="email" type="text" placeholder="email"></ion-input>
+          </ion-item>
+          <ion-item color='navbarColor' *ngIf="registerForm.get('email').errors && registerForm.get('email').dirty">
+              <p color="danger" ion-text *ngIf="registerForm.get('email').hasError('required')">Necesitas introducir tu correo</p>
+              <p color="danger" ion-text *ngIf="registerForm.get('email').hasError('email')">Introduzca un correo válido</p>
+          </ion-item>
+          <ion-item color='navbarColor'>
+              <ion-label stacked class="input-data">Fecha de nacimineto:</ion-label>
+              <ion-datetime displayFormat="MMM DD, YYYY" max="1999-01-10" formControlName="date" placeholder="Fecha de nacimiento"></ion-datetime>
+          </ion-item>
+          <ion-item color='navbarColor' *ngIf="registerForm.get('date').errors && registerForm.get('date').dirty">
+              <p color="danger" ion-text *ngIf="registerForm.get('date').hasError('required')">Necesitas introducir tu fecha de nacimiento</p>
+          </ion-item>
+        
+          <ion-item class="special-item" color='navbarColor'> 
+              <ion-label stacked class="input-data">Número de teléfono:</ion-label>
+              <ion-input formControlName="phone" type="text" placeholder="Número de teléfono"></ion-input>
+          </ion-item>
+          <ion-item class="special-item" color='navbarColor' *ngIf="registerForm.get('phone').errors && registerForm.get('phone').dirty">
+              <p color="danger" ion-text *ngIf="registerForm.get('phone').hasError('required')">Necesitas poner tu número de teléfono</p>
+              <p color="danger" ion-text *ngIf="registerForm.get('phone').hasError('pattern')">El teléfono debe de ser válido</p>
+          </ion-item>
+      </ion-list>
+    </form>
+ 
+    <div  class ="register-buttons">
+        <button ion-button class="custom-buton" (click)="cancel()">Cancelar</button>
+        <button ion-button class="custom-buton rent" (click)="next()" [disabled]="registerForm.invalid">Siguiente</button>
+    </div>
+
+</ion-content>

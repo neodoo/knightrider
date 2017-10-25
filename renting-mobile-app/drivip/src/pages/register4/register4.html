@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color='navbarColor'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title class="title">
+            <img  class="logo-img" alt="logo" src="assets/img/logo-negativo.png" > 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+
+    <div class="tittle">CREAR CUENTA 4/4</div>
+
+    <form class="form-content" [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+        <ion-list class="register-list"> 
+            <ion-item color='navbarColor'>
+                <ion-icon id="eyeOne" name="eye" item-left></ion-icon>
+                <ion-label stacked class="input-data">Contraseña:</ion-label>
+                <ion-input formControlName="password" id="passwordOne" type="password" placeholder="Contraseña" ionic-password-show-hide></ion-input>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('password').errors && registerForm.get('password').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('password').hasError('required')">Necesitas introducir tu contraseña</p>
+                <p color="danger" ion-text *ngIf="registerForm.get('password').hasError('minlength')">Longitud mínima 6 carácteres</p>
+            </ion-item>
+            <ion-item class="special-item" color='navbarColor'>
+                <ion-icon id="eyeTwo"  name="eye" item-left></ion-icon>
+                <ion-label stacked class="input-data">Confirmar contraseña:</ion-label>
+                <ion-input formControlName="passwordConfirmation" id="passwordTwo" type="password" placeholder="Confirmar contraseña" ionic-password-show-hide></ion-input>
+            </ion-item> 
+        </ion-list>
+    </form>
+
+    <div  class ="register-buttons">
+        <button ion-button class="custom-buton" (click)="previous()">Anterior</button>
+        <button ion-button class="custom-buton rent" [disabled]="registerForm.invalid" (click)="register()">Confirmar</button>
+    </div>
+  
+</ion-content>

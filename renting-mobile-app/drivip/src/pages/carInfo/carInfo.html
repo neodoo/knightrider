@@ -1,0 +1,69 @@
+<ion-content id="carInfoContent" (click)="updateModal()" class="car-modal">
+    
+    <div class="car-img-container initial">
+        <img class="car-img" src="{{car.img}}">
+    </div>
+
+    <div class="car-info-container">    
+        
+        <div class="first">
+            <ion-row>
+                <div class="icon">
+                     <img src="assets/icon/matricula.png">
+                </div>
+                <div class="headers">
+                    <div class="headers-align">MATRÍCULA: &nbsp; <b>{{car.vin}}</b></div>
+                </div>
+            </ion-row>
+            <ion-row>
+                <div class="icon">
+                     <img src="assets/icon/localizacion.png">
+                </div>
+                <div class="headers">
+                    <div class="headers-align">LOCALIZACIÓN: &nbsp; <b>{{car.adress}}</b></div>
+                </div>
+            </ion-row>
+            <div  class ="button-bar buttons">
+                <button ion-button class="custom-buton" color= "{{(car.rent_state == 'blocked') ? 'danger' : 'default' }}" id="book" onclick="event.stopPropagation()" (click)="block()">{{(car.rent_state == 'blocked') ? 'Liberar' : 'Reservar' }}</button>
+                <button ion-button class="custom-buton white" id="xxxx" onclick="event.stopPropagation()"(click)="startTravel()">Alquilar</button>
+            </div>
+        </div>
+       
+        <div class="last"> 
+            <ion-row>
+                <div class="icon">
+                     <img src="assets/icon/bateria.png">
+                </div>
+                <div class="headers">
+                    <div class="headers-align">BATERÍA: &nbsp; <b>{{car.battery_level}}</b></div>
+                </div>
+            </ion-row>
+             <ion-row>
+                <div class="icon">
+                     <img src="assets/icon/distancia.png">
+                </div>
+                <div class="headers">
+                    <div class="headers-align">DISTANCIA APROX.: &nbsp; <b>{{car.battery_range}}KM</b></div>
+                </div>
+            </ion-row>
+            <ion-row>
+                <div class="icon">
+                     <img src="assets/icon/color.png">
+                </div>
+                <div class="headers">
+                    <div class="headers-align">COLOR: &nbsp; <b>{{car.color}}</b></div>
+                </div>
+            </ion-row>
+            <ion-row>
+                <div class="icon">
+                     <img src="assets/icon/techo-solar.png">
+                </div>
+                <div class="headers">
+                    <div class="headers-align">TECHO SOLAR: &nbsp; <b>{{ car.sunRoof ? "SI" : "NO" }}</b></div>
+                </div>
+            </ion-row>
+        </div>
+
+    </div>
+
+</ion-content>

@@ -1,0 +1,62 @@
+page-register3 {
+
+    .logo-img{
+       height: 30px;
+    }
+
+    .tittle{
+        padding: 10px;
+        font-size: 1.3em;
+        font-weight: bold;
+        font-family: 'Open Sans', sans-serif;
+        text-align:center;
+        color: white;                
+        border-bottom: 2px solid white;
+        border-top: 2px solid white;
+    }
+
+    .register-buttons{
+        text-align:center;
+    }
+
+    .custom-buton{
+        color : #FFFFFF !important;
+        background-color : #000000 !important;
+        border: 2px solid #FFFFFF;
+        width: 40%;
+        margin-right: 10px;
+    }
+
+    .custom-buton.rent{
+        color : #000000 !important;
+        background-color : #FFFFFF !important;
+        width: 40%;
+        margin-left: 10px;
+    }
+
+    .content{
+        background-color: #000000 !important;
+        color:white;
+    }
+
+    .input-data{
+        color : #FFFFFF !important;
+    }
+
+    .register-list{
+        padding-right : 16px;
+    }
+
+    .register-list .item-inner{
+        border-bottom: 1px solid !important;
+    }
+
+    .register-list .item-input:last-child{
+        border-bottom: none !important;
+    }
+
+    .form-content{
+        margin-top : 10%;
+    }
+
+}

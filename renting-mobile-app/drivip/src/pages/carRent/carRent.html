@@ -1,0 +1,59 @@
+<ion-content id="carInfoContent" (click)="closeModal()">
+
+    <div class="car-info-container">
+        <ion-row class="profile-container">
+            <div class="icon">
+                <img src="assets/icon/viajes.png" align-text="center">
+            </div>
+            <div class="headers">
+                <div class="headers-align">MATRÍCULA: &nbsp; <b>{{car.vin}}</b></div>
+            </div>
+        </ion-row>
+        <ion-row class="profile-container">
+            <div class="icon">
+                <img src="assets/icon/bateria.png" align-text="center">
+            </div>
+            <div class="headers">
+                <div class="headers-align">BATERÍA ACTUAL: &nbsp; <b>{{car.battery_level}}%</b></div>
+            </div>
+        </ion-row>
+        <ion-row class="profile-container">
+            <div class="icon">
+                <img src="assets/icon/distancia.png" align-text="center">
+            </div>
+            <div class="headers">
+                <div class="headers-align">DISTANCIA APROXIMADA: &nbsp; <b>{{car.battery_range}}KM</b></div>
+            </div>
+        </ion-row>
+        <ion-row class="profile-container">
+            <div class="icon">
+                <img src="assets/icon/techo-solar.png" align-text="center">
+            </div>
+            <div class="headers">
+                <div class="headers-align">FECHA INICIO: &nbsp; <b>{{car.date_start.getDate()}}/{{car.date_start.getMonth() + 1}}/{{car.date_start.getYear() + 1900}}&nbsp; ({{car.date_start.getHours()}}:{{car.date_start.getMinutes()}}:{{car.date_start.getSeconds()}})</b></div>
+            </div>
+        </ion-row>
+        <ion-row class="profile-container">
+            <div class="icon">
+                <img src="assets/icon/tiempo.png" align-text="center">
+            </div>
+            <div class="headers">
+                <div class="headers-align">TIEMPO: &nbsp; <b>{{car.actual_time}}</b></div>
+            </div>
+        </ion-row>
+        <ion-row class="profile-container">
+            <div class="icon">
+                <img src="assets/icon/importe.png" align-text="center">
+            </div>
+            <div class="headers">
+                <div class="headers-align">IMPORTE: &nbsp; <b>{{car.price}}€</b></div>
+            </div>
+        </ion-row>
+
+        <div  class ="car-rent-buttons">
+            <button ion-button class="custom-buton white" onclick="event.stopPropagation()"(click)="finishTravel()">FINZALIZAR</button>
+        </div>
+          
+    </div>
+
+</ion-content>

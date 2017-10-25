@@ -1,0 +1,144 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.car-info-modal{
+
+    height: 400px;
+    top: initial;
+    font-family: "Open Sans";
+}
+.transparent {
+    background: transparent !important;
+}
+
+.car-rent-modal{
+
+    height: 404px;
+    bottom: 0% !important;
+    top:auto;
+
+}
+
+.car-info-modal.initial{
+    bottom: -170px
+}
+
+.car-info-modal.small{
+    animation: modal-animation-small 0.2s linear forwards;
+    height:325px;
+}
+
+.car-info-modal.large{
+    animation: modal-animation-large 0.2s linear forwards;
+    height:400px;
+}
+
+@keyframes modal-animation-large {
+    
+    from {bottom: -170px}
+    to {bottom: 0%;}
+
+}
+
+@keyframes modal-animation-small {
+    
+    from {bottom: 0%;}
+    to {bottom: -170px}
+
+}
+.car-img-container{
+    height: 75px;
+    width: 100%;
+    text-align: center;
+    top: 20px;
+    position: absolute;
+}
+
+.car-img-container.initial{
+    display:none;
+}
+
+.car-img-container.small{
+    display:none;
+}
+
+.car-img-container.large{
+    display:block;
+}
+
+.car-img.initial{
+    display:none;
+}
+
+.car-img.large{
+    animation: car-animation-large 0.5s linear forwards;
+}
+
+@keyframes car-animation-large {
+    
+    from {margin-left: -150%}
+    to {margin-left: 0%;}
+
+}
+
+.car-img.small{
+    animation: car-animation-small 0.5s linear forwards;
+}
+
+@keyframes car-animation-small {
+    
+    from {margin-left: 0%;}
+    to {margin-left: 150%}
+
+}
+
+.menu-content-custom{
+    background-color:#000000;
+    font-family: "Open Sans";
+}
+
+.menu-content-custom button{
+    background-color:#000000 !important;
+    color: #fff !important;
+}
+
+.menu-content-custom button .item-inner{
+    border: none !important;
+}
+
+    .headers{
+        font-variant: small-caps;
+        font-weight: 300;
+        width: 85%;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.3em;
+        line-height: 40px;
+    }
+
+    .headers-align{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
+
+
+    .icon{
+        height: 40px;
+        padding: 4px 0px;
+        width: 15%;
+    }

@@ -1,0 +1,92 @@
+carRent {
+        .car-rent-container{
+        padding: 5px;
+    }
+
+     .car-rent-container .item{
+        padding: 10px 0px;
+    }
+
+    .car-rent-container .buttons{
+        padding: 10 px 0 px;
+        text-align: center;
+
+    }
+    .car-rent-buttons{
+        text-align: center;
+    }
+
+    .car-rent-book{
+        display: inline-block;
+    }
+
+    .car-rent-vin{
+        font-size:1.2em;
+        color: skyblue;
+    }
+
+    .car-rent-address{
+        font-size: 1em;
+        color: grey;
+    }
+
+    .car-rent-range{
+        font-size: 1em;
+        color: blue;
+    }
+
+    .car-rent-options{
+        font-size: 1em;
+        color:red;
+    }
+
+    .car-img{
+       position:absolute;
+       bottom:170px;
+       height: 75px;
+       width: 150px;
+    }
+
+    .car-info-container{
+        padding: 0px 5px;
+        background-color : #000000;
+        font-family: "Open Sans";
+    }
+
+    .profile-container{
+        height:60px;
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .icon{
+        height: 40px;
+        padding: 4px 0px;
+        width: 15%;
+    }
+
+    .headers{
+        font-variant: small-caps;
+        font-weight: 300;
+        width: 85%;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.3em;
+        line-height: 40px;
+    }
+
+    .headers-align{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
+
+    .custom-buton.white{
+        color : #000000 !important;
+        background-color : #FFFFFF !important;
+        width: 40%;
+        text-align: center !important;
+    }
+
+}
+

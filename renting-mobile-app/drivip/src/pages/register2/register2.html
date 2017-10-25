@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar color='navbarColor'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title class="title">
+            <img  class="logo-img" alt="logo" src="assets/img/logo-negativo.png" > 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+
+    <div class="tittle">CREAR CUENTA 2/4</div>
+
+    <form class="form-content" [formGroup]="registerForm" (ngSubmit)="siguiente()" novalidate>
+        <ion-list class= "register-list"> 
+            <ion-item color='navbarColor'>
+                <ion-label stacked class="input-data">Número del permiso de conducir:</ion-label>
+                <ion-input formControlName="driveNumber" type="text" placeholder="Nº permiso de conducir"></ion-input>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('driveNumber').errors && registerForm.get('driveNumber').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('driveNumber').hasError('required')">Necesitas poner tu permiso de conducir</p>
+                <p color="danger" ion-text *ngIf="registerForm.get('driveNumber').hasError('pattern')">El permiso de conducir debe de ser válido</p>
+            </ion-item>
+            <ion-item color='navbarColor'>
+                <ion-label stacked class="input-data">Fecha de caducidad del permiso de conducir:</ion-label>
+                <ion-datetime displayFormat="MMM DD, YYYY" min="2017-01-01" max="2030-01-01" formControlName="driveDate" placeholder="Fecha caducidad permiso de conducir"></ion-datetime>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('driveDate').errors && registerForm.get('driveDate').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('driveDate').hasError('required')">Necesitas introducir la fecha de caducidad de tu permiso de conducir</p>
+            </ion-item>
+        </ion-list>
+    </form>
+
+    <div  class ="register-buttons">
+        <button ion-button class="custom-buton" (click)="previous()">Anterior</button>
+        <button ion-button class="custom-buton rent" (click)="next()" [disabled]="registerForm.invalid">Siguiente</button>
+    </div>
+  
+</ion-content>
+
+

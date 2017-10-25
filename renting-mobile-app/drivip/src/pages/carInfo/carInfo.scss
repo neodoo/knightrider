@@ -1,0 +1,125 @@
+carInfo {
+
+    .car-info-container{
+        padding: 5px;
+        background-color : #000000;
+        margin-top: 75px;
+        font-family: "Open Sans";
+    }
+
+    .car-info-container.small{
+        margin-top: 0px;
+    }
+
+    .car-info-container.large{
+        margin-top: 75px;
+    }
+
+    .car-info-container .first{
+        padding: 10px;
+        height: 150px;
+        //border-bottom: 1px solid grey;
+    }
+
+    .car-info-container .last{
+        padding: 0px 10px 10px 10px;
+        // height calc
+    }
+
+    .car-info-container .item{
+        padding: 10px 0px;
+    }
+
+   
+    .car-info-container .buttons{
+        padding: 10 px 0 px;
+        text-align: center;
+
+    }
+
+    .car-info-book{
+    }
+
+      .car-info-book.reserved{
+         background-color: #ff5c00 !important;
+    }
+       .car-info-book.liberated{
+         background-color: #00ADEE;
+    }
+    
+
+
+    .car-info-vin{
+        font-size:1.2em;
+        color: white;
+    }
+
+    .car-info-address{
+        font-size: 1em;
+        color: white;
+    }
+
+    .car-info-range{
+        font-size: 1em;
+        color: white;
+    }
+
+ .car-info-options{    .custom-buton{
+        color : #FFFFFF !important;
+        background-color : #000000 !important;
+        border: 2px solid #FFFFFF;
+        width: 40%;
+        margin-right: 10px;
+    }
+        font-size: 1em;
+        color:white;
+    }
+
+    .car-img{
+       height: 75px;
+       width: 150px;
+    }
+
+    .car-modal{
+        background-color:transparent !important;
+    }
+
+       
+    .headers{
+        font-variant: small-caps;
+        font-weight: 300;
+        width: 85%;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.3em;
+        line-height: 40px;
+    }
+
+    .headers-align{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
+
+    .icon{
+        height: 40px;
+        padding: 4px 0px;
+        width: 15%;
+    }
+
+    .custom-buton{
+        color : #FFFFFF !important;
+        background-color : #000000 !important;
+        border: 2px solid #FFFFFF;
+        width: 40%;
+        margin-right: 10px;
+    }
+
+    .custom-buton.white{
+        color : #000000 !important;
+        background-color : #FFFFFF !important;
+        width: 40%;
+        margin-left: 10px;
+    }
+
+}

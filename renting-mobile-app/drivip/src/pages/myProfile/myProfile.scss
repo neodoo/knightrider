@@ -1,0 +1,93 @@
+myProfile {
+    
+    .welcome-container{
+        height:10%;
+        width: 100%;
+        padding: 10px 15px 7px 15px;
+        border-bottom: 2px solid white;
+
+    }
+
+    .welcome{
+        font-size: 2em;
+        font-family: 'Open Sans', sans-serif;
+        text-align:center;
+        color: white;
+        width:100%;
+
+    }
+
+    .logo-img{
+       height: 30px;
+    }
+
+    .title{
+        text-align: center;
+        margin-right: 56px;
+    }
+
+    .profileClass{
+        padding-left: 0 !important;
+        background-color: #000000;
+        color:white;
+    }
+
+    .icon{
+        height: 40px;
+        padding: 4px 0px;
+        width: 15%;
+    }
+
+    .headers{
+        font-variant: small-caps;
+        font-weight: 300;
+        width: 85%;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.3em;
+        line-height: 40px;
+    }
+
+    .headers-align{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
+
+    .profile-container{
+        height:60px;
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .list-container{
+        padding: 10px 0px 10px 15px;
+        width: 100%;
+        background-color: #000000 !important;
+        color:white !important;
+    }
+    .list-title{
+        font-size: 1.3em;
+        font-style: italic;
+        font-family: 'Open Sans', sans-serif;
+        text-align:center;
+        color: white;
+        width:100%;
+    }
+    .list-item{
+        height:10%;
+        width: 100%;
+    }
+
+    .list-travel{
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1em;
+        font-weight: 300;
+    }
+
+    .icon-icon{
+    padding-top:16px;
+        width: 2%;
+    }
+
+}

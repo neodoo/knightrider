@@ -1,0 +1,61 @@
+page-login {   
+    
+    .logo-img{
+       height: 30px;
+    }
+
+    .title{
+        text-align: center;
+        margin-right: 56px;
+    }
+
+    .logo-img{
+       height: 30px;
+    }
+
+    .title{
+        text-align: center;
+        margin-right: 56px;
+    }
+
+    .content{
+        background-color: #000000 !important;
+        color:white;
+    }
+
+    .tittle{
+        padding: 10px;
+        font-size: 1.3em;
+        font-weight: bold;
+        font-family: 'Open Sans', sans-serif;
+        text-align:center;
+        color: white;                
+        border-bottom: 2px solid white;
+        border-top: 2px solid white;
+
+    }
+
+    .form-content{
+        margin-top : 15%;
+    }
+
+    .botton{
+        text-align:center;
+    }
+
+    .input-data{
+        color : #FFFFFF !important;
+    }
+
+    .custom-buton{
+        color : #000000 !important;
+        background-color : #FFFFFF !important;
+    }
+
+    .custom-buton.create{
+        color : #FFFFFF !important;
+        background-color : #000000 !important;
+        border: 2px solid #FFFFFF;
+    }
+
+}

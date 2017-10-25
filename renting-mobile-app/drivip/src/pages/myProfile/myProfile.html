@@ -1,0 +1,113 @@
+<ion-header>
+    <ion-navbar color='navbarColor'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title class="title">
+            <img  class="logo-img" alt="logo" src="assets/img/logo-negativo.png" > 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="profileClass">
+    
+    <ion-row class="welcome-container">
+        <div class="welcome">¡Bienvenido &nbsp; {{name}}!</div>
+    </ion-row>
+    <ion-row class="profile-container">
+        <div class="icon">
+            <img src="assets/icon/viajes.png" align-text="center">
+        </div>
+        <div class="headers">
+            <div class="headers-align">NÚMERO DE VIAJES: &nbsp; <b>{{numTravels}}</b></div>
+        </div>
+    </ion-row>
+    <ion-row  class="profile-container">
+        <div class="icon">
+            <img src="assets/icon/importe.png">
+        </div>
+        <div class="headers">
+            <div class="headers-align">DINERO GASTADO: &nbsp; <b>{{cost}}€</b></div>
+        </div>
+    </ion-row>
+    <ion-row  class="profile-container">
+        <div class="icon">
+            <img src="assets/icon/tiempo.png">
+        </div>
+        <div class="headers">
+            <div class="headers-align">TIEMPO TOTAL: &nbsp; <b>{{time}}H</b></div>
+        </div>
+    </ion-row>
+    <ion-row  class="profile-container">
+        <div class="icon">
+            <img src="assets/icon/media-importe.png">
+        </div>
+        <div class="headers">
+            <div class="headers-align">MEDIA COSTE / VIAJE: &nbsp; <b>{{average}}€</b></div>
+        </div>
+    </ion-row>
+  
+    <ion-row class="welcome-container">
+        <div class="list-title">LISTADO DE VIAJES</div>
+    </ion-row>
+
+    <ion-row>
+        <ion-list class="list-item">
+            <ion-item class="profileClass" *ngFor="let travel of travelList; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+                
+                <ion-row class="list-container">
+                    <div class="list-travel">
+                    {{travel.date_start.getDate()}}/{{travel.date_start.getMonth() + 1}}/{{travel.date_start.getYear() + 1900}}({{travel.date_start.getHours()}}:{{travel.date_start.getMinutes()}}:{{travel.date_start.getSeconds()}}H)  ->  {{travel.date_end.getDate()}}/{{travel.date_end.getMonth() + 1}}/{{travel.date_end.getYear() + 1900}}({{travel.date_end.getHours()}}:{{travel.date_end.getMinutes()}}:{{travel.date_end.getSeconds()}}H)&nbsp; <b>{{travel.cost}}€</b>
+                    </div>
+                </ion-row>
+                <ion-icon class="icon-icon" color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>    
+                
+                <div *ngIf="isGroupShown(i)">
+                    <ion-row class="profile-container">
+                        <div class="icon">
+                            <img src="assets/icon/matricula.png">
+                        </div>
+                        <div class="headers">
+                            <div class="haeders-align">matrícula: &nbsp; <b>{{travel.vin}}</b></div>
+                        </div>
+                    </ion-row>
+                    <ion-row class="profile-container">
+                        <div class="icon">
+                            <img src="assets/icon/origen.png">
+                        </div>
+                        <div class="headers">
+                            <div class="headers-align">origen: &nbsp; <b>{{travel.address_start}}</b></div>
+                        </div>
+                    </ion-row>
+                    <ion-row class="profile-container">
+                        <div class="icon">
+                            <img src="assets/icon/destino.png">
+                        </div>
+                        <div class="headers">
+                            <div class="headers-align">destino: &nbsp; <b>{{travel.address_end}}</b></div>
+                        </div>
+                    </ion-row>
+                    <ion-row class="profile-container">
+                        <div class="icon">
+                            <img src="assets/icon/tiempo.png">
+                        </div>
+                        <div class="headers">
+                            <div class="headers-align">tiempo viaje: &nbsp; <b>{{travel.time_string}}H</b></div>
+                        </div>
+                    </ion-row>
+                    <ion-row class="profile-container">
+                        <div class="icon">
+                            <img src="assets/icon/importe.png">
+                        </div>
+                        <div class="headers">
+                            <div class="headers-align">importe: &nbsp; <b>{{travel.cost}}€</b></div>
+                        </div>
+                    </ion-row>
+                </div>
+
+            </ion-item>
+        </ion-list>
+    </ion-row>
+    
+</ion-content>
+

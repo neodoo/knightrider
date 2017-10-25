@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar color='navbarColor'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title class="title">
+            <img  class="logo-img" alt="logo" src="assets/img/logo-negativo.png" > 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+
+    <div class="tittle">CREAR CUENTA 3/4</div>
+
+    <form class="form-content" [formGroup]="registerForm" (ngSubmit)="siguiente()" novalidate>
+        <ion-list class="register-list"> 
+            <ion-item color='navbarColor'>
+                <ion-label stacked class="input-data">Número de tarjeta de crédito:</ion-label>
+                <ion-input formControlName="creditCardNumber" type="text" placeholder="Nº de su tarjeta de crédito"></ion-input>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('creditCardNumber').errors && registerForm.get('creditCardNumber').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('creditCardNumber').hasError('required')">Necesitas introducir tu número de tarjeta de crédito</p>
+                <p color="danger" ion-text *ngIf="registerForm.get('creditCardNumber').hasError('pattern')">La tarjeta de crédito debe de ser válida</p>
+            </ion-item>
+            <ion-item color='navbarColor'>
+                <ion-label stacked class="input-data">Nombre y apellidos del titular de la tarjeta de crédito:</ion-label>
+                <ion-input formControlName="creditCardName" type="text" placeholder="Nombre y apellidos del titular de la tarjeta"></ion-input>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('creditCardName').errors && registerForm.get('creditCardName').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('creditCardName').hasError('required')">Necesitas introducir el nombre del titular de la tarjeta de crédito</p>
+            </ion-item>
+            <ion-item color='navbarColor'>
+                <ion-label stacked class="input-data">CVS de la tarjeta de crédito:</ion-label>
+                <ion-input formControlName="creditCardCVS" type="text" placeholder="Introduzca el código CVS de la tarjeta de crédito"></ion-input>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('creditCardCVS').errors && registerForm.get('creditCardCVS').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('creditCardCVS').hasError('required')">Necesitas introducir el nombre del titular de la tarjeta de crédito</p>
+                <p color="danger" ion-text *ngIf="registerForm.get('creditCardCVS').hasError('pattern')">CVS es el código de 3 cifras que aparece en el reverso de la tarjeta</p>
+            </ion-item>
+            <ion-item color='navbarColor'>
+                <ion-label stacked class="input-data">Fecha de caducidad del permiso de conducir:</ion-label>
+                <ion-datetime displayFormat="MMM, YYYY" min="2017-01" max="2045-01" formControlName="creditCardDate" placeholder="Fecha caducidad de la tarjeta"></ion-datetime>
+            </ion-item>
+            <ion-item color='navbarColor' *ngIf="registerForm.get('creditCardDate').errors && registerForm.get('creditCardDate').dirty">
+                <p color="danger" ion-text *ngIf="registerForm.get('creditCardDate').hasError('required')">Necesitas introducir la fecha de caducidad de la tarjeta</p>
+            </ion-item>
+
+        </ion-list>
+    </form>
+
+    <div  class ="register-buttons">
+        <button ion-button class="custom-buton" (click)="previous()">Anterior</button>
+        <button ion-button class="custom-buton rent" (click)="next()" [disabled]="registerForm.invalid">Siguiente</button>
+    </div>
+    
+</ion-content>
