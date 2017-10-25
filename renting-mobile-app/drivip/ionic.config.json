@@ -1,0 +1,8 @@
+{
+  "name": "DRIVIP",
+  "app_id": "7b16f107",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
