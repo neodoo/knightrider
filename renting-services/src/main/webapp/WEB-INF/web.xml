@@ -5,73 +5,82 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     version="3.1">
 
-  <display-name>renting-services</display-name>
+  	<display-name>renting-services</display-name>
 
-  <!-- Database connection -->
-  <resource-ref>
-    <description>DB Connection</description>
-    <res-ref-name>jdbc/knightrider</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-  </resource-ref>
+  	<!-- Database connection -->
+  	<resource-ref>
+    	<description>DB Connection</description>
+    	<res-ref-name>jdbc/knightrider</res-ref-name>
+    	<res-type>javax.sql.DataSource</res-type>
+    	<res-auth>Container</res-auth>
+  	</resource-ref>
   
-  <!-- Not necessary in servlet 3.0+ and we use @WebListener
-  <listener>
-    <description>PersistenceListener</description>
-    <listener-class>es.neodoo.knightrider.web.PersistenceListener</listener-class>
-  </listener>
-  -->
+  	<!-- Not necessary in servlet 3.0+ and we use @WebListener
+  	<listener>
+    	<description>PersistenceListener</description>
+    	<listener-class>es.neodoo.knightrider.web.PersistenceListener</listener-class>
+  	</listener>
+  	-->
 
-  <!-- Auto scan REST service 
-  <context-param>
-	<param-name>resteasy.scan</param-name>
-	<param-value>true</param-value>
-  </context-param>
+  	<!-- Auto scan REST service 
+  	<context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>true</param-value>
+  	</context-param>
   -->
   
-  <!-- Manually REST service declarations --> 
-  <context-param>
-    <param-name>resteasy.scan</param-name>
-    <param-value>false</param-value>
-  </context-param>
+  	<!-- Manually REST service declarations --> 
+  	<context-param>
+    	<param-name>resteasy.scan</param-name>
+    	<param-value>false</param-value>
+  	</context-param>
   
-  <context-param>
-    <param-name>resteasy.resources</param-name>
-    <param-value>es.neodoo.knightrider.services.renting.rest.api.CustomerRestImpl, es.neodoo.knightrider.services.renting.rest.api.VehicleRestImpl</param-value>
-  </context-param>
+  	<context-param>
+    	<param-name>resteasy.resources</param-name>
+    	<param-value>es.neodoo.knightrider.services.renting.rest.api.CustomerRestImpl, es.neodoo.knightrider.services.renting.rest.api.VehicleRestImpl</param-value>
+  	</context-param>
   
-  <!-- This need same with resteasy servlet url-pattern. 
+  	<!-- This need same with resteasy servlet url-pattern. 
        You need this if your servlet-mapping for the resteasy servlet has a url-pattern other than “/*“ -->
-  <context-param>
-	<param-name>resteasy.servlet.mapping.prefix</param-name>
-	<param-value>/api/1</param-value>
-  </context-param>
+  	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/api/1</param-value>
+  	</context-param>
 
-  <listener>
-	<listener-class>
-	  org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
-	</listener-class>
-  </listener>
+  	<listener>
+		<listener-class>
+	  		org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+		</listener-class>
+  	</listener>
 
-  <servlet>
-	<servlet-name>resteasy-servlet</servlet-name>
-	<servlet-class>
-	  org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
-	</servlet-class>
-  </servlet>
+  	<servlet>
+		<servlet-name>resteasy-servlet</servlet-name>
+		<servlet-class>
+	  		org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+		</servlet-class>
+  	</servlet>
 
-  <servlet-mapping>
-	<servlet-name>resteasy-servlet</servlet-name>
-	<url-pattern>/api/1/*</url-pattern>
-  </servlet-mapping>
-   
+  	<servlet-mapping>
+		<servlet-name>resteasy-servlet</servlet-name>
+		<url-pattern>/api/1/*</url-pattern>
+	</servlet-mapping>
+  
+	<security-constraint>
+        <web-resource-collection>
+        	<web-resource-name>*</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
    <!-- Security -->
   	<security-constraint>
     	<web-resource-collection>
         	<web-resource-name>*</web-resource-name>
         	<url-pattern>/api/1/vehicles/*</url-pattern>
-        	<http-method>POST</http-method>
-    	</web-resource-collection>
+        	<http-method>POST</http-method>    	</web-resource-collection>
     	<auth-constraint>
 			<role-name>user</role-name>
 		</auth-constraint>

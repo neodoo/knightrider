@@ -294,22 +294,22 @@ public class VehicleRestImpl implements VehicleRest {
 	public Response travelFinish(@PathParam("vehicleId") int vehicleId, @QueryParam("username") String username) {
 
 		double finishTravelCost = 0;
-		UpdateBDResponse startTravelResponse = new UpdateBDResponse();
+		UpdateBDResponse finishTravelResponse = new UpdateBDResponse();
 		String json = null;
 
 		try {
 
 			finishTravelCost = vehicleService.travelFinish(username, vehicleId);
-			startTravelResponse = startTravelResponse.buildUpdateBDResponse(true, String.valueOf(finishTravelCost));
+			finishTravelResponse = finishTravelResponse.buildUpdateBDResponse(true, String.valueOf(finishTravelCost));
 
 		}  catch (Exception e){
-			startTravelResponse = startTravelResponse.buildUpdateBDResponse(false,"An error ocurred");
+			finishTravelResponse = finishTravelResponse.buildUpdateBDResponse(false,"An error ocurred");
 			log.error("Error finishing travel:" + e);
 		}
 
 		try {
 
-			json = startTravelResponse.toJson();
+			json = finishTravelResponse.toJson();
 
 		} catch (JsonProcessingException e) {
 			log.error("Eror converting Response to Json:" + e);

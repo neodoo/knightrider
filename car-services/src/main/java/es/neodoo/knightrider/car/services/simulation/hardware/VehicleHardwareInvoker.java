@@ -4,14 +4,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import es.neodoo.knightrider.car.services.exceptions.VehicleHardwareInvokerException;
+import es.neodoo.knightrider.car.services.mqtt.Subscriber;
 
 public class VehicleHardwareInvoker {
 
 	private static final Log log = LogFactory.getLog(VehicleHardwareInvoker.class);
-
+	
+	private Subscriber s = null;
 
 	public VehicleHardwareInvoker() {
 		super();
+		this.s = new Subscriber();
 	}
 
 	public boolean wakeUpCar(int vehicleId) throws VehicleHardwareInvokerException {
@@ -187,6 +190,7 @@ public class VehicleHardwareInvoker {
 		boolean unlockDoors = false;
 
 		try {
+			s.unlockDoors(vehicleId);
 			unlockDoors = true;
 		} catch (Exception e) {
 			log.error("error unlocking doors of the vehicle:" + vehicleId);

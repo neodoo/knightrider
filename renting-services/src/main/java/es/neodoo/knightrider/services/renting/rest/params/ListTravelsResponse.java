@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTravel;
 
 public class ListTravelsResponse {
+	
 	private  List<ListTravelsParamResponse> response = new ArrayList<ListTravelsParamResponse>();
 
 	private int count;

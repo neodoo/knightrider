@@ -6,6 +6,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -24,6 +28,7 @@ import es.neodoo.knightrider.services.renting.model.dao.VehicleTravelingDAOImpl;
 import es.neodoo.knightrider.services.renting.model.vo.Vehicle;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleBlocked;
 import es.neodoo.knightrider.services.renting.model.vo.VehicleTraveling;
+import es.neodoo.knightrider.services.renting.rest.params.OpenDoorResponse;
 
 public class VehicleServiceImpl implements VehicleService {
 
@@ -42,6 +47,8 @@ public class VehicleServiceImpl implements VehicleService {
 	private final double PRICE_PER_MINUT = 0.21;
 
 	private final int CONVERT_MS_TO_SECONDS = 60000;
+	
+	//private final String unlockDoorUri = "";
 
 	private static final Log log = LogFactory.getLog(VehicleServiceImpl.class);
 
@@ -240,7 +247,17 @@ public class VehicleServiceImpl implements VehicleService {
 		} catch (DAOException e) {
 			throw new ServiceException("Can not unblocked the vehicle");
 		}
-
+	/**	
+		if (start){
+			Client cliente = ClientBuilder.newClient();
+			OpenDoorResponse openDoorResponse = cliente.target(unlockDoorUri)
+			.request(MediaType.APPLICATION_JSON_TYPE).get(OpenDoorResponse.class);
+			 
+			System.out.println(openDoorResponse.getOpenDoorParamResponse().getReason());
+			System.out.println(openDoorResponse.getOpenDoorParamResponse().getResult());
+			 
+		}
+*/
 		return start;
 
 	}

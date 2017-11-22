@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import es.neodoo.knightrider.car.services.exceptions.*;
+import es.neodoo.knightrider.car.services.mqtt.Subscriber;
 import es.neodoo.knightrider.car.services.rest.params.*;
 import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInvoker;
 
@@ -83,7 +84,7 @@ private ResponseBuilder addCorsSupport(ResponseBuilder response){
 		try {
 
 			setValetMode = vh.setValetMode(vehicleId, on, pin);
-			setValetModeResponse = setValetModeResponse.buildSetValetModeResponse(setValetMode, "Vehicle wake up");
+			setValetModeResponse = setValetModeResponse.buildSetValetModeResponse(setValetMode, "Succesfull");
 
 		} catch (VehicleHardwareInvokerException e) {
 			setValetModeResponse.buildSetValetModeResponse(false, e.toString());
@@ -387,14 +388,13 @@ private ResponseBuilder addCorsSupport(ResponseBuilder response){
 	@Path("/{vehicleId}/command/door_unlock")
 	@POST
 	public Response unlockDoors(@PathParam("vehicleId") int vehicleId) {
-
+		
 		boolean unlockDoors = false;
 		UnlockDoorsResponse unlockDoorsResponse = new UnlockDoorsResponse();
 		String json = null;
 
 		try {
-
-			unlockDoors = vh.stopCharging(vehicleId);
+			unlockDoors = vh.unlockDoors(vehicleId);
 			unlockDoorsResponse = unlockDoorsResponse.buildUnlockDoorsResponse(unlockDoors, "Succesfull");
 
 		} catch (VehicleHardwareInvokerException e) {
@@ -549,7 +549,7 @@ private ResponseBuilder addCorsSupport(ResponseBuilder response){
 
 		try {
 
-			movePanoRoof = vh.stopCharging(vehicleId);
+			movePanoRoof = vh.movePanoRoof(vehicleId, state,percent);
 			movePanoRoofResponse = movePanoRoofResponse.buildMovePanoRoofResponse(movePanoRoof, "Succesfull");
 
 		} catch (VehicleHardwareInvokerException e) {

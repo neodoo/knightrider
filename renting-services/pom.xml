@@ -22,13 +22,14 @@
 		<hibernate-version>5.2.11.Final</hibernate-version>
 		<servlet-version>3.1.0</servlet-version>
 		<tomcat-servlet-version>8.5.21</tomcat-servlet-version>
-		<reasteasy-version>2.2.3.GA</reasteasy-version>
+		<resteasy-version>3.0.14.Final</resteasy-version>
 		<jackson-databind>2.9.1</jackson-databind>
 		<commons-logging-version>1.2</commons-logging-version>
 		<log4j-version>1.2.17</log4j-version>
 		<slf4j-version>1.7.25</slf4j-version>
 		<junit-version>4.8.2</junit-version>
 		<maven-compiler-version>3.7.0</maven-compiler-version>
+		<keycloak-version>3.2.1.Final</keycloak-version>
 		<jdk>1.8</jdk>
 	</properties>
 	
@@ -82,28 +83,20 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>${reasteasy-version}</version>
+			<version>${resteasy-version}</version>
 		</dependency>
-	
-		<!-- 
+		
+		<dependency>
+        	<groupId>org.jboss.resteasy</groupId>
+        	<artifactId>resteasy-client</artifactId>
+        	<version>${resteasy-version}</version>
+    	</dependency>
+    	  
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jackson2-provider</artifactId>
-			<version>${reasteasy-version}</version>
+			<version>${resteasy-version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxb-provider</artifactId>
-			<version>${reasteasy-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jettison-provider</artifactId>
-			<version>${reasteasy-version}</version>
-		</dependency>
-		-->
 		
 		<!-- Jackson Databind-->
 		<dependency>
@@ -111,7 +104,19 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson-databind}</version>
 		</dependency>
-			
+		
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-annotations</artifactId>
+    		<version>${jackson-databind}</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-core</artifactId>
+    		<version>${jackson-databind}</version>
+		</dependency>
+		
 		<!-- Log -->
 		
 		<dependency>
@@ -119,28 +124,6 @@
 			<artifactId>commons-logging</artifactId>
 			<version>${commons-logging-version}</version>
 		</dependency>
-
-		<!-- 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
-			</dependency>
-		-->
-		
-		<!-- 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-version}</version>
-		</dependency>
-		-->
 		
 		<!-- Junit -->
 		<dependency>
@@ -148,6 +131,12 @@
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.keycloak</groupId>
+    		<artifactId>keycloak-admin-client</artifactId>
+    		<version>${keycloak-version}</version>
 		</dependency>
 		
 	</dependencies>
@@ -165,6 +154,27 @@
 					<target>${jdk}</target>
 				</configuration>
 			</plugin>
+			
+		<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-war-plugin</artifactId>
+            	<version>3.0.0</version>
+            	<configuration>
+                	<archive>
+                    	<manifest>
+                        	<addClasspath>true</addClasspath>
+                        	<classpathPrefix>lib/</classpathPrefix>
+                    	</manifest>
+                	</archive>
+                	<webResources>
+                    	<resource>
+                        	<!-- this is relative to the pom.xml directory -->
+                        	<directory>${project.basedir}/src/main/resources</directory>
+                    	</resource>
+                	</webResources>
+            	</configuration>
+            </plugin>
+            
 		</plugins>
 		
 	</build>
