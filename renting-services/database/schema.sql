@@ -37,29 +37,6 @@ CREATE TABLE `customer` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `customer_address`
---
-
-DROP TABLE IF EXISTS `customer_address`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `customer_address` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(45) NOT NULL,
-  `address` varchar(45) NOT NULL,
-  `number` varchar(45) NOT NULL,
-  `floor` varchar(45) NOT NULL,
-  `postal_code` varchar(45) NOT NULL,
-  `locality` varchar(45) NOT NULL,
-  `province` varchar(45) NOT NULL,
-  `state` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_customer_address_customer_idx` (`email`),
-  CONSTRAINT `fk_customer_address_customer` FOREIGN KEY (`email`) REFERENCES `customer` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `customer_card`
 --
 
