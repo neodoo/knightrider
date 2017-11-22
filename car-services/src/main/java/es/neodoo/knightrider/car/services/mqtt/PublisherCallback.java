@@ -4,7 +4,7 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-public class SubscribeCallback implements MqttCallback {
+public class PublisherCallback implements MqttCallback {
 
     public void connectionLost(Throwable cause) {}
 

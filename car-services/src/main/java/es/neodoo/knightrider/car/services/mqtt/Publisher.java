@@ -9,9 +9,9 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInvoker;
 
-public class Subscriber {
+public class Publisher {
 	
-	private static final Log log = LogFactory.getLog(Subscriber.class);
+	private static final Log log = LogFactory.getLog(Publisher.class);
 
 	public static final String BROKER_URL = "tcp://192.168.1.144:1883";
 	
@@ -19,7 +19,7 @@ public class Subscriber {
 	
 	private int TestSystemVehicleId = 1;
 
-	public Subscriber() {
+	public Publisher() {
 		super();
 		
 	}

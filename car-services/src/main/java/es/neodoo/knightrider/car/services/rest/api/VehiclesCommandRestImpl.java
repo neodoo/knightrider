@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import es.neodoo.knightrider.car.services.exceptions.*;
-import es.neodoo.knightrider.car.services.mqtt.Subscriber;
+import es.neodoo.knightrider.car.services.mqtt.Publisher;
 import es.neodoo.knightrider.car.services.rest.params.*;
 import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInvoker;
 

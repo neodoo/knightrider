@@ -4,17 +4,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import es.neodoo.knightrider.car.services.exceptions.VehicleHardwareInvokerException;
-import es.neodoo.knightrider.car.services.mqtt.Subscriber;
+import es.neodoo.knightrider.car.services.mqtt.Publisher;
 
 public class VehicleHardwareInvoker {
 
 	private static final Log log = LogFactory.getLog(VehicleHardwareInvoker.class);
 	
-	private Subscriber s = null;
+	private Publisher s = null;
 
 	public VehicleHardwareInvoker() {
 		super();
-		this.s = new Subscriber();
+		this.s = new Publisher();
 	}
 
 	public boolean wakeUpCar(int vehicleId) throws VehicleHardwareInvokerException {
