@@ -42,9 +42,9 @@ export class HomePage {
 
 
     constructor(public navCtrl: NavController, public geolocation: Geolocation, public modalCtrl: ModalController, public http: Http, public nativeGeocoder: NativeGeocoder, public network: Network,  public appCtrl: App) {
-        
-        this.tomcatUrl = "https://192.168.1.144:8443";
-        this.keycloakUrl = "http://192.168.1.144:9080/auth/realms/knightrider_realm/protocol/openid-connect/token";
+
+        this.tomcatUrl = "https://192.168.1.40:8443";
+        this.keycloakUrl = "http://192.168.1.40:9080/auth/realms/knightrider_realm/protocol/openid-connect/token";
         this.unblockedUrl = "/renting-services/api/1/vehicles/state/unblocked"
         this.blockedUrl = "/renting-services/api/1/vehicles/state/blocked?username=";
         this.checkTravelingUrl = "/renting-services/api/1/vehicles/state/traveling?username="
@@ -188,15 +188,11 @@ export class HomePage {
     selectImg(car){
 
         if(car.model == "X"){
-            car.img="assets/img/tesla-x.png";
+            car.img="assets/img/coche-x.png";
         }
 
         if(car.model== "S"){
-            car.img="assets/img/tesla-s.png";
-        }
-
-        if(car.model == "3"){
-            car.img="assets/img/tesla-3.png";
+            car.img="assets/img/coche-s.png";
         }
 
     }

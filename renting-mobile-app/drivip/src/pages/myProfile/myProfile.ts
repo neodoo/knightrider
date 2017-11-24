@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams, NavController, App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -30,8 +31,8 @@ export class MyProfile {
 
     constructor(public viewCtrl: ViewController, public params: NavParams, public navCtrl: NavController, public http: Http, public nativeGeocoder: NativeGeocoder,public appCtrl:App ) {
 
-        this.tomcatUrl = "https://192.168.1.144:8443";
-        this.keycloakUrl = "http://192.168.1.144:9080/auth/realms/knightrider_realm/protocol/openid-connect/token"
+        this.tomcatUrl = "https://192.168.1.40:8443";
+        this.keycloakUrl = "http://192.168.1.40:9080/auth/realms/knightrider_realm/protocol/openid-connect/token"
         this.profileUrl = "/renting-services/api/1/customer/profile?username="
         this.travelsUrl = "/renting-services/api/1/customer/travels?username="
         this.getMyProfile();  
@@ -47,7 +48,7 @@ export class MyProfile {
         } else {
 
             this.viewCtrl.dismiss();
-            this.appCtrl.getRootNav().push(LoginPage);
+            this.appCtrl.getRootNav().push(RegisterPage);
         
         }
 
