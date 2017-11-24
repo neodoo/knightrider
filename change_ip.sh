@@ -34,8 +34,6 @@ sed -i -e "s/http:\/\/.*:/http:\/\/$IP:/" renting-mobile-app/drivip/src/pages/my
 
 sed -i -e "s/https:\/\/.*:/https:\/\/$IP:/" renting-mobile-app/drivip/src/pages/register4/register4.ts
 
-sed -i -e "s/tcp:\/\/.*:1883\"/tcp:\/\/$IP:1883\"/" OSVehicle-client/src/main/java/es/neodoo/knightrider/osvehicle/Subscriber.java
-
 mvn clean compile package -DskipTests
 
 echo "Actualizadas las IP a $IP"
