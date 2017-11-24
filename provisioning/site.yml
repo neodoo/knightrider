@@ -8,4 +8,5 @@
   - keycloack
   - mysql
   - tomcat
+  - mosquitto
   - application

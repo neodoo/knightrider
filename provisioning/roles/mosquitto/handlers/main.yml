@@ -1,0 +1,11 @@
+---
+- name: restart tomcat
+  service: 
+    name: tomcat
+    state: restarted
+
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+
