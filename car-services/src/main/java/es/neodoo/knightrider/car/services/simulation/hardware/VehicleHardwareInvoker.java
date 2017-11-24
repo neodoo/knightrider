@@ -206,6 +206,7 @@ public class VehicleHardwareInvoker {
 		boolean lockDoors = false;
 
 		try {
+			s.lockDoors(vehicleId);
 			lockDoors = true;
 		} catch (Exception e) {
 			log.error("error locking doors of the vehicle:" + vehicleId);

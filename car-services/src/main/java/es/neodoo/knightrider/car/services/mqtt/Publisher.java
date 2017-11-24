@@ -7,13 +7,11 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import es.neodoo.knightrider.car.services.simulation.hardware.VehicleHardwareInvoker;
-
 public class Publisher {
 	
 	private static final Log log = LogFactory.getLog(Publisher.class);
 
-	public static final String BROKER_URL = "tcp://192.168.1.144:1883";
+	public static final String BROKER_URL = "tcp://192.168.1.40:1883";
 	
 	private MqttClient client;
 	
@@ -29,7 +27,7 @@ public class Publisher {
 		try {
 			
             MemoryPersistence persistence = new MemoryPersistence();
-			client = new MqttClient(BROKER_URL, "publisher1", persistence);
+			client = new MqttClient(BROKER_URL, "publisher", persistence);
 			client.connect();
 			MqttMessage message = new MqttMessage();
 			message.setPayload("unlock_door".getBytes());
@@ -37,18 +35,18 @@ public class Publisher {
 			client.disconnect();
 			
 		} catch (MqttException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 
 	}
 
 	public void lockDoors(int vehicleId) {
 		
 		try {
-			
+			log.info("DENTRO DEL LOCK");
             MemoryPersistence persistence = new MemoryPersistence();
-			client = new MqttClient(BROKER_URL, "publisher1", persistence);
+			client = new MqttClient(BROKER_URL, "publisher", persistence);
 			client.connect();
 			MqttMessage message = new MqttMessage();
 			message.setPayload("lock_door".getBytes());
@@ -56,7 +54,6 @@ public class Publisher {
 			client.disconnect();
 			
 		} catch (MqttException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

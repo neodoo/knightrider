@@ -425,7 +425,7 @@ private ResponseBuilder addCorsSupport(ResponseBuilder response){
 
 		try {
 
-			lockDoors = vh.stopCharging(vehicleId);
+			lockDoors = vh.lockDoors(vehicleId);
 			lockDoorsResponse = lockDoorsResponse.buildLockDoorsResponse(lockDoors, "Succesfull");
 
 		} catch (VehicleHardwareInvokerException e) {
