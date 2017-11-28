@@ -1,13 +1,13 @@
----
+﻿---
 
 - name: Descargamos el proyecto Apache Tomcat
-  get_url: url=http://apache.rediris.es/tomcat/tomcat-8/v8.0.46/bin/apache-tomcat-8.0.46.tar.gz dest=/root/software/apache-tomcat-8.0.46.tar.gz
+  get_url: url=http://apache.uvigo.es/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz dest=/root/software/apache-tomcat-8.5.23.tar.gz
 
 - name: Descomprimimos el proyecto Apache Tomcat
-  unarchive: src=/root/software/apache-tomcat-8.0.46.tar.gz dest=/usr/java copy=no
+  unarchive: src=/root/software/apache-tomcat-8.5.23.tar.gz dest=/usr/java copy=no
 
 - name: Creamos link para Apache Tomcat
-  file: path=/usr/java/apache-tomcat src=/usr/java/apache-tomcat-8.0.46 state=link
+  file: path=/usr/java/apache-tomcat src=/usr/java/apache-tomcat-8.5.23 state=link
 
 - name: Anyadimos el grupo "tomcat"
   group: name=tomcat
@@ -21,6 +21,10 @@
 - name: Descomprimimos el adaptador de Keycloak para Apache Tomcat 8
   unarchive: src=/root/software/keycloak-tomcat8-adapter-dist-3.3.0.CR2.tar.gz dest=/usr/java/apache-tomcat/lib copy=no
 
+- name: Creando fichero .keystore
+  shell: "keytool -genkey -noprompt -alias tomcat -keyalg RSA -dname 'CN=a, OU=a, O=a, L=a, S=a, C=a' -keystore /usr/java/apache-tomcat/conf/.keystore -storepass password -keypass password"
+
+
 - name: Cambiamos el propietario de la instalación Apache Tomcat
   file: path=/usr/java/apache-tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
@@ -33,6 +37,7 @@
     owner=root group=root mode=0644
     src=tomcat.service.jk2
     dest=/etc/systemd/system/tomcat.service
+
 
 - name: tomcat systemd service enable and start
   service: name=tomcat

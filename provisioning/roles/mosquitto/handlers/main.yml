@@ -1,7 +1,7 @@
 ---
-- name: restart tomcat
+- name: restart mosquitto
   service: 
-    name: tomcat
+    name: mosquitto
     state: restarted
 
 - name: restart firewalld

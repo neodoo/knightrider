@@ -1,4 +1,4 @@
----
+﻿---
 
 - name: Actualizar la maquina con los ultimos paquetes
   yum:
@@ -19,7 +19,7 @@
     state: directory
 
 - name: Descargamos el proyecto Maven
-  get_url: url=http://apache.uvigo.es/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz dest=/root/software/apache-maven-3.5.0-bin.tar.gz
+  get_url: url=http://apache.uvigo.es/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz dest=/root/software/apache-maven-3.5.2-bin.tar.gz
 
 - name: Creamos el directorio java
   file:
@@ -27,10 +27,10 @@
     state: directory
 
 - name: Descomprimimos el proyecto Maven
-  unarchive: src=/root/software/apache-maven-3.5.0-bin.tar.gz dest=/usr/java copy=no
+  unarchive: src=/root/software/apache-maven-3.5.2-bin.tar.gz dest=/usr/java copy=no
 
 - name: Creamos link para Maven
-  file: path=/usr/java/apache-maven src=/usr/java/apache-maven-3.5.0 state=link
+  file: path=/usr/java/apache-maven src=/usr/java/apache-maven-3.5.2 state=link
 
 - name: Configuramos las variables de entorno Java y Maven
   template: src=java.sh.j2 dest=/etc/profile.d/java.sh owner=root group=root mode=0755 backup=yes 

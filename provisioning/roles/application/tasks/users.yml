@@ -4,11 +4,11 @@
   action: command /usr/java/keycloak/bin/kcadm.sh config credentials --server http://localhost:9080/auth --realm master --user {{ keycloak_management_user }} --password {{ keycloak_management_password }}
 
 - name: Create a new realm
-  action: command /usr/java/keycloak/bin/kcadm.sh create realms -s realm={{ keycloak_app_realm }} -s enabled=true -o
+  action: command /usr/java/keycloak/bin/kcadm.sh create realms -s realm={{ keycloak_app_realm }} -s registrationAllowed=true -s enabled=true -s sslRequired=NONE -o
   ignore_errors: yes
 
 - name: Create a new client
-  action: command /usr/java/keycloak/bin/kcadm.sh create clients -r {{ keycloak_app_realm }} -s clientId={{ keycloak_app_client_id }} -s enabled=true -o
+  action: command /usr/java/keycloak/bin/kcadm.sh create clients -r {{ keycloak_app_realm }} -s clientId={{ keycloak_app_client_id }} -s publicClient=true -s 'redirectUris=["*"]' -s 'webOrigins=["*"]' -s directAccessGrantsEnabled=true -s enabled=true -o
   ignore_errors: yes
 
 - name: Create a new user
